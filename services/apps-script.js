@@ -174,7 +174,8 @@ function doPost(e) {
   try {
     if (method === 'DELETE') {
       switch (action) {
-        case 'deletePortfolioEntry': result = _deletePortfolioEntry(body); break;
+        case 'deletePortfolioEntry': result = _deletePortfolioEntry(body);   break;
+        case 'deleteStudent':        result = _deleteStudentAccount(body);  break;
         default: result = { ok: false, error: 'unknown_action' };
       }
     } else if (method === 'PUT') {
@@ -188,6 +189,8 @@ function doPost(e) {
         case 'submitMission':      result = _submitMission(body);   break;
         case 'uploadPortfolio':    result = _uploadPortfolio(body); break;
         case 'logEvents':          result = _logEvents(body);       break;
+        case 'createStudent':      result = _createStudent(body);   break;
+        case 'importStudents':     result = _importStudents(body);  break;
         default: result = { ok: false, error: 'unknown_action', message: 'Unknown action: ' + action };
       }
     }
@@ -464,7 +467,7 @@ function _updateStudentProfile(body) {
   if (!userId) return _err('missing_user_id');
   if (!Object.keys(updates).length) return _err('no_updates');
 
-  var ALLOWED = ['name', 'nickname', 'email', 'bio', 'avatarColor'];
+  var ALLOWED = ['name', 'nickname', 'email', 'bio', 'avatarColor', 'class'];
   var sheet   = _getSheet(SHEET_NAMES.STUDENTS);
   var rowIdx  = _findRowIndex(sheet, 0, userId); /* col 0 = userId */
   if (rowIdx < 0) return _err('user_not_found');
@@ -881,6 +884,109 @@ function _deletePortfolioEntry(body) {
   }
 
   return _err('entry_not_found');
+}
+
+/* ────────────────────────────────────────────────────────────
+   STUDENT MANAGEMENT (teacher dashboard — add / import / delete)
+   ──────────────────────────────────────────────────────────── */
+
+/**
+ * Create a single real student account (teacher dashboard "เพิ่มนักเรียน").
+ * Students log in passwordless, so passwordHash is left blank.
+ */
+function _createStudent(body) {
+  var userId = String(body.userId || '').toUpperCase();
+  var name   = String(body.name   || '').trim();
+  var cls    = String(body.class  || '').trim();
+
+  if (!userId) return _err('missing_user_id');
+  if (!name)   return _err('missing_name');
+
+  var sheet = _getSheet(SHEET_NAMES.STUDENTS);
+  if (_findRowIndex(sheet, 0, userId) >= 0) {
+    return _err('user_exists', 'รหัสนักเรียน ' + userId + ' มีอยู่แล้วในระบบ');
+  }
+
+  sheet.appendRow([
+    userId,
+    name,
+    '',                                   /* passwordHash — students log in passwordless */
+    cls,
+    0,                                     /* xp */
+    1,                                     /* level */
+    '[]',                                  /* badges */
+    '[]',                                  /* completedMissions */
+    Utilities.formatDate(new Date(), 'GMT+7', 'yyyy-MM-dd'), /* joinDate */
+    '',                                    /* avatarColor */
+    '', '', '',                            /* nickname, email, bio */
+    false,                                 /* isDemo */
+  ]);
+
+  return _ok({
+    userId: userId, name: name, class: cls,
+    xp: 0, level: 1, badges: [], completedMissions: [], isDemo: false,
+  });
+}
+
+/**
+ * Bulk-create real students from a teacher's Excel/CSV import.
+ * Skips rows that are missing userId/name, or whose userId already exists.
+ * @param {{ students: {userId:string, name:string, class:string}[] }} body
+ */
+function _importStudents(body) {
+  var rows = Array.isArray(body.students) ? body.students : [];
+  if (!rows.length) return _err('no_students');
+
+  var sheet    = _getSheet(SHEET_NAMES.STUDENTS);
+  var existing = _sheetToObjects(sheet).reduce(function (m, r) {
+    m[String(r.userId || '').toUpperCase()] = true;
+    return m;
+  }, {});
+
+  var today   = Utilities.formatDate(new Date(), 'GMT+7', 'yyyy-MM-dd');
+  var newRows = [];
+  var created = 0, skipped = 0;
+
+  rows.forEach(function (r) {
+    var userId = String(r.userId || '').toUpperCase();
+    var name   = String(r.name   || '').trim();
+    var cls    = String(r.class  || '').trim();
+    if (!userId || !name || existing[userId]) { skipped++; return; }
+    existing[userId] = true;
+    newRows.push([userId, name, '', cls, 0, 1, '[]', '[]', today, '', '', '', '', false]);
+    created++;
+  });
+
+  if (newRows.length) {
+    sheet.getRange(sheet.getLastRow() + 1, 1, newRows.length, newRows[0].length).setValues(newRows);
+  }
+
+  return _ok({ created: created, skipped: skipped });
+}
+
+/**
+ * Permanently remove a real student account from the Students sheet.
+ * Demo accounts (isDemo=TRUE) can never be deleted this way — they're
+ * meant to stay fixed for the next visitor trying the demo.
+ */
+function _deleteStudentAccount(body) {
+  var userId = String(body.userId || '').toUpperCase();
+  if (!userId) return _err('missing_user_id');
+
+  var sheet   = _getSheet(SHEET_NAMES.STUDENTS);
+  var headers = sheet.getRange(1, 1, 1, sheet.getLastColumn()).getValues()[0]
+    .map(function (h) { return String(h).trim(); });
+  var demoCol = headers.indexOf('isDemo');
+  var rowIdx  = _findRowIndex(sheet, 0, userId);
+  if (rowIdx < 0) return _err('user_not_found');
+
+  if (demoCol !== -1) {
+    var isDemo = _isDemoRow(sheet.getRange(rowIdx, demoCol + 1).getValue());
+    if (isDemo) return _err('cannot_delete_demo', 'ไม่สามารถลบบัญชีทดลอง (Demo) ได้');
+  }
+
+  sheet.deleteRow(rowIdx);
+  return _ok({ deleted: true, userId: userId });
 }
 
 /* ────────────────────────────────────────────────────────────
