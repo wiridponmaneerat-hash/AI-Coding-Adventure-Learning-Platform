@@ -92,7 +92,6 @@ Stores all student accounts including credentials, profile information, learning
 |---|---|---|---|---|---|---|---|---|---|---|
 | STD001 | นภัสสร สุขใจ | ป.5/1 | student | 850 | 4 | นักพัฒนา | 5 | default | 2026-01-15 | TRUE |
 | STD002 | ปภัสรา คงดี | ป.5/1 | student | 650 | 3 | นักสำรวจ | 2 | default | 2026-01-15 | TRUE |
-| STD003 | มาริสา นาคทอง | ป.5/1 | student | 1200 | 4 | นักพัฒนา | 12 | default | 2026-01-15 | TRUE |
 | STD004 | ธัญชนก วงศ์ดี | ป.5/2 | student | 0 | 1 | มือใหม่ | 0 | default | 2026-01-15 | TRUE |
 
 ---
