@@ -262,3 +262,20 @@ nav, main, footer, .auth-page, .home-nav, .home-main, .home-footer,
   filter: saturate(1.6) brightness(1.1) !important;
   opacity: 1;
 }
+
+/* ── I. MISSION DETAIL BREADCRUMB (md-breadcrumb has no
+   background — sits directly on the dark body, above the
+   md-header card) ───────────────────────────────────────── */
+
+.md-breadcrumb {
+  color: rgba(148, 163, 184, 0.85) !important;
+}
+.md-bc-link {
+  color: #7dd3fa !important;
+}
+.md-bc-current {
+  color: rgba(226, 232, 240, 0.9) !important;
+}
+.md-breadcrumb .material-symbols-rounded {
+  color: rgba(148, 163, 184, 0.5) !important;
+}
