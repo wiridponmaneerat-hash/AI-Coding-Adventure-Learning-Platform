@@ -108,7 +108,6 @@ When a student uploads a file:
 |---|---|---|---|---|---|---|---|---|
 | PF000001 | STD001 | 1 | โปรแกรมแรกของฉัน | code | — | FALSE | ดีมาก | 2026-02-01T10:00:00Z |
 | PF000002 | STD001 | 2 | เกมทายตัวเลข | image | screenshot.png | TRUE | ยอดเยี่ยม | 2026-02-09T14:30:00Z |
-| PF000003 | STD003 | 5 | Mini AI Chatbot | code | chatbot.py | TRUE | A | 2026-03-15T09:00:00Z |
 
 ---
 
