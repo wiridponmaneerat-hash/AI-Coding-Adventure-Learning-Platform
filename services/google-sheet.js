@@ -85,6 +85,8 @@ const GoogleSheetService = (function () {
    * @param {string[]} [options.classes]   - Filter to specific class(es)
    * @param {number}   [options.limit]     - Max rows to return (0 = all)
    * @param {string}   [options.teacherId] - For production auth context
+   * @param {boolean}  [options.isDemo]    - Only return demo (true) or real (false) accounts.
+   *                                         Omit to return everything unfiltered.
    * @returns {Promise<{ok: boolean, data?: object[], error?: string}>}
    */
   async function getLeaderboard(options) {
@@ -103,6 +105,9 @@ const GoogleSheetService = (function () {
     if (options.classes && options.classes.length) params.classes = options.classes.join(',');
     if (options.limit)     params.limit     = options.limit;
     if (options.teacherId) params.teacherId = options.teacherId;
+    if (options.isDemo !== undefined && options.isDemo !== null) {
+      params.isDemo = options.isDemo ? 'true' : 'false';
+    }
 
     var result = await ApiService.get('getLeaderboard', params);
     if (!result.ok) return { ok: false, error: result.error, message: result.message };
