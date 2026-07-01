@@ -114,6 +114,7 @@ const AuthService = (function () {
       bio:               user.bio      || null,
       theme:             user.theme    || 'default',
       loginTime:         new Date().toISOString(),
+      isDemo:            user.isDemo === true || user.isDemo === 'TRUE' || user.isDemo === 'true',
     };
   }
 
