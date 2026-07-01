@@ -19,7 +19,6 @@ const GoogleSheetService = (function () {
   var _MOCK_STUDENTS = [
     { userId:'STD001', name:'นภัสสร สุขใจ',    class:'ป.5/1', xp:850,  level:4, completedMissions:[1,2],     badges:['first_login','mission1_complete','mission2_complete'],    joinDate:'2026-01-15' },
     { userId:'STD002', name:'ปภัสรา คงดี',      class:'ป.5/1', xp:500,  level:2, completedMissions:[1],       badges:['first_login','mission1_complete'],                        joinDate:'2026-01-15' },
-    { userId:'STD003', name:'มาริสา นาคทอง',   class:'ป.5/1', xp:1200, level:5, completedMissions:[1,2,3],   badges:['first_login','mission1_complete','mission2_complete','mission3_complete'], joinDate:'2026-01-15' },
     { userId:'STD004', name:'พีรพัฒน์ สุขศรี', class:'ป.5/2', xp:950,  level:4, completedMissions:[1,2],     badges:['first_login','mission1_complete','mission2_complete'],    joinDate:'2026-01-16' },
     { userId:'STD005', name:'กรกช วงศ์ดี',      class:'ป.5/1', xp:720,  level:3, completedMissions:[1,2],     badges:['first_login','mission1_complete','mission2_complete'],    joinDate:'2026-01-16' },
     { userId:'STD006', name:'ณัฐกานต์ แสงทอง', class:'ป.5/2', xp:650,  level:3, completedMissions:[1],       badges:['first_login','mission1_complete'],                        joinDate:'2026-01-17' },
