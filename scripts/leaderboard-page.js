@@ -33,23 +33,34 @@
     if (!session) return;
     _setupNav();
 
-    /* Production: fetch live leaderboard from GAS via GoogleSheetService */
+    /* Production: fetch live leaderboard from GAS via GoogleSheetService.
+       Scope to the logged-in student's own isDemo status so a demo
+       account (STD001) only ever sees the demo leaderboard, and a real
+       student only ever sees real classmates. */
     if (window.GoogleSheetService &&
         window.AppConfig && window.AppConfig.ENVIRONMENT === 'production') {
       try {
-        var result = await GoogleSheetService.getLeaderboard();
+        var result = await GoogleSheetService.getLeaderboard({ isDemo: !!session.isDemo });
         if (result.ok && Array.isArray(result.data)) {
-          _renderMyRank(result.data);
-          _renderPodium(result.data);
-          _renderTable(result.data);
+          var annotated = result.data.map(function (s) {
+            return Object.assign({}, s, {
+              initial: (s.name || '?').charAt(0).toUpperCase(),
+              isMe:    s.userId === session.userId,
+            });
+          });
+          _renderMyRank(annotated);
+          _renderPodium(annotated);
+          _renderTable(annotated);
           _renderUpdateTime();
-          _animate(result.data);
+          _animate(annotated);
+          _renderDemoBanner();
           return;
         }
       } catch (_) { /* fall through to mock */ }
     }
 
     _buildAndRender();
+    _renderDemoBanner();
   }
 
   /* ═══════════════════════════════════
@@ -120,6 +131,32 @@
     _renderTable(ranked);
     _renderUpdateTime();
     _animate(ranked);
+  }
+
+  /* ═══════════════════════════════════
+     DEMO MODE BANNER
+  ═══════════════════════════════════ */
+  function _renderDemoBanner() {
+    if (!session.isDemo) return;
+    if (document.getElementById('demoModeBanner')) return;
+
+    var main = document.getElementById('leaderboardMain');
+    var hero = document.querySelector('.lb-hero');
+    if (!main) return;
+
+    var banner = document.createElement('div');
+    banner.id = 'demoModeBanner';
+    banner.setAttribute('role', 'status');
+    banner.style.cssText = 'margin:12px auto;max-width:900px;padding:10px 16px;' +
+      'background:#FEF3C7;border:1px solid #F59E0B;border-radius:10px;' +
+      'color:#92400E;font-size:14px;font-weight:600;text-align:center;';
+    banner.textContent = '🧪 โหมดทดลอง (Demo) — ข้อมูลนี้เป็นข้อมูลตัวอย่าง ไม่ใช่ข้อมูลนักเรียนจริง';
+
+    if (hero && hero.parentNode === main) {
+      main.insertBefore(banner, hero);
+    } else {
+      main.insertBefore(banner, main.firstChild);
+    }
   }
 
   /* ═══════════════════════════════════
