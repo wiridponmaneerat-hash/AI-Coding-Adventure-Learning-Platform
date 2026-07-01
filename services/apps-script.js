@@ -1234,7 +1234,7 @@ function migrateAddIsDemoAndSeedData() {
       'วิริทธิ์พล แก้วดวงจันทร์',
       getPasswordHash('teacher2544'),
       'วิทยาการคำนวณ',
-      JSON.stringify(['ป.5']),
+      JSON.stringify(['ป.5/2']),
       Utilities.formatDate(new Date(), 'GMT+7', 'yyyy-MM-dd'),
       false,
     ]);
@@ -1270,6 +1270,60 @@ function migrateAddIsDemoAndSeedData() {
   });
 
   Logger.log('Migration complete: isDemo column added, existing accounts tagged, TCH002 created, demo students seeded.');
+}
+
+/**
+ * ONE-TIME FIX — run once from the GAS Script Editor to correct class
+ * scoping so the dashboard/leaderboard show the right students for the
+ * right teacher account:
+ *   1. TCH001 (demo teacher) is given classes ["ป.5","ป.5/1"] so it sees
+ *      BOTH STD001 (class "ป.5") and the seeded demo students STD901-905
+ *      (class "ป.5/1") — previously TCH001 only had ["ป.5"], so the demo
+ *      dashboard only ever showed STD001 and never the 5 seeded students.
+ *   2. TCH002 (real teacher, วิริทธิ์พล แก้วดวงจันทร์) is set to
+ *      classes ["ป.5/2"] to match the real classroom being taught.
+ *   3. Every REAL student row (isDemo=FALSE) whose `class` cell is blank
+ *      is stamped with "ป.5/2" — these are the real students imported via
+ *      the dashboard's Excel/roster import, which left `class` empty, so
+ *      getClassData(TCH002) was matching zero rows.
+ * Safe to re-run.
+ */
+function fixClassAssignments() {
+  var studentsSheet = _getSheet(SHEET_NAMES.STUDENTS);
+  var teachersSheet = _getSheet(SHEET_NAMES.TEACHERS);
+
+  var tchHeaders  = teachersSheet.getRange(1, 1, 1, teachersSheet.getLastColumn()).getValues()[0];
+  var tchClassCol = tchHeaders.indexOf('classes') + 1;
+  var tchData     = teachersSheet.getDataRange().getValues();
+
+  for (var j = 1; j < tchData.length; j++) {
+    var tuid = String(tchData[j][0] || '').toUpperCase();
+    if (tuid === 'TCH001') {
+      teachersSheet.getRange(j + 1, tchClassCol).setValue(JSON.stringify(['ป.5', 'ป.5/1']));
+    } else if (tuid === 'TCH002') {
+      teachersSheet.getRange(j + 1, tchClassCol).setValue(JSON.stringify(['ป.5/2']));
+    }
+  }
+
+  var stuHeaders  = studentsSheet.getRange(1, 1, 1, studentsSheet.getLastColumn()).getValues()[0];
+  var stuClassCol = stuHeaders.indexOf('class') + 1;
+  var stuDemoCol  = stuHeaders.indexOf('isDemo') + 1;
+  var stuData     = studentsSheet.getDataRange().getValues();
+  var fixedCount  = 0;
+
+  for (var i = 1; i < stuData.length; i++) {
+    var uid       = String(stuData[i][0] || '');
+    if (!uid) continue;
+    var isDemoVal = stuData[i][stuDemoCol - 1];
+    var isDemo    = isDemoVal === true || String(isDemoVal).toUpperCase() === 'TRUE';
+    var classVal  = String(stuData[i][stuClassCol - 1] || '').trim();
+    if (!isDemo && !classVal) {
+      studentsSheet.getRange(i + 1, stuClassCol).setValue('ป.5/2');
+      fixedCount++;
+    }
+  }
+
+  Logger.log('fixClassAssignments complete: TCH001 -> [ป.5, ป.5/1], TCH002 -> [ป.5/2], ' + fixedCount + ' real student rows stamped with class ป.5/2.');
 }
 
 /**
