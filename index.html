@@ -1,0 +1,686 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="AI Coding Adventure — แพลตฟอร์มเรียนวิทยาการคำนวณผ่านการผจญภัยด้วย AI สำหรับนักเรียน ป.5 สนุก ท้าทาย วัดผลได้จริง" />
+  <meta name="keywords" content="วิทยาการคำนวณ, coding, AI, เรียน, ป.5, gamification, learning platform">
+  <meta name="author" content="นายวิริทธิ์พล แก้วดวงจันทร์">
+  <meta name="robots" content="index, follow">
+  <title>AI Coding Adventure — Learn Coding Through Adventure</title>
+  <link rel="canonical" href="https://YOUR_GITHUB_USERNAME.github.io/AI-Coding-Adventure/">
+
+  <!-- Favicon -->
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="assets/icon-192.svg">
+
+  <!-- PWA Manifest -->
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#2563EB">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="AI Coding">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="AI Coding Adventure">
+  <meta property="og:locale" content="th_TH">
+  <meta property="og:title" content="AI Coding Adventure — Learn Coding Through Adventure">
+  <meta property="og:description" content="แพลตฟอร์มเรียนวิทยาการคำนวณผ่านการผจญภัยด้วย AI สำหรับนักเรียน ป.5 สนุก ท้าทาย และวัดผลได้จริง">
+  <meta property="og:url" content="https://YOUR_GITHUB_USERNAME.github.io/AI-Coding-Adventure/">
+  <meta property="og:image" content="https://YOUR_GITHUB_USERNAME.github.io/AI-Coding-Adventure/assets/icon-512.svg">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="AI Coding Adventure — Learn Coding Through Adventure">
+  <meta name="twitter:description" content="แพลตฟอร์มเรียนวิทยาการคำนวณผ่านการผจญภัยด้วย AI สำหรับนักเรียน ป.5">
+  <meta name="twitter:image" content="https://YOUR_GITHUB_USERNAME.github.io/AI-Coding-Adventure/assets/icon-512.svg">
+
+  <!-- Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "AI Coding Adventure",
+    "description": "แพลตฟอร์มเรียนวิทยาการคำนวณผ่านการผจญภัยด้วย AI สำหรับนักเรียนชั้น ป.5",
+    "url": "https://YOUR_GITHUB_USERNAME.github.io/AI-Coding-Adventure/",
+    "applicationCategory": "EducationalApplication",
+    "operatingSystem": "Any",
+    "inLanguage": "th",
+    "author": {
+      "@type": "Person",
+      "name": "นายวิริทธิ์พล แก้วดวงจันทร์"
+    },
+    "educationalLevel": "ประถมศึกษาปีที่ 5",
+    "teaches": "วิทยาการคำนวณ, การเขียนโปรแกรม"
+  }
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800;900&family=Poppins:wght@400;500;600;700;800;900&family=Prompt:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,400,1,0" />
+
+  <link rel="stylesheet" href="styles/globals.css" />
+  <link rel="stylesheet" href="styles/starfield.css" />
+</head>
+
+<body>
+
+<!-- ===== NAVBAR ===== -->
+<nav class="navbar" id="navbar" role="navigation" aria-label="Main navigation">
+  <div class="nav-container">
+
+    <a href="#home" class="nav-logo" aria-label="AI Coding Adventure หน้าหลัก">
+      <div class="logo-icon" aria-hidden="true">
+        <img src="assets/icons/smart_toy.png" alt="" style="width:24px;height:24px;object-fit:contain;filter:brightness(0) invert(1)">
+      </div>
+      <div class="logo-text">
+        <span class="logo-main">AI Coding</span>
+        <span class="logo-sub">Adventure</span>
+      </div>
+    </a>
+
+    <ul class="nav-menu" role="list" id="navMenu">
+      <li><a href="#home"      class="nav-link active" aria-current="page">Home</a></li>
+      <li><a href="#mission"   class="nav-link">Mission</a></li>
+      <li><a href="#dashboard" class="nav-link">Dashboard</a></li>
+    </ul>
+
+    <div class="nav-actions">
+      <a href="pages/login.html" class="btn-login">
+        <span class="material-symbols-rounded" aria-hidden="true">login</span>
+        Login
+      </a>
+      <button class="nav-hamburger" id="hamburger" aria-label="เปิด/ปิด เมนู" aria-expanded="false" aria-controls="navMenu">
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+      </button>
+    </div>
+
+  </div>
+</nav>
+
+<!-- ===== HERO ===== -->
+<section class="hero" id="home" aria-label="หน้าหลัก Hero">
+
+  <div class="hero-bg" aria-hidden="true">
+    <div class="hero-orb hero-orb--1"></div>
+    <div class="hero-orb hero-orb--2"></div>
+    <div class="hero-orb hero-orb--3"></div>
+    <div class="hero-grid"></div>
+  </div>
+
+  <div class="hero-container">
+
+    <div class="hero-content">
+      <div class="hero-badge" id="heroBadge">
+        <span class="material-symbols-rounded" aria-hidden="true">rocket_launch</span>
+        <span>AI-Powered Learning Platform</span>
+      </div>
+
+      <h1 class="hero-headline" id="heroHeadline">
+        Learn Coding
+        <span class="headline-through">Through</span>
+        <span class="headline-gradient">Adventure</span>
+      </h1>
+
+      <p class="hero-sub" id="heroSub">
+        ระบบเรียนวิทยาการคำนวณแบบผจญภัย สำหรับนักเรียนชั้น ป.5<br />
+        ขับเคลื่อนด้วย AI — สนุก ท้าทาย และวัดผลได้จริง
+      </p>
+
+      <div class="hero-ctas" id="heroCtas">
+        <a href="pages/login.html" class="cta-primary btn-neon-pulse">
+          <span class="material-symbols-rounded" aria-hidden="true">play_circle</span>
+          Start Learning
+        </a>
+      </div>
+
+    </div>
+
+    <div class="hero-visual" aria-hidden="true" id="heroVisual">
+      <div class="robot-wrap">
+        <div class="robot-glow"></div>
+        <div class="robot-body">
+          <div class="robot-antenna-wrap">
+            <div class="robot-antenna"></div>
+            <div class="robot-antenna-ball"></div>
+          </div>
+          <div class="robot-head">
+            <div class="robot-ear robot-ear--l"></div>
+            <div class="robot-ear robot-ear--r"></div>
+            <div class="robot-face">
+              <div class="robot-eye">
+                <div class="robot-pupil"></div>
+              </div>
+              <div class="robot-eye">
+                <div class="robot-pupil"></div>
+              </div>
+            </div>
+            <div class="robot-mouth"></div>
+          </div>
+          <div class="robot-neck"></div>
+          <div class="robot-torso">
+            <div class="robot-arm robot-arm--l">
+              <div class="robot-hand"></div>
+            </div>
+            <div class="robot-core">
+              <div class="robot-screen">
+                <div class="screen-code">
+                  <span class="code-line c1">def adventure():</span>
+                  <span class="code-line c2">&nbsp;&nbsp;print("Hello!")</span>
+                  <span class="code-line c3">&nbsp;&nbsp;return True</span>
+                </div>
+              </div>
+              <div class="robot-btns">
+                <div class="robot-btn rb--blue"></div>
+                <div class="robot-btn rb--yellow"></div>
+                <div class="robot-btn rb--green"></div>
+              </div>
+            </div>
+            <div class="robot-arm robot-arm--r">
+              <div class="robot-hand"></div>
+            </div>
+          </div>
+          <div class="robot-legs">
+            <div class="robot-leg">
+              <div class="robot-foot"></div>
+            </div>
+            <div class="robot-leg">
+              <div class="robot-foot"></div>
+            </div>
+          </div>
+        </div>
+        <div class="float-badge float-badge--1">
+          <span class="material-symbols-rounded">code</span>
+          Python
+        </div>
+        <div class="float-badge float-badge--2">
+          <span class="material-symbols-rounded">emoji_events</span>
+          Level 5!
+        </div>
+        <div class="float-badge float-badge--3">
+          <span class="material-symbols-rounded">psychology</span>
+          AI Ready
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <a href="#features" class="scroll-indicator" aria-label="เลื่อนลงดูเนื้อหา">
+    <div class="scroll-dot" aria-hidden="true"></div>
+    <span>Scroll</span>
+  </a>
+
+</section>
+
+<!-- ===== FEATURES ===== -->
+<section class="features" id="features" aria-label="คุณสมบัติของแพลตฟอร์ม">
+  <div class="section-container">
+
+    <header class="section-header">
+      <span class="section-tag">คุณสมบัติ</span>
+      <h2 class="section-title">ทำไมต้อง <span class="text-gradient">AI Coding Adventure</span>?</h2>
+      <p class="section-desc">แพลตฟอร์มที่ออกแบบมาเพื่อนักเรียน ป.5 โดยเฉพาะ ด้วยเทคโนโลยี AI สมัยใหม่</p>
+    </header>
+
+    <div class="features-grid">
+
+      <article class="feature-card feature-card--primary shimmer-card card-lift" tabindex="0">
+        <div class="feature-icon fi--blue" aria-hidden="true">
+          <img src="assets/icons/emoji_events.png" alt="" class="fi-icon-img">
+        </div>
+        <h3>Game-Based Learning</h3>
+        <p>เรียนรู้การเขียนโค้ดผ่านการผจญภัยและภารกิจสนุกสนาน ไม่น่าเบื่อ สร้างแรงจูงใจด้วยระบบ XP และ Badge</p>
+        <div class="feature-badge-label">Most Popular</div>
+      </article>
+
+      <article class="feature-card shimmer-card card-lift" tabindex="0">
+        <div class="feature-icon fi--purple" aria-hidden="true">
+          <img src="assets/icons/AI.png" alt="" class="fi-icon-img">
+        </div>
+        <h3>AI Assistant</h3>
+        <p>ผู้ช่วย AI ให้คำแนะนำและฮินต์แบบ Real-time เพื่อช่วยให้เข้าใจได้เร็วขึ้น โดยไม่บอกคำตอบตรง ๆ</p>
+      </article>
+
+      <article class="feature-card shimmer-card card-lift" tabindex="0">
+        <div class="feature-icon fi--green" aria-hidden="true">
+          <img src="assets/icons/analytics.png" alt="" class="fi-icon-img">
+        </div>
+        <h3>Learning Analytics</h3>
+        <p>วิเคราะห์ผลการเรียนรู้แบบ Real-time ช่วยให้ครูเห็นพัฒนาการของนักเรียนทุกคนและปรับการสอนได้ทันที</p>
+      </article>
+
+      <article class="feature-card shimmer-card card-lift" tabindex="0">
+        <div class="feature-icon fi--orange" aria-hidden="true">
+          <img src="assets/icons/Portfolio.png" alt="" class="fi-icon-img">
+        </div>
+        <h3>Digital Portfolio</h3>
+        <p>นักเรียนสร้างพอร์ตโฟลิโอดิจิทัลเก็บผลงาน โปรเจกต์ เหรียญรางวัล และแสดงความสามารถของตนเอง</p>
+      </article>
+
+      <article class="feature-card shimmer-card card-lift" tabindex="0">
+        <div class="feature-icon fi--teal" aria-hidden="true">
+          <img src="assets/icons/school.png" alt="" class="fi-icon-img">
+        </div>
+        <h3>Google Classroom Ready</h3>
+        <p>เชื่อมต่อ Google Classroom ได้ทันที รองรับการเรียนทั้งในและนอกห้องเรียน ไม่ต้องติดตั้งซอฟต์แวร์</p>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- ===== MISSION PREVIEW ===== -->
+<section class="missions" id="mission" aria-label="ตัวอย่างภารกิจการเรียนรู้">
+  <div class="section-container">
+
+    <header class="section-header">
+      <span class="section-tag">ภารกิจ</span>
+      <h2 class="section-title">5 ภารกิจ <span class="text-gradient">สู่ความเป็น Coder</span></h2>
+      <p class="section-desc">ทุกภารกิจออกแบบตามหลักสูตรวิทยาการคำนวณ พร้อมความท้าทายที่เพิ่มขึ้นตามลำดับ</p>
+    </header>
+
+    <div class="mission-grid">
+
+      <article class="mission-card shimmer-card card-lift" tabindex="0">
+        <div class="mission-num" aria-hidden="true">01</div>
+        <div class="mission-icon-wrap miw--blue" aria-hidden="true">
+          <span class="material-symbols-rounded">rocket_launch</span>
+        </div>
+        <div class="mission-diff diff--easy">
+          <span class="material-symbols-rounded" aria-hidden="true">signal_cellular_alt_1_bar</span>
+          Beginner
+        </div>
+        <h3 class="mission-title">เริ่มต้นเขียนโค้ด</h3>
+        <p class="mission-desc">เรียนรู้พื้นฐานการเขียนโปรแกรม คำสั่ง input/output และโครงสร้างโปรแกรมเบื้องต้น</p>
+        <div class="mission-meta">
+          <span><span class="material-symbols-rounded" aria-hidden="true">timer</span>45 นาที</span>
+          <span><span class="material-symbols-rounded" aria-hidden="true">emoji_events</span>100 XP</span>
+        </div>
+        <a href="pages/login.html" class="mission-btn">
+          เริ่มภารกิจ
+          <span class="material-symbols-rounded" aria-hidden="true">arrow_forward</span>
+        </a>
+      </article>
+
+      <article class="mission-card shimmer-card card-lift" tabindex="0">
+        <div class="mission-num" aria-hidden="true">02</div>
+        <div class="mission-icon-wrap miw--green" aria-hidden="true">
+          <span class="material-symbols-rounded">data_object</span>
+        </div>
+        <div class="mission-diff diff--easy">
+          <span class="material-symbols-rounded" aria-hidden="true">signal_cellular_alt_1_bar</span>
+          Beginner
+        </div>
+        <h3 class="mission-title">ตัวแปรและข้อมูล</h3>
+        <p class="mission-desc">ทำความเข้าใจตัวแปร ชนิดของข้อมูล และการจัดเก็บข้อมูลในโปรแกรม</p>
+        <div class="mission-meta">
+          <span><span class="material-symbols-rounded" aria-hidden="true">timer</span>60 นาที</span>
+          <span><span class="material-symbols-rounded" aria-hidden="true">emoji_events</span>150 XP</span>
+        </div>
+        <a href="pages/login.html" class="mission-btn">
+          เริ่มภารกิจ
+          <span class="material-symbols-rounded" aria-hidden="true">arrow_forward</span>
+        </a>
+      </article>
+
+      <article class="mission-card mission-card--featured shimmer-card card-lift" tabindex="0">
+        <div class="mission-num" aria-hidden="true">03</div>
+        <div class="mission-hot-label" aria-label="ยอดนิยม">🔥 Hot</div>
+        <div class="mission-icon-wrap miw--yellow" aria-hidden="true">
+          <span class="material-symbols-rounded">loop</span>
+        </div>
+        <div class="mission-diff diff--medium">
+          <span class="material-symbols-rounded" aria-hidden="true">signal_cellular_alt_2_bar</span>
+          Intermediate
+        </div>
+        <h3 class="mission-title">การวนซ้ำ (Loops)</h3>
+        <p class="mission-desc">เรียนรู้การทำซ้ำด้วย for loop และ while loop เพื่อสร้างโปรแกรมที่ทรงพลัง</p>
+        <div class="mission-meta">
+          <span><span class="material-symbols-rounded" aria-hidden="true">timer</span>75 นาที</span>
+          <span><span class="material-symbols-rounded" aria-hidden="true">emoji_events</span>200 XP</span>
+        </div>
+        <a href="pages/login.html" class="mission-btn mission-btn--featured">
+          เริ่มภารกิจ
+          <span class="material-symbols-rounded" aria-hidden="true">arrow_forward</span>
+        </a>
+      </article>
+
+      <article class="mission-card shimmer-card card-lift" tabindex="0">
+        <div class="mission-num" aria-hidden="true">04</div>
+        <div class="mission-icon-wrap miw--purple" aria-hidden="true">
+          <span class="material-symbols-rounded">functions</span>
+        </div>
+        <div class="mission-diff diff--medium">
+          <span class="material-symbols-rounded" aria-hidden="true">signal_cellular_alt_2_bar</span>
+          Intermediate
+        </div>
+        <h3 class="mission-title">ฟังก์ชัน (Functions)</h3>
+        <p class="mission-desc">ออกแบบและเรียกใช้ฟังก์ชัน เพื่อเขียนโค้ดที่เป็นระเบียบและนำกลับมาใช้ใหม่ได้</p>
+        <div class="mission-meta">
+          <span><span class="material-symbols-rounded" aria-hidden="true">timer</span>90 นาที</span>
+          <span><span class="material-symbols-rounded" aria-hidden="true">emoji_events</span>250 XP</span>
+        </div>
+        <a href="pages/login.html" class="mission-btn">
+          เริ่มภารกิจ
+          <span class="material-symbols-rounded" aria-hidden="true">arrow_forward</span>
+        </a>
+      </article>
+
+      <article class="mission-card shimmer-card card-lift" tabindex="0">
+        <div class="mission-num" aria-hidden="true">05</div>
+        <div class="mission-icon-wrap miw--red" aria-hidden="true">
+          <span class="material-symbols-rounded">psychology</span>
+        </div>
+        <div class="mission-diff diff--hard">
+          <span class="material-symbols-rounded" aria-hidden="true">signal_cellular_alt</span>
+          Advanced
+        </div>
+        <h3 class="mission-title">โปรเจกต์ AI สุดท้าย</h3>
+        <p class="mission-desc">รวบรวมทุกทักษะสร้างโปรเจกต์ AI จริง ๆ ด้วยตัวเอง — Final Boss ของผู้ท้าชิง</p>
+        <div class="mission-meta">
+          <span><span class="material-symbols-rounded" aria-hidden="true">timer</span>120 นาที</span>
+          <span><span class="material-symbols-rounded" aria-hidden="true">emoji_events</span>350 XP</span>
+        </div>
+        <a href="pages/login.html" class="mission-btn">
+          เริ่มภารกิจ
+          <span class="material-symbols-rounded" aria-hidden="true">arrow_forward</span>
+        </a>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- ===== TEACHER DASHBOARD PREVIEW ===== -->
+<section class="dashboard-preview" id="dashboard" aria-label="ตัวอย่าง Dashboard ครู">
+  <div class="section-container">
+
+    <header class="section-header">
+      <span class="section-tag">สำหรับครู</span>
+      <h2 class="section-title">Dashboard <span class="text-gradient">สำหรับครูผู้สอน</span></h2>
+      <p class="section-desc">ติดตามพัฒนาการนักเรียนทุกคนแบบ Real-time พร้อม AI วิเคราะห์และให้คำแนะนำ</p>
+    </header>
+
+    <div class="dashboard-wrapper">
+
+      <div class="dashboard-analytics-row">
+
+        <div class="dash-mini-card shimmer-card card-lift">
+          <div class="mini-icon mini-icon--blue" aria-hidden="true">
+            <img src="assets/icons/Student.png" alt="" class="mini-icon-img">
+          </div>
+          <div class="mini-info">
+            <div class="mini-val">45</div>
+            <div class="mini-lbl">นักเรียนทั้งหมด</div>
+          </div>
+          <div class="mini-trend mini-trend--up" aria-label="เพิ่มขึ้น 12%">
+            <span class="material-symbols-rounded" aria-hidden="true">trending_up</span>+12%
+          </div>
+        </div>
+
+        <div class="dash-mini-card shimmer-card card-lift">
+          <div class="mini-icon mini-icon--green" aria-hidden="true">
+            <img src="assets/icons/analytics.png" alt="" class="mini-icon-img">
+          </div>
+          <div class="mini-info">
+            <div class="mini-val">84%</div>
+            <div class="mini-lbl">คะแนนเฉลี่ย</div>
+          </div>
+          <div class="mini-trend mini-trend--up" aria-label="เพิ่มขึ้น 5%">
+            <span class="material-symbols-rounded" aria-hidden="true">trending_up</span>+5%
+          </div>
+        </div>
+
+        <div class="dash-mini-card shimmer-card card-lift">
+          <div class="mini-icon mini-icon--yellow" aria-hidden="true">
+            <img src="assets/icons/Mission.png" alt="" class="mini-icon-img">
+          </div>
+          <div class="mini-info">
+            <div class="mini-val">73%</div>
+            <div class="mini-lbl">อัตราส่งงาน</div>
+          </div>
+          <div class="mini-trend mini-trend--down" aria-label="ลดลง 2%">
+            <span class="material-symbols-rounded" aria-hidden="true">trending_down</span>-2%
+          </div>
+        </div>
+
+        <div class="dash-mini-card shimmer-card card-lift">
+          <div class="mini-icon mini-icon--purple" aria-hidden="true">
+            <img src="assets/icons/Dashboard.png" alt="" class="mini-icon-img">
+          </div>
+          <div class="mini-info">
+            <div class="mini-val">38</div>
+            <div class="mini-lbl">ออนไลน์วันนี้</div>
+          </div>
+          <div class="mini-trend mini-trend--up" aria-label="84 เปอร์เซ็นต์">
+            <span class="material-symbols-rounded" aria-hidden="true">trending_up</span>84%
+          </div>
+        </div>
+
+      </div>
+
+      <div class="dashboard-main-grid">
+
+        <div class="dash-chart-card">
+          <div class="dash-card-header">
+            <div class="dash-card-title">
+              <span class="material-symbols-rounded" aria-hidden="true">bar_chart</span>
+              <h3>ความก้าวหน้าของชั้นเรียน</h3>
+            </div>
+            <div class="chart-legend" aria-hidden="true">
+              <span class="legend-dot legend-dot--blue"></span> Mission 1–5
+            </div>
+          </div>
+          <div class="chart-area" role="img" aria-label="กราฟแสดงความก้าวหน้า Mission 1 ถึง 5">
+            <div class="chart-bars">
+              <div class="chart-bar-wrap">
+                <div class="chart-bar" style="--h:75%; --c:#2563EB" aria-label="Mission 1 75%"></div>
+                <span class="bar-lbl">M1</span>
+                <span class="bar-val">75%</span>
+              </div>
+              <div class="chart-bar-wrap">
+                <div class="chart-bar" style="--h:60%; --c:#60A5FA" aria-label="Mission 2 60%"></div>
+                <span class="bar-lbl">M2</span>
+                <span class="bar-val">60%</span>
+              </div>
+              <div class="chart-bar-wrap">
+                <div class="chart-bar" style="--h:88%; --c:#FBBF24" aria-label="Mission 3 88%"></div>
+                <span class="bar-lbl">M3</span>
+                <span class="bar-val">88%</span>
+              </div>
+              <div class="chart-bar-wrap">
+                <div class="chart-bar" style="--h:45%; --c:#22C55E" aria-label="Mission 4 45%"></div>
+                <span class="bar-lbl">M4</span>
+                <span class="bar-val">45%</span>
+              </div>
+              <div class="chart-bar-wrap">
+                <div class="chart-bar" style="--h:30%; --c:#A855F7" aria-label="Mission 5 30%"></div>
+                <span class="bar-lbl">M5</span>
+                <span class="bar-val">30%</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="dash-ai-card">
+          <div class="ai-card-head">
+            <div class="ai-avatar" aria-hidden="true">
+              <span class="material-symbols-rounded">smart_toy</span>
+            </div>
+            <div>
+              <h3>AI แนะนำ</h3>
+              <p>วิเคราะห์แล้ว 45 คน</p>
+            </div>
+          </div>
+
+          <div class="ai-insights">
+            <div class="ai-insight ai-insight--warn">
+              <span class="material-symbols-rounded" aria-hidden="true">warning</span>
+              <div>
+                <strong>ต้องการความช่วยเหลือ</strong>
+                <p>นักเรียน 8 คนยังไม่ผ่าน Mission 2 ควรทบทวนเรื่องตัวแปร</p>
+              </div>
+            </div>
+            <div class="ai-insight ai-insight--success">
+              <span class="material-symbols-rounded" aria-hidden="true">celebration</span>
+              <div>
+                <strong>นักเรียนเก่ง</strong>
+                <p>นักเรียน 5 คนพร้อมรับ Challenge พิเศษ Mission 6 (Bonus)</p>
+              </div>
+            </div>
+            <div class="ai-insight ai-insight--info">
+              <span class="material-symbols-rounded" aria-hidden="true">tips_and_updates</span>
+              <div>
+                <strong>เวลาเรียนที่ดีที่สุด</strong>
+                <p>นักเรียนมี Engagement สูงสุดช่วง 09:00–11:00 น.</p>
+              </div>
+            </div>
+          </div>
+
+          <a href="pages/login.html" class="ai-view-btn">
+            ดู Dashboard เต็ม
+            <span class="material-symbols-rounded" aria-hidden="true">open_in_new</span>
+          </a>
+        </div>
+
+      </div>
+
+      <div class="dash-table-card">
+        <div class="dash-card-header">
+          <div class="dash-card-title">
+            <span class="material-symbols-rounded" aria-hidden="true">table_chart</span>
+            <h3>รายชื่อนักเรียน — ป.5/1</h3>
+          </div>
+          <a href="pages/login.html" class="see-all-link">ดูทั้งหมด</a>
+        </div>
+        <div class="table-scroll" role="region" aria-label="ตารางความก้าวหน้าของนักเรียน" tabindex="0">
+          <table class="student-table">
+            <thead>
+              <tr>
+                <th scope="col">นักเรียน</th>
+                <th scope="col">M1</th>
+                <th scope="col">M2</th>
+                <th scope="col">M3</th>
+                <th scope="col">M4</th>
+                <th scope="col">รวม</th>
+                <th scope="col">สถานะ</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="td-name">
+                  <div class="stu-avatar stu-av--1" aria-hidden="true">น</div>
+                  <span>นภัสสร สุขใจ</span>
+                </td>
+                <td><span class="score score--hi">95</span></td>
+                <td><span class="score score--hi">88</span></td>
+                <td><span class="score score--hi">92</span></td>
+                <td><span class="score score--md">76</span></td>
+                <td><strong>87.75</strong></td>
+                <td><span class="status-badge sb--active">Active</span></td>
+              </tr>
+              <tr>
+                <td class="td-name">
+                  <div class="stu-avatar stu-av--2" aria-hidden="true">ป</div>
+                  <span>ปภัสรา คงดี</span>
+                </td>
+                <td><span class="score score--hi">90</span></td>
+                <td><span class="score score--md">78</span></td>
+                <td><span class="score score--md">82</span></td>
+                <td><span class="score score--md">70</span></td>
+                <td><strong>80.00</strong></td>
+                <td><span class="status-badge sb--active">Active</span></td>
+              </tr>
+              <tr>
+                <td class="td-name">
+                  <div class="stu-avatar stu-av--3" aria-hidden="true">ก</div>
+                  <span>กวินท์ แสงสว่าง</span>
+                </td>
+                <td><span class="score score--md">72</span></td>
+                <td><span class="score score--lo">55</span></td>
+                <td><span class="score score--lo">60</span></td>
+                <td><span class="score score--lo">48</span></td>
+                <td><strong>58.75</strong></td>
+                <td><span class="status-badge sb--warn">ต้องช่วย</span></td>
+              </tr>
+              <tr>
+                <td class="td-name">
+                  <div class="stu-avatar stu-av--4" aria-hidden="true">ม</div>
+                  <span>มาริสา นาคทอง</span>
+                </td>
+                <td><span class="score score--hi">98</span></td>
+                <td><span class="score score--hi">95</span></td>
+                <td><span class="score score--hi">97</span></td>
+                <td><span class="score score--hi">91</span></td>
+                <td><strong>95.25</strong></td>
+                <td><span class="status-badge sb--top">Top Student</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer class="footer" id="about" role="contentinfo">
+  <div class="footer-container">
+
+    <div class="footer-main">
+
+      <div class="footer-brand">
+        <div class="footer-logo" aria-label="AI Coding Adventure">
+          <div class="logo-icon" aria-hidden="true">
+            <span class="material-symbols-rounded">smart_toy</span>
+          </div>
+          <div class="logo-text">
+            <span class="logo-main">AI Coding</span>
+            <span class="logo-sub">Adventure</span>
+          </div>
+        </div>
+        <p class="footer-desc">แพลตฟอร์มเรียนวิทยาการคำนวณผ่านการผจญภัย สำหรับนักเรียนชั้น ป.5 ด้วย AI และ Gamification</p>
+      </div>
+
+
+    </div>
+
+    <div class="footer-bottom">
+      <div class="footer-school">
+        <span class="material-symbols-rounded" aria-hidden="true">school</span>
+        <span>โรงเรียนชุมชนบ้านปากชม</span>
+      </div>
+      <div class="footer-meta">
+        <span>พัฒนาโดย <strong>นายวิริทธิ์พล แก้วดวงจันทร์</strong></span>
+        <span class="footer-sep" aria-hidden="true">•</span>
+        <span class="ver-badge">v1.0.0</span><!-- update via AppConfig.VERSION -->
+        <span class="footer-sep" aria-hidden="true">•</span>
+        <span>© 2026 AI Coding Adventure</span>
+      </div>
+    </div>
+
+  </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js" defer></script>
+<script src="scripts/app.js" defer></script>
+<script src="scripts/starfield.js"></script>
+<script>
+  /* Register Service Worker */
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', function () {
+      navigator.serviceWorker.register('/AI-Coding-Adventure/sw.js', { scope: '/AI-Coding-Adventure/' });
+    });
+  }
+</script>
+
+</body>
+</html>

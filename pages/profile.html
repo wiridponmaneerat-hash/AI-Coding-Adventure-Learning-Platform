@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="โปรไฟล์และการตั้งค่า — AI Coding Adventure" />
+  <meta name="robots" content="noindex, nofollow">
+  <title>โปรไฟล์ — AI Coding Adventure</title>
+  <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="../assets/icon-192.svg">
+  <link rel="manifest" href="../manifest.json">
+  <meta name="theme-color" content="#2563EB">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800;900&family=Poppins:wght@400;500;600;700;800;900&family=Prompt:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,400,1,0" />
+
+  <link rel="stylesheet" href="../styles/globals.css" />
+  <link rel="stylesheet" href="../styles/home.css" />
+  <link rel="stylesheet" href="../styles/profile.css" />
+  <link rel="stylesheet" href="../styles/starfield.css" />
+</head>
+
+<body class="home-page">
+
+<nav class="home-nav" id="homeNav" role="navigation" aria-label="การนำทางหลัก">
+  <div class="home-nav-inner">
+    <a href="../index.html" class="hn-logo" aria-label="AI Coding Adventure หน้าหลัก">
+      <div class="hn-logo-icon" aria-hidden="true"><span class="material-symbols-rounded">smart_toy</span></div>
+      <div class="hn-logo-text">
+        <span class="hn-logo-main">AI Coding</span>
+        <span class="hn-logo-sub">Adventure</span>
+      </div>
+    </a>
+    <ul class="hn-links" id="hnMenu" role="list">
+      <li><a href="home.html" class="hn-link"><img src="../assets/icons/home.png" alt="" class="hn-nav-icon">หน้าหลัก</a></li>
+      <li><a href="missions.html" class="hn-link"><img src="../assets/icons/Mission.png" alt="" class="hn-nav-icon">Mission</a></li>
+      <li><a href="portfolio.html" class="hn-link"><img src="../assets/icons/Portfolio.png" alt="" class="hn-nav-icon">Portfolio</a></li>
+      <li><a href="leaderboard.html" class="hn-link"><img src="../assets/icons/Trophy.png" alt="" class="hn-nav-icon">อันดับ</a></li>
+      <li><a href="profile.html" class="hn-link hn-link--active" aria-current="page"><img src="../assets/icons/account_circle.png" alt="" class="hn-nav-icon">โปรไฟล์</a></li>
+    </ul>
+    <div class="hn-right">
+      <button class="hn-notif-btn" aria-label="การแจ้งเตือน">
+        <span class="material-symbols-rounded" aria-hidden="true">notifications</span>
+        <span class="notif-dot" aria-hidden="true"></span>
+      </button>
+      <div class="hn-user-chip" id="navUserChip">
+        <div class="hn-user-avatar" id="navAvatar" aria-hidden="true">?</div>
+        <div class="hn-user-info" aria-live="polite">
+          <span class="hn-user-name" id="navName">Loading...</span>
+          <span class="hn-user-role">นักเรียน</span>
+        </div>
+      </div>
+      <button class="hn-logout-btn" id="logoutBtn" aria-label="ออกจากระบบ">
+        <span class="material-symbols-rounded" aria-hidden="true">logout</span>
+      </button>
+      <button class="hn-hamburger" id="hnHamburger" aria-label="เปิด/ปิดเมนู" aria-expanded="false" aria-controls="hnMenu">
+        <span aria-hidden="true"></span><span aria-hidden="true"></span><span aria-hidden="true"></span>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<main class="home-main" id="profileMain" role="main">
+  <div class="home-container">
+
+    <!-- PROFILE CARD -->
+    <section class="pr-profile-card" id="prProfileCard" aria-label="โปรไฟล์">
+      <div class="pr-card-bg" aria-hidden="true">
+        <div class="wc-orb wc-orb--1"></div>
+        <div class="wc-orb wc-orb--2"></div>
+      </div>
+
+      <div class="pr-avatar-section">
+        <div class="pr-avatar-ring" id="prAvatarRing" aria-hidden="true">
+          <div class="pr-avatar" id="prAvatar">?</div>
+        </div>
+        <button class="pr-avatar-edit-btn" id="prAvatarEditBtn" aria-label="แก้ไขรูปโปรไฟล์" title="เปลี่ยนสี Avatar">
+          <span class="material-symbols-rounded" aria-hidden="true">edit</span>
+        </button>
+      </div>
+
+      <div class="pr-profile-info">
+        <h1 class="pr-name" id="prName">Loading...</h1>
+        <div class="pr-badges-row">
+          <span class="wlevel-badge" id="prLevelBadge">ระดับ 1</span>
+          <span class="wxp-chip" id="prLevelName">มือใหม่</span>
+          <span class="pr-id-chip" id="prIdChip">ID: —</span>
+        </div>
+        <div class="pr-stats-row">
+          <div class="pr-stat"><span class="pr-stat-val" id="prStatXP">0</span><span class="pr-stat-lbl">XP</span></div>
+          <div class="pr-stat-div" aria-hidden="true"></div>
+          <div class="pr-stat"><span class="pr-stat-val" id="prStatMissions">0</span><span class="pr-stat-lbl">Mission</span></div>
+          <div class="pr-stat-div" aria-hidden="true"></div>
+          <div class="pr-stat"><span class="pr-stat-val" id="prStatBadges">0</span><span class="pr-stat-lbl">เหรียญ</span></div>
+          <div class="pr-stat-div" aria-hidden="true"></div>
+          <div class="pr-stat"><span class="pr-stat-val" id="prStatScore">—</span><span class="pr-stat-lbl">คะแนนเฉลี่ย</span></div>
+        </div>
+      </div>
+
+      <!-- XP Bar -->
+      <div class="pr-xp-bar-section">
+        <div class="pr-xp-labels">
+          <span id="prXpCurrent">0 XP</span>
+          <span id="prXpNext">ระดับ 2: 300 XP</span>
+        </div>
+        <div class="pr-xp-bar" role="progressbar" aria-label="XP ความก้าวหน้า">
+          <div class="pr-xp-fill" id="prXpFill" style="width:0%"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TABS -->
+    <div class="pr-tabs" role="tablist" aria-label="ส่วนต่างๆ ของโปรไฟล์">
+      <button class="pr-tab pr-tab--active" role="tab" aria-selected="true" data-tab="info" id="tabInfo">
+        <img src="../assets/icons/account_circle.png" alt="" style="width:16px;height:16px;object-fit:contain;vertical-align:middle"> ข้อมูล
+      </button>
+      <button class="pr-tab" role="tab" aria-selected="false" data-tab="badges" id="tabBadges">
+        <img src="../assets/icons/Trophy.png" alt="" style="width:16px;height:16px;object-fit:contain;vertical-align:middle"> เหรียญ
+      </button>
+      <button class="pr-tab" role="tab" aria-selected="false" data-tab="settings" id="tabSettings">
+        <img src="../assets/icons/settings.png" alt="" style="width:16px;height:16px;object-fit:contain;vertical-align:middle"> การตั้งค่า
+      </button>
+    </div>
+
+    <!-- TAB: INFO -->
+    <div class="pr-tab-panel" id="panelInfo" role="tabpanel" aria-labelledby="tabInfo">
+      <form class="pr-form" id="prForm" novalidate>
+        <div class="pr-form-card">
+          <h2 class="pr-form-section-title">
+            <img src="../assets/icons/account_circle.png" alt="" style="width:18px;height:18px;object-fit:contain;vertical-align:middle">
+            ข้อมูลส่วนตัว
+          </h2>
+          <div class="pr-form-row">
+            <div class="pr-form-group">
+              <label class="pf-form-label" for="prInputName">ชื่อ-นามสกุล</label>
+              <input class="pf-form-input" type="text" id="prInputName" placeholder="ชื่อของคุณ" maxlength="100" />
+            </div>
+            <div class="pr-form-group">
+              <label class="pf-form-label" for="prInputClass">ห้องเรียน</label>
+              <input class="pf-form-input" type="text" id="prInputClass" placeholder="เช่น ป.5/1" maxlength="20" readonly />
+            </div>
+          </div>
+          <div class="pr-form-row">
+            <div class="pr-form-group">
+              <label class="pf-form-label" for="prInputNickname">ชื่อเล่น</label>
+              <input class="pf-form-input" type="text" id="prInputNickname" placeholder="ชื่อเล่นในเกม" maxlength="30" />
+            </div>
+            <div class="pr-form-group">
+              <label class="pf-form-label" for="prInputEmail">อีเมล (ไม่บังคับ)</label>
+              <input class="pf-form-input" type="email" id="prInputEmail" placeholder="email@school.ac.th" maxlength="100" />
+            </div>
+          </div>
+          <div class="pr-form-group">
+            <label class="pf-form-label" for="prInputBio">แนะนำตัวเอง</label>
+            <textarea class="pf-form-textarea" id="prInputBio" rows="3" placeholder="บอกเล่าตัวเองสั้นๆ..." maxlength="200"></textarea>
+          </div>
+          <div class="pr-form-error" id="prFormError" hidden role="alert"></div>
+          <div class="pr-form-success" id="prFormSuccess" hidden role="status"></div>
+          <button type="submit" class="md-comp-btn md-comp-btn--pri pr-save-btn">
+            <span class="material-symbols-rounded" aria-hidden="true">save</span> บันทึกการเปลี่ยนแปลง
+          </button>
+        </div>
+      </form>
+
+      <!-- Mission Progress -->
+      <div class="pr-form-card pr-mission-progress-card">
+        <h2 class="pr-form-section-title">
+          <img src="../assets/icons/Mission.png" alt="" style="width:18px;height:18px;object-fit:contain;vertical-align:middle">
+          ความก้าวหน้า Mission
+        </h2>
+        <div class="pr-mission-list" id="prMissionList" aria-label="รายการ Mission">
+          <!-- Rendered by JS -->
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB: BADGES -->
+    <div class="pr-tab-panel" id="panelBadges" role="tabpanel" aria-labelledby="tabBadges" hidden>
+      <div class="pr-form-card">
+        <div class="pr-badges-header">
+          <h2 class="pr-form-section-title">
+            <img src="../assets/icons/Trophy.png" alt="" style="width:18px;height:18px;object-fit:contain;vertical-align:middle">
+            คอลเลกชั่นเหรียญ
+          </h2>
+          <span class="pr-badge-count" id="prBadgeCount">0 / 0 เหรียญ</span>
+        </div>
+        <div class="pr-badges-grid" id="prBadgesGrid" aria-label="เหรียญที่สะสม">
+          <!-- Rendered by JS -->
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB: SETTINGS -->
+    <div class="pr-tab-panel" id="panelSettings" role="tabpanel" aria-labelledby="tabSettings" hidden>
+      <div class="pr-form-card">
+        <h2 class="pr-form-section-title">
+          <img src="../assets/icons/account_circle.png" alt="" style="width:18px;height:18px;object-fit:contain;vertical-align:middle">
+          รูปแบบ Avatar
+        </h2>
+        <div class="pr-avatar-colors" id="prAvatarColors" aria-label="เลือกสี Avatar">
+          <!-- Rendered by JS -->
+        </div>
+      </div>
+
+      <div class="pr-form-card">
+        <h2 class="pr-form-section-title">
+          <img src="../assets/icons/settings.png" alt="" style="width:18px;height:18px;object-fit:contain;vertical-align:middle">
+          ความปลอดภัย
+        </h2>
+        <form class="pr-form" id="prPasswordForm" novalidate>
+          <div class="pr-form-group">
+            <label class="pf-form-label" for="prOldPass">รหัสผ่านเดิม</label>
+            <input class="pf-form-input" type="password" id="prOldPass" placeholder="รหัสผ่านปัจจุบัน" autocomplete="current-password" />
+          </div>
+          <div class="pr-form-row">
+            <div class="pr-form-group">
+              <label class="pf-form-label" for="prNewPass">รหัสผ่านใหม่</label>
+              <input class="pf-form-input" type="password" id="prNewPass" placeholder="รหัสผ่านใหม่ (6+ ตัวอักษร)" autocomplete="new-password" minlength="6" />
+            </div>
+            <div class="pr-form-group">
+              <label class="pf-form-label" for="prConfirmPass">ยืนยันรหัสผ่านใหม่</label>
+              <input class="pf-form-input" type="password" id="prConfirmPass" placeholder="พิมพ์รหัสผ่านใหม่อีกครั้ง" autocomplete="new-password" />
+            </div>
+          </div>
+          <div class="pr-form-error" id="prPassError" hidden role="alert"></div>
+          <div class="pr-form-success" id="prPassSuccess" hidden role="status"></div>
+          <button type="submit" class="md-comp-btn md-comp-btn--pri pr-save-btn">
+            <span class="material-symbols-rounded" aria-hidden="true">lock_reset</span> เปลี่ยนรหัสผ่าน
+          </button>
+        </form>
+      </div>
+
+      <div class="pr-form-card pr-danger-card">
+        <h2 class="pr-form-section-title pr-danger-title"><span class="material-symbols-rounded" aria-hidden="true">warning</span> โซนอันตราย</h2>
+        <p class="pr-danger-desc">การออกจากระบบจะยกเลิก session ปัจจุบัน</p>
+        <button class="md-comp-btn md-comp-btn--danger" id="prLogoutBtn">
+          <span class="material-symbols-rounded" aria-hidden="true">logout</span> ออกจากระบบ
+        </button>
+      </div>
+    </div>
+
+  </div>
+</main>
+
+<!-- Toast -->
+<div class="pr-toast" id="prToast" role="status" aria-live="polite" hidden>
+  <span class="material-symbols-rounded" id="prToastIcon">check_circle</span>
+  <span id="prToastMsg"></span>
+</div>
+
+<footer class="home-footer" role="contentinfo">
+  <p>© 2026 AI Coding Adventure · พัฒนาโดยทีมนวัตกรรมการเรียนรู้</p>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js" defer></script>
+<script src="../config/app-config.js" defer></script>
+<script src="../services/api.js" defer></script>
+<script src="../services/analytics-service.js" defer></script>
+<script src="../services/auth-service.js" defer></script>
+<script src="../services/student-service.js" defer></script>
+<script src="../scripts/profile-page.js" defer></script>
+<script src="../scripts/starfield.js"></script>
+</body>
+</html>

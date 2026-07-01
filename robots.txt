@@ -1,0 +1,21 @@
+User-agent: *
+Allow: /AI-Coding-Adventure/
+Allow: /AI-Coding-Adventure/index.html
+
+# Private pages — require authentication, no indexing value
+Disallow: /AI-Coding-Adventure/pages/home.html
+Disallow: /AI-Coding-Adventure/pages/missions.html
+Disallow: /AI-Coding-Adventure/pages/mission-detail.html
+Disallow: /AI-Coding-Adventure/pages/portfolio.html
+Disallow: /AI-Coding-Adventure/pages/leaderboard.html
+Disallow: /AI-Coding-Adventure/pages/profile.html
+Disallow: /AI-Coding-Adventure/dashboard/
+Disallow: /AI-Coding-Adventure/data/
+Disallow: /AI-Coding-Adventure/ai-context/
+Disallow: /AI-Coding-Adventure/prompts/
+Disallow: /AI-Coding-Adventure/.vscode/
+
+# Public pages
+Allow: /AI-Coding-Adventure/pages/login.html
+
+Sitemap: https://YOUR_GITHUB_USERNAME.github.io/AI-Coding-Adventure/sitemap.xml

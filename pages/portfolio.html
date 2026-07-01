@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Portfolio ผลงาน — AI Coding Adventure" />
+  <meta name="robots" content="noindex, nofollow">
+  <title>Portfolio — AI Coding Adventure</title>
+  <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="../assets/icon-192.svg">
+  <link rel="manifest" href="../manifest.json">
+  <meta name="theme-color" content="#2563EB">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800;900&family=Poppins:wght@400;500;600;700;800;900&family=Prompt:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,400,1,0" />
+
+  <link rel="stylesheet" href="../styles/globals.css" />
+  <link rel="stylesheet" href="../styles/home.css" />
+  <link rel="stylesheet" href="../styles/portfolio.css" />
+  <link rel="stylesheet" href="../styles/starfield.css" />
+</head>
+
+<body class="home-page">
+
+<!-- NAV -->
+<nav class="home-nav" id="homeNav" role="navigation" aria-label="การนำทางหลัก">
+  <div class="home-nav-inner">
+    <a href="../index.html" class="hn-logo" aria-label="AI Coding Adventure หน้าหลัก">
+      <div class="hn-logo-icon" aria-hidden="true"><span class="material-symbols-rounded">smart_toy</span></div>
+      <div class="hn-logo-text">
+        <span class="hn-logo-main">AI Coding</span>
+        <span class="hn-logo-sub">Adventure</span>
+      </div>
+    </a>
+    <ul class="hn-links" id="hnMenu" role="list">
+      <li><a href="home.html" class="hn-link"><img src="../assets/icons/home.png" alt="" class="hn-nav-icon">หน้าหลัก</a></li>
+      <li><a href="missions.html" class="hn-link"><img src="../assets/icons/Mission.png" alt="" class="hn-nav-icon">Mission</a></li>
+      <li><a href="portfolio.html" class="hn-link hn-link--active" aria-current="page"><img src="../assets/icons/Portfolio.png" alt="" class="hn-nav-icon">Portfolio</a></li>
+      <li><a href="leaderboard.html" class="hn-link"><img src="../assets/icons/Trophy.png" alt="" class="hn-nav-icon">อันดับ</a></li>
+      <li><a href="profile.html" class="hn-link"><img src="../assets/icons/account_circle.png" alt="" class="hn-nav-icon">โปรไฟล์</a></li>
+    </ul>
+    <div class="hn-right">
+      <button class="hn-notif-btn" aria-label="การแจ้งเตือน">
+        <span class="material-symbols-rounded" aria-hidden="true">notifications</span>
+        <span class="notif-dot" aria-hidden="true"></span>
+      </button>
+      <div class="hn-user-chip" id="navUserChip">
+        <div class="hn-user-avatar" id="navAvatar" aria-hidden="true">?</div>
+        <div class="hn-user-info" aria-live="polite">
+          <span class="hn-user-name" id="navName">Loading...</span>
+          <span class="hn-user-role">นักเรียน</span>
+        </div>
+      </div>
+      <button class="hn-logout-btn" id="logoutBtn" aria-label="ออกจากระบบ">
+        <span class="material-symbols-rounded" aria-hidden="true">logout</span>
+      </button>
+      <button class="hn-hamburger" id="hnHamburger" aria-label="เปิด/ปิดเมนู" aria-expanded="false" aria-controls="hnMenu">
+        <span aria-hidden="true"></span><span aria-hidden="true"></span><span aria-hidden="true"></span>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<!-- MAIN -->
+<main class="home-main" id="portfolioMain" role="main">
+  <div class="home-container">
+
+    <!-- HEADER -->
+    <section class="pf-hero pf-hero--decorated dot-bg" id="pfHero" aria-label="Portfolio Header">
+      <div class="pf-hero-left">
+        <p class="ms-eyebrow">
+          <img src="../assets/icons/Portfolio.png" alt="" style="width:16px;height:16px;object-fit:contain;vertical-align:middle">
+          Portfolio ของฉัน
+        </p>
+        <h1 class="ms-title">ผลงานของฉัน</h1>
+        <p class="ms-subtitle" id="pfSubtitle">เก็บสะสมผลงานการเขียนโค้ดทุกชิ้น</p>
+      </div>
+      <div class="pf-hero-right">
+        <button class="pf-upload-hero-btn pf-upload-glow" id="pfUploadHeroBtn" aria-label="อัปโหลดผลงาน">
+          <img src="../assets/icons/Portfolio.png" alt="" style="width:16px;height:16px;object-fit:contain;filter:brightness(0) invert(1)">
+          อัปโหลดผลงาน
+        </button>
+        <div class="pf-stat-row">
+          <div class="pf-stat pf-stat--glow">
+            <img src="../assets/icons/Portfolio.png" alt="" style="width:16px;height:16px;object-fit:contain;display:block;margin:0 auto 4px">
+            <span class="pf-stat-val" id="pfStatCount">0</span>
+            <span class="pf-stat-lbl">ผลงาน</span>
+          </div>
+          <div class="pf-stat pf-stat--glow">
+            <img src="../assets/icons/Mission.png" alt="" style="width:16px;height:16px;object-fit:contain;display:block;margin:0 auto 4px">
+            <span class="pf-stat-val" id="pfStatMissions">0</span>
+            <span class="pf-stat-lbl">Mission</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FILTER -->
+    <div class="ms-filter-bar" id="pfFilterBar" role="tablist" aria-label="กรองผลงาน">
+      <button class="ms-filter-btn ms-filter-btn--active" role="tab" aria-selected="true" data-mission="all">
+        <span class="material-symbols-rounded" aria-hidden="true">apps</span> ทั้งหมด
+      </button>
+      <button class="ms-filter-btn" role="tab" aria-selected="false" data-mission="1">M1</button>
+      <button class="ms-filter-btn" role="tab" aria-selected="false" data-mission="2">M2</button>
+      <button class="ms-filter-btn" role="tab" aria-selected="false" data-mission="3">M3</button>
+      <button class="ms-filter-btn" role="tab" aria-selected="false" data-mission="4">M4</button>
+      <button class="ms-filter-btn" role="tab" aria-selected="false" data-mission="5">M5</button>
+    </div>
+
+    <!-- PORTFOLIO GRID -->
+    <section class="pf-grid-section" aria-label="รายการผลงาน">
+      <div class="pf-grid" id="pfGrid" role="list">
+        <!-- Rendered by JS -->
+      </div>
+
+      <!-- EMPTY STATE -->
+      <div class="pf-empty" id="pfEmpty" hidden aria-live="polite">
+        <div class="pf-empty-icon pf-empty-float" aria-hidden="true">
+          <img src="../assets/icons/Portfolio.png" alt="" style="width:48px;height:48px;object-fit:contain;opacity:0.5">
+        </div>
+        <h3 class="pf-empty-title">ยังไม่มีผลงาน</h3>
+        <p class="pf-empty-sub">อัปโหลดผลงานโค้ดชิ้นแรกของคุณ!</p>
+        <button class="pf-upload-btn pf-upload-glow" id="pfUploadEmptyBtn">
+          <span class="material-symbols-rounded" aria-hidden="true">add</span> อัปโหลดเลย
+        </button>
+      </div>
+    </section>
+
+  </div>
+</main>
+
+<!-- UPLOAD MODAL -->
+<div class="pf-modal-overlay" id="pfModalOverlay" hidden role="dialog" aria-modal="true" aria-labelledby="pfModalTitle">
+  <div class="pf-modal" id="pfModal">
+    <div class="pf-modal-header">
+      <h2 class="pf-modal-title" id="pfModalTitle">
+        <span class="material-symbols-rounded" aria-hidden="true">upload</span>
+        อัปโหลดผลงาน
+      </h2>
+      <button class="pf-modal-close" id="pfModalClose" aria-label="ปิด">
+        <span class="material-symbols-rounded" aria-hidden="true">close</span>
+      </button>
+    </div>
+
+    <form class="pf-form" id="pfForm" novalidate>
+
+      <!-- Drop zone -->
+      <div class="pf-dropzone" id="pfDropzone" role="button" tabindex="0" aria-label="ลากไฟล์มาวางที่นี่">
+        <span class="material-symbols-rounded pf-dz-icon" aria-hidden="true">cloud_upload</span>
+        <p class="pf-dz-text">ลากไฟล์มาวาง หรือ <span class="pf-dz-link">คลิกเพื่อเลือก</span></p>
+        <p class="pf-dz-hint">รองรับ PNG, JPG, PDF — ไม่เกิน 10 MB</p>
+        <input type="file" id="pfFileInput" class="pf-file-input" accept=".png,.jpg,.jpeg,.gif,.pdf" aria-label="เลือกไฟล์" />
+      </div>
+
+      <!-- Preview -->
+      <div class="pf-preview-area" id="pfPreviewArea" hidden>
+        <img id="pfPreviewImg" src="" alt="ตัวอย่างไฟล์" class="pf-preview-img" hidden />
+        <div class="pf-preview-pdf" id="pfPreviewPdf" hidden>
+          <span class="material-symbols-rounded" aria-hidden="true">picture_as_pdf</span>
+          <span id="pfPreviewPdfName"></span>
+        </div>
+        <button type="button" class="pf-remove-file" id="pfRemoveFile" aria-label="ลบไฟล์">
+          <span class="material-symbols-rounded" aria-hidden="true">delete</span>
+        </button>
+      </div>
+
+      <!-- Metadata -->
+      <div class="pf-form-fields">
+        <div class="pf-form-group">
+          <label class="pf-form-label" for="pfTitle">ชื่อผลงาน *</label>
+          <input class="pf-form-input" type="text" id="pfTitle" placeholder="เช่น Hello World แรกของฉัน" required maxlength="100" />
+        </div>
+        <div class="pf-form-group">
+          <label class="pf-form-label" for="pfMissionSelect">Mission ที่เกี่ยวข้อง *</label>
+          <select class="pf-form-select" id="pfMissionSelect" required>
+            <option value="">-- เลือก Mission --</option>
+            <option value="1">Mission 1: Hello, World!</option>
+            <option value="2">Mission 2: Conditions</option>
+            <option value="3">Mission 3: Loops</option>
+            <option value="4">Mission 4: Functions</option>
+            <option value="5">Mission 5: Mini AI Project</option>
+          </select>
+        </div>
+        <div class="pf-form-group">
+          <label class="pf-form-label" for="pfDesc">คำอธิบาย</label>
+          <textarea class="pf-form-textarea" id="pfDesc" placeholder="อธิบายผลงานของคุณ..." rows="3" maxlength="500"></textarea>
+        </div>
+      </div>
+
+      <div class="pf-form-error" id="pfFormError" hidden role="alert"></div>
+
+      <div class="pf-form-actions">
+        <button type="button" class="md-comp-btn md-comp-btn--sec" id="pfCancelBtn">ยกเลิก</button>
+        <button type="submit" class="md-comp-btn md-comp-btn--pri" id="pfSubmitBtn">
+          <span class="material-symbols-rounded" aria-hidden="true">save</span> บันทึกผลงาน
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- VIEW MODAL -->
+<div class="pf-modal-overlay" id="pfViewOverlay" hidden role="dialog" aria-modal="true" aria-labelledby="pfViewTitle">
+  <div class="pf-modal pf-modal--view">
+    <div class="pf-modal-header">
+      <h2 class="pf-modal-title" id="pfViewTitle">ดูผลงาน</h2>
+      <button class="pf-modal-close" id="pfViewClose" aria-label="ปิด">
+        <span class="material-symbols-rounded" aria-hidden="true">close</span>
+      </button>
+    </div>
+    <div class="pf-view-body">
+      <img id="pfViewImg" src="" alt="ผลงาน" class="pf-view-img" hidden />
+      <div class="pf-view-pdf" id="pfViewPdf" hidden>
+        <span class="material-symbols-rounded" aria-hidden="true">picture_as_pdf</span>
+        <span id="pfViewPdfName"></span>
+      </div>
+      <div class="pf-view-meta">
+        <h3 id="pfViewItemTitle"></h3>
+        <p id="pfViewItemDesc"></p>
+        <div class="pf-view-tags" id="pfViewTags"></div>
+      </div>
+    </div>
+    <div class="pf-view-actions">
+      <button class="md-comp-btn md-comp-btn--danger" id="pfViewDeleteBtn">
+        <span class="material-symbols-rounded" aria-hidden="true">delete</span> ลบ
+      </button>
+    </div>
+  </div>
+</div>
+
+<footer class="home-footer" role="contentinfo">
+  <p>© 2026 AI Coding Adventure · พัฒนาโดยทีมนวัตกรรมการเรียนรู้</p>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js" defer></script>
+<script src="../config/app-config.js" defer></script>
+<script src="../services/api.js" defer></script>
+<script src="../services/analytics-service.js" defer></script>
+<script src="../services/auth-service.js" defer></script>
+<script src="../services/portfolio-service.js" defer></script>
+<script src="../services/google-drive.js" defer></script>
+<script src="../scripts/portfolio-page.js" defer></script>
+<script src="../scripts/starfield.js"></script>
+</body>
+</html>

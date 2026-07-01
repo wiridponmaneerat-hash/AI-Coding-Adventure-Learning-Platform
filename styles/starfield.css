@@ -1,0 +1,264 @@
+/* ============================================================
+   Starfield Background — applies to all pages
+   ============================================================ */
+
+/* Dark space gradient body */
+body {
+  background: radial-gradient(ellipse at bottom, #1b2735 0%, #090a0f 100%) !important;
+  min-height: 100vh;
+}
+
+/* Star layer containers — injected by starfield.js */
+#stars, #stars2, #stars3 {
+  position: fixed;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  z-index: 0;
+}
+
+#stars {
+  width: 1px;
+  height: 1px;
+  background: transparent;
+  animation: animStar 50s linear infinite;
+}
+#stars:after {
+  content: " ";
+  position: absolute;
+  top: 2000px;
+  left: 0;
+  width: 1px;
+  height: 1px;
+  background: transparent;
+}
+
+#stars2 {
+  width: 2px;
+  height: 2px;
+  background: transparent;
+  animation: animStar 100s linear infinite;
+}
+#stars2:after {
+  content: " ";
+  position: absolute;
+  top: 2000px;
+  left: 0;
+  width: 2px;
+  height: 2px;
+  background: transparent;
+}
+
+#stars3 {
+  width: 3px;
+  height: 3px;
+  background: transparent;
+  animation: animStar 150s linear infinite;
+}
+#stars3:after {
+  content: " ";
+  position: absolute;
+  top: 2000px;
+  left: 0;
+  width: 3px;
+  height: 3px;
+  background: transparent;
+}
+
+@keyframes animStar {
+  from { transform: translateY(0px); }
+  to   { transform: translateY(-2000px); }
+}
+
+/* Ensure all page content sits above stars */
+nav, main, footer, .auth-page, .home-nav, .home-main, .home-footer,
+.db-topbar, .db-main, .db-sidebar {
+  position: relative;
+  z-index: 1;
+}
+
+/* Nav — semi-transparent frosted glass over stars */
+.home-nav {
+  background: rgba(15, 23, 42, 0.85) !important;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(37,99,235,0.18) !important;
+}
+
+/* Footer dark */
+.home-footer {
+  background: rgba(15, 23, 42, 0.7) !important;
+  color: rgba(148,163,184,0.8) !important;
+  border-top: 1px solid rgba(37,99,235,0.12) !important;
+}
+
+/* Cards keep white background — float above stars */
+.card, [class*="-card"], .stat-card, .ms-card, .pr-form-card,
+.db-stat-card, .lb-my-rank, .lb-table-section, .pf-hero,
+.ms-hero, .lb-hero {
+  position: relative;
+  z-index: 1;
+}
+
+/* Text color fix for elements that relied on light body */
+.home-page .hn-logo-main,
+.home-page .hn-logo-sub,
+.home-page .hn-links .hn-link {
+  color: rgba(255,255,255,0.88) !important;
+}
+.home-page .hn-link:hover,
+.home-page .hn-link--active {
+  color: #fff !important;
+}
+
+/* Index page landing cards over stars */
+.section, section, .features-section, .cta-section,
+.how-section, .stats-bar {
+  position: relative;
+  z-index: 1;
+}
+
+/* ════════════════════════════════════════════════════════
+   CONTRAST FIXES — readable text on dark starfield
+   ════════════════════════════════════════════════════════ */
+
+/* ── A. LANDING PAGE HERO ───────────────────────────────
+   .hero has no background — text sits directly on dark body */
+
+.hero .hero-headline {
+  color: #f1f5f9 !important;
+}
+.hero .headline-through {
+  color: rgba(203, 213, 225, 0.75) !important;
+}
+/* .headline-gradient keeps its CSS-gradient text — no override needed */
+
+.hero .hero-sub {
+  color: rgba(203, 213, 225, 0.9) !important;
+}
+
+/* Badge pill in hero */
+.hero .hero-badge {
+  color: #7dd3fa !important;
+  background: rgba(96, 165, 250, 0.14) !important;
+  border-color: rgba(96, 165, 250, 0.32) !important;
+}
+.hero .hero-badge .material-symbols-rounded {
+  color: #fbbf24 !important;
+}
+
+/* Scroll indicator at bottom of hero */
+.scroll-indicator {
+  color: rgba(148, 163, 184, 0.7) !important;
+}
+.scroll-dot {
+  border-color: rgba(148, 163, 184, 0.5) !important;
+}
+.scroll-dot::after {
+  background: rgba(148, 163, 184, 0.5) !important;
+}
+
+/* ── B. STUDENT NAV BAR (dark frosted-glass bg) ─────────
+   .home-nav overridden to rgba(15,23,42,0.85) — icon buttons
+   have transparent bg, so their icons go dark-on-dark */
+
+.home-page .hn-notif-btn {
+  color: rgba(203, 213, 225, 0.8) !important;
+}
+.home-page .hn-notif-btn:hover {
+  color: #fff !important;
+  background: rgba(255, 255, 255, 0.1) !important;
+}
+.home-page .hn-logout-btn {
+  color: rgba(203, 213, 225, 0.7) !important;
+}
+.home-page .hn-logout-btn:hover {
+  color: #fca5a5 !important;
+  background: rgba(239, 68, 68, 0.15) !important;
+}
+/* Hamburger bars */
+.home-page .hn-hamburger span {
+  background: rgba(203, 213, 225, 0.88) !important;
+}
+
+/* ── C. HOME PAGE — missions-section header ─────────────
+   .missions-section has no background — sits on dark body
+   between the stat-cards row and the mission cards grid */
+
+.missions-section .section-hdr-title {
+  color: #e2e8f0 !important;
+}
+.missions-section .section-hdr-sub {
+  color: rgba(148, 163, 184, 0.85) !important;
+}
+.missions-section .section-hdr-link {
+  color: #7dd3fa !important;
+}
+.missions-section .section-hdr-link:hover {
+  color: #bae6fd !important;
+  background: rgba(96, 165, 250, 0.1) !important;
+}
+/* Material icon inside the heading */
+.missions-section .section-hdr-title .material-symbols-rounded {
+  color: #60a5fa !important;
+}
+
+/* ── D. LEADERBOARD HERO (lb-hero has no background) ────
+   Uses .ms-title / .ms-subtitle / .ms-eyebrow from missions.css
+   but without a white card wrapper — directly on dark body */
+
+.lb-hero .ms-eyebrow {
+  color: #7dd3fa !important;
+}
+.lb-hero .ms-title {
+  color: #f1f5f9 !important;
+}
+.lb-hero .ms-subtitle {
+  color: rgba(203, 213, 225, 0.88) !important;
+}
+
+/* ── E. LEADERBOARD PODIUM ──────────────────────────────
+   .lb-podium-section has white card bg — pod-name/xp fine.
+   .lb-pod-name and .lb-pod-xp use var(--text)/var(--primary)
+   which are readable on white card → no override needed.    */
+
+/* ── F. PROFILE PAGE tabs (white card bg) ───────────────
+   No contrast issue — all text is on white card bg. */
+
+/* ── G. FOOTER labels on dark bg ───────────────────────
+   .home-footer bg overridden to rgba(15,23,42,0.7).
+   .hf-logo, .hf-meta use var(--text-muted) / var(--text-light) */
+
+.home-footer .hf-logo {
+  color: rgba(148, 163, 184, 0.85) !important;
+}
+.home-footer .hf-logo:hover {
+  color: #7dd3fa !important;
+}
+.home-footer .hf-meta {
+  color: rgba(100, 116, 139, 0.75) !important;
+}
+.home-footer .hf-meta strong {
+  color: rgba(203, 213, 225, 0.8) !important;
+}
+.home-footer .hf-sep {
+  color: rgba(255, 255, 255, 0.2) !important;
+}
+.home-footer .hf-ver {
+  color: #7dd3fa !important;
+  background: rgba(96, 165, 250, 0.12) !important;
+}
+
+/* ── H. STUDENT NAV — PNG icons on dark glass nav ──────────
+   .hn-nav-icon uses saturate(0) in home.css (desaturate to gray)
+   On dark frosted-glass nav the gray is too dim — force white */
+
+.home-page .hn-nav-icon {
+  filter: brightness(0) invert(1) !important;
+  opacity: 0.72;
+}
+.home-page .hn-link--active .hn-nav-icon,
+.home-page .hn-link:hover .hn-nav-icon {
+  filter: saturate(1.6) brightness(1.1) !important;
+  opacity: 1;
+}

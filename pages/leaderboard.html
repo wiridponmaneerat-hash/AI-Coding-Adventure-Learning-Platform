@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="อันดับคะแนน — AI Coding Adventure" />
+  <meta name="robots" content="noindex, nofollow">
+  <title>Leaderboard — AI Coding Adventure</title>
+  <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="../assets/icon-192.svg">
+  <link rel="manifest" href="../manifest.json">
+  <meta name="theme-color" content="#2563EB">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800;900&family=Poppins:wght@400;500;600;700;800;900&family=Prompt:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,400,1,0" />
+
+  <link rel="stylesheet" href="../styles/globals.css" />
+  <link rel="stylesheet" href="../styles/home.css" />
+  <link rel="stylesheet" href="../styles/leaderboard.css" />
+  <link rel="stylesheet" href="../styles/starfield.css" />
+</head>
+
+<body class="home-page">
+
+<nav class="home-nav" id="homeNav" role="navigation" aria-label="การนำทางหลัก">
+  <div class="home-nav-inner">
+    <a href="../index.html" class="hn-logo" aria-label="AI Coding Adventure หน้าหลัก">
+      <div class="hn-logo-icon" aria-hidden="true"><span class="material-symbols-rounded">smart_toy</span></div>
+      <div class="hn-logo-text">
+        <span class="hn-logo-main">AI Coding</span>
+        <span class="hn-logo-sub">Adventure</span>
+      </div>
+    </a>
+    <ul class="hn-links" id="hnMenu" role="list">
+      <li><a href="home.html" class="hn-link"><img src="../assets/icons/home.png" alt="" class="hn-nav-icon">หน้าหลัก</a></li>
+      <li><a href="missions.html" class="hn-link"><img src="../assets/icons/Mission.png" alt="" class="hn-nav-icon">Mission</a></li>
+      <li><a href="portfolio.html" class="hn-link"><img src="../assets/icons/Portfolio.png" alt="" class="hn-nav-icon">Portfolio</a></li>
+      <li><a href="leaderboard.html" class="hn-link hn-link--active" aria-current="page"><img src="../assets/icons/Trophy.png" alt="" class="hn-nav-icon">อันดับ</a></li>
+      <li><a href="profile.html" class="hn-link"><img src="../assets/icons/account_circle.png" alt="" class="hn-nav-icon">โปรไฟล์</a></li>
+    </ul>
+    <div class="hn-right">
+      <button class="hn-notif-btn" aria-label="การแจ้งเตือน">
+        <span class="material-symbols-rounded" aria-hidden="true">notifications</span>
+        <span class="notif-dot" aria-hidden="true"></span>
+      </button>
+      <div class="hn-user-chip" id="navUserChip">
+        <div class="hn-user-avatar" id="navAvatar" aria-hidden="true">?</div>
+        <div class="hn-user-info" aria-live="polite">
+          <span class="hn-user-name" id="navName">Loading...</span>
+          <span class="hn-user-role">นักเรียน</span>
+        </div>
+      </div>
+      <button class="hn-logout-btn" id="logoutBtn" aria-label="ออกจากระบบ">
+        <span class="material-symbols-rounded" aria-hidden="true">logout</span>
+      </button>
+      <button class="hn-hamburger" id="hnHamburger" aria-label="เปิด/ปิดเมนู" aria-expanded="false" aria-controls="hnMenu">
+        <span aria-hidden="true"></span><span aria-hidden="true"></span><span aria-hidden="true"></span>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<main class="home-main" id="leaderboardMain" role="main">
+  <div class="home-container">
+
+    <!-- HEADER -->
+    <section class="lb-hero lb-hero--decorated" aria-label="หัวข้อ">
+      <p class="ms-eyebrow">
+        <img src="../assets/icons/Trophy.png" alt="" style="width:16px;height:16px;object-fit:contain;vertical-align:middle">
+        Class Ranking
+      </p>
+      <h1 class="ms-title">อันดับห้องเรียน</h1>
+      <p class="ms-subtitle">แข่งขันสะสม XP เพื่อขึ้นอันดับสูงสุด!</p>
+      <div class="lb-hero-icons" aria-hidden="true">
+        <img src="../assets/icons/Trophy.png" alt="" class="lb-float-icon lb-float-icon--1">
+        <img src="../assets/icons/emoji_events.png" alt="" class="lb-float-icon lb-float-icon--2">
+        <img src="../assets/icons/analytics.png" alt="" class="lb-float-icon lb-float-icon--3">
+      </div>
+    </section>
+
+    <!-- MY RANK BANNER -->
+    <div class="lb-my-rank" id="lbMyRank" aria-label="อันดับของฉัน">
+      <div class="lb-my-rank-left">
+        <div class="lb-my-rank-pos" id="lbMyPos" aria-hidden="true">#—</div>
+        <div class="lb-my-rank-avatar" id="lbMyAvatar" aria-hidden="true">?</div>
+        <div class="lb-my-rank-info">
+          <span class="lb-my-name" id="lbMyName">Loading...</span>
+          <span class="lb-my-label">อันดับของฉัน</span>
+        </div>
+      </div>
+      <div class="lb-my-rank-right">
+        <div class="lb-my-stat">
+          <img src="../assets/icons/Trophy.png" alt="" style="width:14px;height:14px;object-fit:contain;filter:brightness(0) invert(1)">
+          <span id="lbMyXP">0</span> XP
+        </div>
+        <div class="lb-my-stat">
+          <img src="../assets/icons/Mission.png" alt="" style="width:14px;height:14px;object-fit:contain;filter:brightness(0) invert(1)">
+          <span id="lbMyMissions">0</span> Mission
+        </div>
+        <div class="lb-my-change" id="lbMyChange" aria-label="การเปลี่ยนแปลงอันดับ">—</div>
+      </div>
+    </div>
+
+    <!-- TOP 3 PODIUM -->
+    <section class="lb-podium-section" id="lbPodiumSection" aria-label="อันดับสูงสุด 3">
+      <div class="lb-podium" id="lbPodium">
+        <!-- Rendered by JS: 2nd, 1st, 3rd order -->
+        <div class="lb-podium-slot lb-podium-slot--2" id="lbPod2">
+          <div class="lb-pod-avatar" id="lbPod2Avatar">2</div>
+          <div class="lb-pod-info"><span class="lb-pod-name" id="lbPod2Name">—</span><span class="lb-pod-xp" id="lbPod2XP">0 XP</span></div>
+          <div class="lb-pod-stand lb-pod-stand--2"><span class="lb-pod-rank">2</span></div>
+        </div>
+        <div class="lb-podium-slot lb-podium-slot--1" id="lbPod1">
+          <div class="lb-pod-crown" aria-hidden="true">👑</div>
+          <div class="lb-pod-avatar lb-pod-avatar--1" id="lbPod1Avatar">1</div>
+          <div class="lb-pod-info"><span class="lb-pod-name" id="lbPod1Name">—</span><span class="lb-pod-xp" id="lbPod1XP">0 XP</span></div>
+          <div class="lb-pod-stand lb-pod-stand--1"><span class="lb-pod-rank">1</span></div>
+        </div>
+        <div class="lb-podium-slot lb-podium-slot--3" id="lbPod3">
+          <div class="lb-pod-avatar" id="lbPod3Avatar">3</div>
+          <div class="lb-pod-info"><span class="lb-pod-name" id="lbPod3Name">—</span><span class="lb-pod-xp" id="lbPod3XP">0 XP</span></div>
+          <div class="lb-pod-stand lb-pod-stand--3"><span class="lb-pod-rank">3</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FULL TABLE -->
+    <section class="lb-table-section" id="lbTableSection" aria-label="ตารางอันดับเต็ม">
+      <div class="lb-table-header">
+        <h2 class="lb-table-title">ตารางอันดับทั้งหมด</h2>
+        <span class="lb-update-time" id="lbUpdateTime">อัปเดตล่าสุด: วันนี้</span>
+      </div>
+
+      <div class="lb-table-wrap" role="region" aria-label="ตารางอันดับ" tabindex="0">
+        <table class="lb-table" id="lbTable">
+          <thead>
+            <tr>
+              <th scope="col" class="lb-th lb-th--rank">อันดับ</th>
+              <th scope="col" class="lb-th lb-th--player">ผู้เล่น</th>
+              <th scope="col" class="lb-th lb-th--level">ระดับ</th>
+              <th scope="col" class="lb-th lb-th--xp">XP</th>
+              <th scope="col" class="lb-th lb-th--missions">Mission</th>
+              <th scope="col" class="lb-th lb-th--change">เปลี่ยน</th>
+            </tr>
+          </thead>
+          <tbody id="lbTableBody" aria-live="polite">
+            <!-- Rendered by JS -->
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- XP INFO -->
+    <section class="lb-info-section" aria-label="วิธีสะสม XP">
+      <h2 class="ms-skills-title">
+        <img src="../assets/icons/analytics.png" alt="" style="width:20px;height:20px;object-fit:contain;vertical-align:middle">
+        วิธีสะสม XP
+      </h2>
+      <div class="ms-skills-grid">
+        <div class="ms-skill-chip ms-skill-chip--glow">
+          <img src="../assets/icons/Mission.png" alt="" style="width:13px;height:13px;object-fit:contain;vertical-align:middle"> Mission 1 → 100 XP
+        </div>
+        <div class="ms-skill-chip ms-skill-chip--glow">
+          <img src="../assets/icons/Mission.png" alt="" style="width:13px;height:13px;object-fit:contain;vertical-align:middle"> Mission 2 → 150 XP
+        </div>
+        <div class="ms-skill-chip ms-skill-chip--glow">
+          <img src="../assets/icons/Mission.png" alt="" style="width:13px;height:13px;object-fit:contain;vertical-align:middle"> Mission 3 → 200 XP
+        </div>
+        <div class="ms-skill-chip ms-skill-chip--glow">
+          <img src="../assets/icons/Mission.png" alt="" style="width:13px;height:13px;object-fit:contain;vertical-align:middle"> Mission 4 → 250 XP
+        </div>
+        <div class="ms-skill-chip ms-skill-chip--glow">
+          <img src="../assets/icons/AI.png" alt="" style="width:13px;height:13px;object-fit:contain;vertical-align:middle"> Mission 5 → 350 XP
+        </div>
+        <div class="ms-skill-chip ms-skill-chip--glow">
+          <img src="../assets/icons/Trophy.png" alt="" style="width:13px;height:13px;object-fit:contain;vertical-align:middle"> Perfect Score → +50 XP
+        </div>
+      </div>
+    </section>
+
+  </div>
+</main>
+
+<footer class="home-footer" role="contentinfo">
+  <p>© 2026 AI Coding Adventure · พัฒนาโดยทีมนวัตกรรมการเรียนรู้</p>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js" defer></script>
+<script src="../config/app-config.js" defer></script>
+<script src="../services/api.js" defer></script>
+<script src="../services/analytics-service.js" defer></script>
+<script src="../services/auth-service.js" defer></script>
+<script src="../services/google-sheet.js" defer></script>
+<script src="../scripts/leaderboard-page.js" defer></script>
+<script src="../scripts/starfield.js"></script>
+</body>
+</html>

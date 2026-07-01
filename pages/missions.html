@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="ภารกิจทั้งหมด — AI Coding Adventure" />
+  <meta name="robots" content="noindex, nofollow">
+  <title>Mission — AI Coding Adventure</title>
+  <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="../assets/icon-192.svg">
+  <link rel="manifest" href="../manifest.json">
+  <meta name="theme-color" content="#2563EB">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800;900&family=Poppins:wght@400;500;600;700;800;900&family=Prompt:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,400,1,0" />
+
+  <link rel="stylesheet" href="../styles/globals.css" />
+  <link rel="stylesheet" href="../styles/home.css" />
+  <link rel="stylesheet" href="../styles/missions.css" />
+  <link rel="stylesheet" href="../styles/starfield.css" />
+</head>
+
+<body class="home-page">
+
+<!-- ===== TOP NAVIGATION ===== -->
+<nav class="home-nav" id="homeNav" role="navigation" aria-label="การนำทางหลัก">
+  <div class="home-nav-inner">
+
+    <a href="../index.html" class="hn-logo" aria-label="AI Coding Adventure หน้าหลัก">
+      <div class="hn-logo-icon" aria-hidden="true">
+        <span class="material-symbols-rounded">smart_toy</span>
+      </div>
+      <div class="hn-logo-text">
+        <span class="hn-logo-main">AI Coding</span>
+        <span class="hn-logo-sub">Adventure</span>
+      </div>
+    </a>
+
+    <ul class="hn-links" id="hnMenu" role="list">
+      <li><a href="home.html" class="hn-link"><img src="../assets/icons/home.png" alt="" class="hn-nav-icon">หน้าหลัก</a></li>
+      <li><a href="missions.html" class="hn-link hn-link--active" aria-current="page"><img src="../assets/icons/Mission.png" alt="" class="hn-nav-icon">Mission</a></li>
+      <li><a href="portfolio.html" class="hn-link"><img src="../assets/icons/Portfolio.png" alt="" class="hn-nav-icon">Portfolio</a></li>
+      <li><a href="leaderboard.html" class="hn-link"><img src="../assets/icons/Trophy.png" alt="" class="hn-nav-icon">อันดับ</a></li>
+      <li><a href="profile.html" class="hn-link"><img src="../assets/icons/account_circle.png" alt="" class="hn-nav-icon">โปรไฟล์</a></li>
+    </ul>
+
+    <div class="hn-right">
+      <button class="hn-notif-btn" aria-label="การแจ้งเตือน">
+        <span class="material-symbols-rounded" aria-hidden="true">notifications</span>
+        <span class="notif-dot" aria-hidden="true"></span>
+      </button>
+      <div class="hn-user-chip" id="navUserChip">
+        <div class="hn-user-avatar" id="navAvatar" aria-hidden="true">?</div>
+        <div class="hn-user-info" aria-live="polite">
+          <span class="hn-user-name" id="navName">Loading...</span>
+          <span class="hn-user-role">นักเรียน</span>
+        </div>
+      </div>
+      <button class="hn-logout-btn" id="logoutBtn" aria-label="ออกจากระบบ" title="ออกจากระบบ">
+        <span class="material-symbols-rounded" aria-hidden="true">logout</span>
+      </button>
+      <button class="hn-hamburger" id="hnHamburger" aria-label="เปิด/ปิดเมนู" aria-expanded="false" aria-controls="hnMenu">
+        <span aria-hidden="true"></span><span aria-hidden="true"></span><span aria-hidden="true"></span>
+      </button>
+    </div>
+
+  </div>
+</nav>
+
+<!-- ===== MAIN ===== -->
+<main class="home-main" id="missionsMain" role="main">
+  <div class="home-container">
+
+    <!-- PAGE HEADER -->
+    <section class="ms-hero ms-hero--decorated dot-bg" id="msHero" aria-label="ความก้าวหน้า">
+      <div class="ms-hero-left">
+        <p class="ms-eyebrow">
+          <img src="../assets/icons/Mission.png" alt="" style="width:16px;height:16px;object-fit:contain;vertical-align:middle">
+          Mission Center
+        </p>
+        <h1 class="ms-title" id="msTitle">เลือก Mission ของคุณ</h1>
+        <p class="ms-subtitle" id="msSubtitle">ผ่าน Mission เพื่อสะสม XP และปลดล็อกทักษะใหม่!</p>
+      </div>
+      <div class="ms-hero-right">
+        <div class="ms-progress-ring-wrap ms-ring-glow" role="img" aria-label="ความคืบหน้า">
+          <svg class="ms-ring-svg" viewBox="0 0 120 120" aria-hidden="true">
+            <circle class="ms-ring-bg" cx="60" cy="60" r="50"/>
+            <circle class="ms-ring-fill" id="msRingFill" cx="60" cy="60" r="50" stroke-dasharray="314.16" stroke-dashoffset="314.16"/>
+          </svg>
+          <div class="ms-ring-inner">
+            <img src="../assets/icons/Mission.png" alt="" style="width:20px;height:20px;object-fit:contain;margin-bottom:2px">
+            <span class="ms-ring-val" id="msRingVal">0/5</span>
+            <span class="ms-ring-lbl">Mission</span>
+          </div>
+        </div>
+        <div class="ms-hero-stats">
+          <div class="ms-hstat ms-hstat--glow">
+            <img src="../assets/icons/Trophy.png" alt="" style="width:16px;height:16px;object-fit:contain">
+            <span class="ms-hstat-val" id="msHeroXP">0</span>
+            <span class="ms-hstat-lbl">XP รวม</span>
+          </div>
+          <div class="ms-hstat ms-hstat--glow">
+            <img src="../assets/icons/emoji_events.png" alt="" style="width:16px;height:16px;object-fit:contain">
+            <span class="ms-hstat-val" id="msHeroBadges">0</span>
+            <span class="ms-hstat-lbl">เหรียญ</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FILTER BAR -->
+    <div class="ms-filter-bar" id="msFilterBar" role="tablist" aria-label="กรองตามระดับ">
+      <button class="ms-filter-btn ms-filter-btn--active" role="tab" aria-selected="true" data-filter="all">
+        <img src="../assets/icons/Mission.png" alt="" style="width:14px;height:14px;object-fit:contain;vertical-align:middle"> ทั้งหมด
+      </button>
+      <button class="ms-filter-btn" role="tab" aria-selected="false" data-filter="beginner">
+        <span class="ms-diff-dot ms-diff-dot--easy" aria-hidden="true"></span> ง่าย
+      </button>
+      <button class="ms-filter-btn" role="tab" aria-selected="false" data-filter="intermediate">
+        <span class="ms-diff-dot ms-diff-dot--medium" aria-hidden="true"></span> ปานกลาง
+      </button>
+      <button class="ms-filter-btn" role="tab" aria-selected="false" data-filter="advanced">
+        <span class="ms-diff-dot ms-diff-dot--hard" aria-hidden="true"></span> ยาก
+      </button>
+    </div>
+
+    <!-- MISSIONS GRID -->
+    <section class="ms-grid-section" aria-label="รายการ Mission">
+      <div class="ms-grid" id="msGrid" role="list">
+        <!-- Rendered by JS -->
+        <div class="ms-skeleton" aria-hidden="true"><div class="sk-card"></div></div>
+        <div class="ms-skeleton" aria-hidden="true"><div class="sk-card"></div></div>
+        <div class="ms-skeleton" aria-hidden="true"><div class="sk-card"></div></div>
+        <div class="ms-skeleton" aria-hidden="true"><div class="sk-card"></div></div>
+        <div class="ms-skeleton" aria-hidden="true"><div class="sk-card"></div></div>
+      </div>
+    </section>
+
+    <!-- SKILLS SUMMARY -->
+    <section class="ms-skills-section" id="msSkillsSection" aria-label="ทักษะที่จะได้รับ">
+      <h2 class="ms-skills-title">
+        <img src="../assets/icons/AI.png" alt="" style="width:20px;height:20px;object-fit:contain;vertical-align:middle">
+        ทักษะที่จะได้เรียนรู้
+      </h2>
+      <div class="ms-skills-grid">
+        <div class="ms-skill-chip ms-skill-chip--glow"><span class="material-symbols-rounded" aria-hidden="true">terminal</span> print() & ตัวแปร</div>
+        <div class="ms-skill-chip ms-skill-chip--glow"><span class="material-symbols-rounded" aria-hidden="true">account_tree</span> Conditions</div>
+        <div class="ms-skill-chip ms-skill-chip--glow"><span class="material-symbols-rounded" aria-hidden="true">loop</span> Loops</div>
+        <div class="ms-skill-chip ms-skill-chip--glow"><span class="material-symbols-rounded" aria-hidden="true">functions</span> Functions</div>
+        <div class="ms-skill-chip ms-skill-chip--glow">
+          <img src="../assets/icons/AI.png" alt="" style="width:13px;height:13px;object-fit:contain;vertical-align:middle"> Mini AI
+        </div>
+        <div class="ms-skill-chip ms-skill-chip--glow"><span class="material-symbols-rounded" aria-hidden="true">psychology</span> Logical Thinking</div>
+      </div>
+    </section>
+
+  </div>
+</main>
+
+<!-- FOOTER -->
+<footer class="home-footer" role="contentinfo">
+  <p>© 2026 AI Coding Adventure · พัฒนาโดยทีมนวัตกรรมการเรียนรู้</p>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js" defer></script>
+<script src="../config/app-config.js" defer></script>
+<script src="../services/api.js" defer></script>
+<script src="../services/analytics-service.js" defer></script>
+<script src="../services/auth-service.js" defer></script>
+<script src="../services/mission-service.js" defer></script>
+<script src="../scripts/missions-page.js" defer></script>
+<script src="../scripts/starfield.js"></script>
+</body>
+</html>

@@ -1,0 +1,39 @@
+ออกแบบ Dashboard สำหรับครูผู้สอนรายวิชาวิทยาการคำนวณ ชั้นประถมศึกษาปีที่ 5
+
+Theme : AI Coding Adventure
+
+Style : Modern Dashboard
+
+Color : Blue White
+
+Menu
+
+Dashboard
+
+Students
+
+Mission
+
+Portfolio
+
+Analytics
+
+Leaderboard
+
+Cards
+
+นักเรียนทั้งหมด
+
+คะแนนเฉลี่ย
+
+จำนวนภารกิจ
+
+Badge
+
+กราฟคะแนน
+
+กราฟความก้าวหน้า
+
+Responsive
+
+Flat Design

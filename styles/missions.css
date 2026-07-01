@@ -1,0 +1,537 @@
+/* =====================================================
+   MISSIONS PAGE — missions.css
+   ===================================================== */
+
+/* ── HERO ── */
+.ms-hero {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+  padding: 2.5rem 2.5rem 2rem;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-sm);
+  margin-bottom: 1.5rem;
+  overflow: hidden;
+  position: relative;
+}
+.ms-hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(37,99,235,0.04) 0%, rgba(96,165,250,0.04) 100%);
+  pointer-events: none;
+}
+.ms-eyebrow {
+  display: flex;
+  align-items: center;
+  gap: .4rem;
+  font-family: var(--font-ui);
+  font-size: .8rem;
+  font-weight: 700;
+  color: var(--primary);
+  text-transform: uppercase;
+  letter-spacing: .08em;
+  margin: 0 0 .5rem;
+}
+.ms-eyebrow .material-symbols-rounded { font-size: 1rem; }
+.ms-title {
+  font-family: var(--font-heading);
+  font-size: clamp(1.6rem, 4vw, 2.2rem);
+  font-weight: 800;
+  color: var(--text);
+  margin: 0 0 .4rem;
+  line-height: 1.2;
+}
+.ms-subtitle {
+  font-size: .95rem;
+  color: var(--text-muted);
+  margin: 0;
+  font-family: var(--font-body);
+}
+.ms-hero-right {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  flex-shrink: 0;
+}
+.ms-progress-ring-wrap {
+  position: relative;
+  width: 110px;
+  height: 110px;
+}
+.ms-ring-svg {
+  width: 110px;
+  height: 110px;
+  transform: rotate(-90deg);
+  filter: drop-shadow(0 4px 12px rgba(37,99,235,.25));
+}
+.ms-ring-bg {
+  fill: none;
+  stroke: #E2E8F0;
+  stroke-width: 9;
+}
+.ms-ring-fill {
+  fill: none;
+  stroke: var(--primary);
+  stroke-width: 9;
+  stroke-linecap: round;
+  transition: stroke-dashoffset 1s cubic-bezier(.4,0,.2,1);
+}
+.ms-ring-inner {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.ms-ring-val {
+  font-family: var(--font-heading);
+  font-size: 1.4rem;
+  font-weight: 800;
+  color: var(--text);
+  line-height: 1;
+}
+.ms-ring-lbl {
+  font-family: var(--font-ui);
+  font-size: .72rem;
+  color: var(--text-muted);
+  margin-top: .1rem;
+}
+.ms-hero-stats {
+  display: flex;
+  gap: 1.2rem;
+}
+.ms-hstat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: .2rem;
+}
+.ms-hstat .material-symbols-rounded {
+  font-size: 1.2rem;
+  color: var(--primary);
+}
+.ms-hstat-val {
+  font-family: var(--font-heading);
+  font-size: 1.1rem;
+  font-weight: 800;
+  color: var(--text);
+  line-height: 1;
+}
+.ms-hstat-lbl {
+  font-family: var(--font-ui);
+  font-size: .72rem;
+  color: var(--text-muted);
+}
+
+/* ── FILTER BAR ── */
+.ms-filter-bar {
+  display: flex;
+  gap: .5rem;
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
+}
+.ms-filter-btn {
+  display: flex;
+  align-items: center;
+  gap: .4rem;
+  padding: .55rem 1.1rem;
+  border-radius: var(--radius-pill);
+  border: 1.5px solid var(--border);
+  background: var(--card);
+  color: var(--text-muted);
+  font-family: var(--font-ui);
+  font-size: .85rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  white-space: nowrap;
+}
+.ms-filter-btn .material-symbols-rounded { font-size: 1rem; }
+.ms-filter-btn:hover {
+  border-color: var(--primary);
+  color: var(--primary);
+  background: #EFF6FF;
+}
+.ms-filter-btn--active {
+  background: var(--primary);
+  border-color: var(--primary);
+  color: #fff;
+}
+.ms-filter-btn--active:hover { background: #1D4ED8; border-color: #1D4ED8; color: #fff; }
+
+/* ── MISSIONS GRID ── */
+.ms-grid-section { margin-bottom: 2rem; }
+.ms-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1.25rem;
+}
+
+/* ── SKELETON ── */
+.ms-skeleton .sk-card {
+  height: 280px;
+  border-radius: var(--radius);
+  background: linear-gradient(90deg, #F1F5F9 25%, #E2E8F0 50%, #F1F5F9 75%);
+  background-size: 200% 100%;
+  animation: skShimmer 1.4s ease infinite;
+}
+@keyframes skShimmer {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+/* ── MISSION CARD ── */
+.ms-card {
+  background: var(--card);
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-xs);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: transform var(--transition-fast), box-shadow var(--transition-fast), border-color var(--transition-fast);
+  cursor: pointer;
+  position: relative;
+}
+.ms-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-md);
+  border-color: var(--primary);
+}
+.ms-card--locked {
+  opacity: .55;
+  pointer-events: none;
+  cursor: default;
+}
+.ms-card--locked:hover { transform: none; box-shadow: var(--shadow-xs); }
+.ms-card--completed { border-color: #22C55E; }
+.ms-card--completed:hover { border-color: #16A34A; }
+.ms-card--current { border-color: var(--primary); box-shadow: 0 0 0 3px rgba(37,99,235,.12); }
+
+.ms-card-banner {
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.2rem 1.5rem;
+  position: relative;
+  overflow: hidden;
+}
+.ms-card-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: var(--radius-sm);
+  background: rgba(255,255,255,.25);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  backdrop-filter: blur(4px);
+}
+.ms-card-icon .material-symbols-rounded { font-size: 1.7rem; color: #fff; }
+.ms-card-lock-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: rgba(0,0,0,.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.ms-card-lock-icon .material-symbols-rounded { font-size: 1.2rem; color: #fff; }
+.ms-card-check-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: rgba(255,255,255,.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.ms-card-check-icon .material-symbols-rounded { font-size: 1.3rem; color: #fff; }
+
+.ms-card-body {
+  padding: 1.25rem 1.5rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  gap: .6rem;
+}
+.ms-card-title-row {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: .5rem;
+}
+.ms-card-title {
+  font-family: var(--font-heading);
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--text);
+  line-height: 1.3;
+  margin: 0;
+  flex: 1;
+}
+.ms-card-num {
+  font-family: var(--font-ui);
+  font-size: .75rem;
+  font-weight: 700;
+  color: var(--text-muted);
+  background: #F1F5F9;
+  padding: .2rem .5rem;
+  border-radius: var(--radius-xs);
+  flex-shrink: 0;
+}
+.ms-card-desc {
+  font-size: .85rem;
+  color: var(--text-muted);
+  line-height: 1.5;
+  margin: 0;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.ms-card-meta {
+  display: flex;
+  gap: .5rem;
+  flex-wrap: wrap;
+  margin-top: .2rem;
+}
+.ms-card-meta-item {
+  display: flex;
+  align-items: center;
+  gap: .25rem;
+  font-family: var(--font-ui);
+  font-size: .78rem;
+  font-weight: 600;
+  color: var(--text-muted);
+}
+.ms-card-meta-item .material-symbols-rounded { font-size: .9rem; }
+.ms-card-topics {
+  display: flex;
+  gap: .35rem;
+  flex-wrap: wrap;
+}
+.ms-topic-tag {
+  font-family: var(--font-ui);
+  font-size: .72rem;
+  font-weight: 600;
+  color: var(--primary);
+  background: #EFF6FF;
+  border-radius: var(--radius-pill);
+  padding: .15rem .55rem;
+}
+.ms-diff-badge {
+  display: inline-flex;
+  align-items: center;
+  font-family: var(--font-ui);
+  font-size: .72rem;
+  font-weight: 700;
+  border-radius: var(--radius-pill);
+  padding: .2rem .6rem;
+  text-transform: uppercase;
+  letter-spacing: .04em;
+}
+.ms-diff-badge--beginner { color: #166534; background: #DCFCE7; }
+.ms-diff-badge--intermediate { color: #92400E; background: #FEF9C3; }
+.ms-diff-badge--advanced { color: #991B1B; background: #FEE2E2; }
+
+.ms-card-cta {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: .5rem;
+  padding: .75rem;
+  border-radius: var(--radius-sm);
+  border: none;
+  background: var(--primary);
+  color: #fff;
+  font-family: var(--font-ui);
+  font-size: .88rem;
+  font-weight: 700;
+  cursor: pointer;
+  text-decoration: none;
+  transition: background var(--transition-fast);
+  margin-top: auto;
+  width: 100%;
+}
+.ms-card-cta:hover { background: #1D4ED8; }
+.ms-card-cta--completed { background: #22C55E; }
+.ms-card-cta--completed:hover { background: #16A34A; }
+.ms-card-cta--locked { background: #94A3B8; cursor: not-allowed; }
+.ms-card-cta .material-symbols-rounded { font-size: 1.1rem; }
+
+/* ── SKILLS SECTION ── */
+.ms-skills-section {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.75rem 2rem;
+  margin-bottom: 2rem;
+}
+.ms-skills-title {
+  font-family: var(--font-heading);
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--text);
+  display: flex;
+  align-items: center;
+  gap: .5rem;
+  margin: 0 0 1rem;
+}
+.ms-skills-title .material-symbols-rounded { color: var(--primary); font-size: 1.2rem; }
+.ms-skills-grid {
+  display: flex;
+  gap: .6rem;
+  flex-wrap: wrap;
+}
+.ms-skill-chip {
+  display: flex;
+  align-items: center;
+  gap: .4rem;
+  background: linear-gradient(135deg, #EFF6FF, #E0F2FE);
+  border: 1px solid #BAE6FD;
+  color: #0369A1;
+  border-radius: var(--radius-pill);
+  padding: .4rem .9rem;
+  font-family: var(--font-ui);
+  font-size: .82rem;
+  font-weight: 600;
+}
+.ms-skill-chip .material-symbols-rounded { font-size: .95rem; }
+
+/* ═══════════════════════════════════════════════════════
+   UIVERSE.IO-INSPIRED MISSIONS PAGE DECORATIONS
+   ═══════════════════════════════════════════════════════ */
+
+/* Dot-grid background for hero */
+.ms-hero--decorated.dot-bg::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image:
+    radial-gradient(circle, rgba(37,99,235,0.1) 1px, transparent 1px),
+    radial-gradient(circle, rgba(124,58,237,0.06) 1px, transparent 1px);
+  background-size: 36px 36px, 54px 54px;
+  background-position: 0 0, 18px 27px;
+  pointer-events: none;
+  z-index: 0;
+}
+.ms-hero--decorated > * { position: relative; z-index: 1; }
+
+/* Glowing progress ring */
+@keyframes ring-pulse {
+  0%, 100% { filter: drop-shadow(0 0 6px rgba(37,99,235,0.4)); }
+  50%       { filter: drop-shadow(0 0 14px rgba(37,99,235,0.65)); }
+}
+.ms-ring-glow { animation: ring-pulse 2.5s ease-in-out infinite; }
+
+/* Glowing hstat chips */
+@keyframes hstat-glow {
+  0%, 100% { box-shadow: 0 2px 8px rgba(37,99,235,0.2); }
+  50%       { box-shadow: 0 4px 16px rgba(37,99,235,0.42); }
+}
+.ms-hstat--glow {
+  background: linear-gradient(135deg, rgba(37,99,235,0.12), rgba(96,165,250,0.1));
+  border: 1px solid rgba(37,99,235,0.2);
+  border-radius: var(--radius-sm);
+  padding: .5rem 1rem;
+  animation: hstat-glow 2.5s ease-in-out infinite;
+  transition: transform 0.25s cubic-bezier(0.34,1.56,0.64,1);
+}
+.ms-hstat--glow:hover { transform: scale(1.06); }
+
+/* Difficulty dots for filter bar */
+.ms-diff-dot {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  display: inline-block;
+  vertical-align: middle;
+  margin-right: 2px;
+}
+.ms-diff-dot--easy   { background: #22C55E; box-shadow: 0 0 6px rgba(34,197,94,0.6); }
+.ms-diff-dot--medium { background: #F59E0B; box-shadow: 0 0 6px rgba(245,158,11,0.6); }
+.ms-diff-dot--hard   { background: #EF4444; box-shadow: 0 0 6px rgba(239,68,68,0.6); }
+
+/* Animated gradient border on active filter button */
+@property --ms-angle {
+  syntax: '<angle>';
+  initial-value: 0deg;
+  inherits: false;
+}
+@keyframes ms-spin-grad { to { --ms-angle: 360deg; } }
+.ms-filter-btn--active {
+  position: relative;
+  isolation: isolate;
+}
+.ms-filter-btn--active::before {
+  content: '';
+  position: absolute;
+  inset: -2px;
+  border-radius: calc(var(--radius-pill) + 2px);
+  background: conic-gradient(from var(--ms-angle, 0deg), #2563EB, #7C3AED, #2563EB);
+  z-index: -1;
+  animation: ms-spin-grad 2.4s linear infinite;
+}
+
+/* Shimmer + lift on filter buttons hover */
+@keyframes ms-btn-shimmer {
+  0%   { transform: translateX(-100%) skewX(-15deg); }
+  100% { transform: translateX(200%) skewX(-15deg); }
+}
+.ms-filter-btn {
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.2s cubic-bezier(0.34,1.56,0.64,1), box-shadow 0.2s;
+}
+.ms-filter-btn::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+  transform: translateX(-100%) skewX(-15deg);
+  pointer-events: none;
+}
+.ms-filter-btn:hover::after { animation: ms-btn-shimmer 0.55s ease forwards; }
+.ms-filter-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 18px rgba(37,99,235,0.18); }
+
+/* Skill chips glow pulse */
+@keyframes chip-glow {
+  0%, 100% { box-shadow: 0 2px 6px rgba(2,132,199,0.15); }
+  50%       { box-shadow: 0 4px 14px rgba(2,132,199,0.35); }
+}
+.ms-skill-chip--glow {
+  animation: chip-glow 2.8s ease-in-out infinite;
+  transition: transform 0.22s cubic-bezier(0.34,1.56,0.64,1), filter 0.22s;
+  cursor: default;
+}
+.ms-skill-chip--glow:hover {
+  transform: translateY(-3px) scale(1.05);
+  filter: brightness(1.05);
+}
+
+/* Skills section title icon float */
+.ms-skills-title img {
+  animation: float-y 3s ease-in-out infinite;
+}
+@keyframes float-y {
+  0%, 100% { transform: translateY(0); }
+  50%       { transform: translateY(-6px); }
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 900px) {
+  .ms-hero { flex-direction: column; text-align: center; }
+  .ms-hero-right { flex-direction: row; }
+}
+@media (max-width: 640px) {
+  .ms-hero { padding: 1.5rem; }
+  .ms-grid { grid-template-columns: 1fr; }
+  .ms-hero-right { flex-direction: column; }
+}

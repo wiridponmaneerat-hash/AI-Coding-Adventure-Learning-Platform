@@ -1,0 +1,432 @@
+[
+  {
+    "id": 1,
+    "title": "สวัสดีโลก! Hello, World!",
+    "titleEn": "Hello, World!",
+    "description": "เริ่มต้นการผจญภัยด้วยการเขียนโปรแกรมแรกของคุณ เรียนรู้การใช้ print() และตัวแปร",
+    "icon": "terminal",
+    "color": "#22C55E",
+    "colorBg": "linear-gradient(135deg,#22C55E,#16A34A)",
+    "difficulty": "beginner",
+    "diffLabel": "ง่าย",
+    "xpReward": 100,
+    "estimatedMinutes": 20,
+    "topics": ["print()", "ตัวแปร", "ชนิดข้อมูล"],
+    "badgeOnComplete": "mission1_complete",
+    "steps": [
+      {
+        "id": 1,
+        "title": "🌟 แนะนำ Python",
+        "content": "**Python คืออะไร?**\n\nPython เป็นภาษาโปรแกรมที่ง่ายและทรงพลัง นักวิทยาศาสตร์และวิศวกรทั่วโลกใช้ Python ในการสร้าง AI, เกม, และเว็บไซต์\n\n**ทำไมต้องเรียน Python?**\n- 🤖 สร้าง AI ได้\n- 🎮 ทำเกมได้\n- 📊 วิเคราะห์ข้อมูลได้\n- 🌐 สร้างเว็บได้\n\nวันนี้เราจะเริ่มจากก้าวแรก — การแสดงข้อความ!"
+      },
+      {
+        "id": 2,
+        "title": "💻 คำสั่ง print()",
+        "content": "**print()** คือคำสั่งที่ใช้แสดงข้อความบนหน้าจอ\n\n```python\nprint(\"Hello, World!\")\n```\n\n**ผลลัพธ์:**\n```\nHello, World!\n```\n\n**กฎสำคัญ:**\n- ใส่ข้อความในเครื่องหมาย `\"` หรือ `'`\n- ตัวอักษรพิมพ์เล็กทั้งหมด\n- ต้องมีวงเล็บ `()`\n\nลองเขียนดู!\n```python\nprint(\"ฉันชื่อ...\")\nprint(\"ฉันเรียน ป.5\")\n```"
+      },
+      {
+        "id": 3,
+        "title": "📦 ตัวแปร (Variables)",
+        "content": "**ตัวแปร** คือกล่องเก็บข้อมูล เราตั้งชื่อเพื่อเก็บค่าที่ต้องการใช้ภายหลัง\n\n```python\nname = \"นภัสสร\"\nage = 11\nschool = \"โรงเรียนวัดนวลนรดิศ\"\n\nprint(name)\nprint(age)\nprint(school)\n```\n\n**ผลลัพธ์:**\n```\nนภัสสร\n11\nโรงเรียนวัดนวลนรดิศ\n```\n\n**ประเภทข้อมูล:**\n- `str` ข้อความ → `\"Hello\"`\n- `int` จำนวนเต็ม → `11`\n- `float` ทศนิยม → `3.14`"
+      },
+      {
+        "id": 4,
+        "title": "🔢 คำนวณด้วย Python",
+        "content": "Python คำนวณเลขได้เหมือนเครื่องคิดเลข!\n\n```python\na = 10\nb = 3\n\nprint(a + b)   # 13\nprint(a - b)   # 7\nprint(a * b)   # 30\nprint(a / b)   # 3.333...\nprint(a // b)  # 3  (หารจำนวนเต็ม)\nprint(a % b)   # 1  (เศษ)\n```\n\n**เคล็ดลับ:** ใช้ f-string เพื่อรวมตัวแปรกับข้อความ\n```python\nname = \"นภัสสร\"\nage = 11\nprint(f\"ฉันชื่อ {name} อายุ {age} ปี\")\n```\n\n**ผลลัพธ์:**\n```\nฉันชื่อ นภัสสร อายุ 11 ปี\n```"
+      },
+      {
+        "id": 5,
+        "title": "✅ สรุปและทดสอบ",
+        "content": "**สิ่งที่เรียนรู้วันนี้:**\n\n✅ `print()` — แสดงข้อความ\n✅ ตัวแปร — เก็บข้อมูล\n✅ ชนิดข้อมูล — str, int, float\n✅ การคำนวณ — +, -, *, /\n✅ f-string — รวมตัวแปรกับข้อความ\n\n**ตัวอย่างโปรแกรมสมบูรณ์:**\n```python\nname = \"AI Hero\"\nxp = 100\nprint(f\"ยินดีต้อนรับ {name}!\")\nprint(f\"คุณได้รับ {xp} XP\")\nprint(\"ขอแสดงความยินดี! 🎉\")\n```\n\nพร้อมสำหรับการทดสอบแล้ว! กดปุ่ม **เริ่มทำแบบทดสอบ** ได้เลย 🚀"
+      }
+    ],
+    "quiz": [
+      {
+        "id": 1,
+        "type": "multiple_choice",
+        "question": "คำสั่งใดในภาษา Python ใช้แสดงข้อความบนหน้าจอ?",
+        "options": ["show()", "print()", "display()", "echo()"],
+        "correct": 1,
+        "explanation": "print() คือคำสั่งมาตรฐานของ Python สำหรับแสดงข้อความ เช่น print(\"Hello\") จะแสดงคำว่า Hello"
+      },
+      {
+        "id": 2,
+        "type": "multiple_choice",
+        "question": "ผลลัพธ์ของ print(10 + 5) คืออะไร?",
+        "options": ["10 + 5", "105", "15", "Error"],
+        "correct": 2,
+        "explanation": "Python จะคำนวณ 10 + 5 = 15 ก่อน แล้วจึงแสดงผลเลข 15"
+      },
+      {
+        "id": 3,
+        "type": "multiple_choice",
+        "question": "ข้อใดต่อไปนี้ถูกต้องสำหรับการสร้างตัวแปร?",
+        "options": ["var name = \"Tom\"", "name == \"Tom\"", "name = \"Tom\"", "string name = \"Tom\""],
+        "correct": 2,
+        "explanation": "ใน Python ใช้ = เพื่อกำหนดค่าตัวแปร เช่น name = \"Tom\" โดยไม่ต้องระบุชนิดข้อมูล"
+      },
+      {
+        "id": 4,
+        "type": "multiple_choice",
+        "question": "f-string ในภาษา Python ใช้ทำอะไร?",
+        "options": ["คำนวณตัวเลข", "รวมตัวแปรเข้าไปในข้อความ", "สร้างไฟล์", "เปรียบเทียบค่า"],
+        "correct": 1,
+        "explanation": "f-string เช่น f\"สวัสดี {name}\" ช่วยให้เราแทรกตัวแปรลงในข้อความได้สะดวก"
+      },
+      {
+        "id": 5,
+        "type": "coding",
+        "question": "เขียนโค้ด Python ที่สร้างตัวแปร name เก็บชื่อของคุณ และแสดงข้อความว่า 'สวัสดี [ชื่อ]!'",
+        "hint": "ใช้ name = \"ชื่อ\" และ print(f\"สวัสดี {name}!\")",
+        "sampleCode": "# สร้างตัวแปรชื่อ\nname = \"\"\n\n# แสดงข้อความ\nprint()",
+        "checkKeywords": ["name", "print", "name"],
+        "expectedPattern": "print.*name",
+        "explanation": "ตัวอย่าง: name = \"นภัสสร\" แล้ว print(f\"สวัสดี {name}!\")"
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "title": "เงื่อนไขและการตัดสินใจ",
+    "titleEn": "Conditions",
+    "description": "สอน AI ให้ตัดสินใจได้! เรียนรู้ if / elif / else และ Boolean",
+    "icon": "account_tree",
+    "color": "#3B82F6",
+    "colorBg": "linear-gradient(135deg,#3B82F6,#2563EB)",
+    "difficulty": "beginner",
+    "diffLabel": "ง่าย",
+    "xpReward": 150,
+    "estimatedMinutes": 25,
+    "topics": ["if/else", "elif", "Boolean", "การเปรียบเทียบ"],
+    "badgeOnComplete": "mission2_complete",
+    "steps": [
+      {
+        "id": 1,
+        "title": "🤔 การตัดสินใจในชีวิตประจำวัน",
+        "content": "**ทุกวันเราตัดสินใจมากมาย!**\n\n- ถ้าฝนตก → เอาร่มไป\n- ถ้าหิว → กินข้าว\n- ถ้าง่วง → นอน\n\n**ในโปรแกรม** เราใช้ `if` เพื่อให้คอมพิวเตอร์ตัดสินใจได้เหมือนกัน!\n\nนี่คือหัวใจของ AI — การตัดสินใจอัตโนมัติ 🤖"
+      },
+      {
+        "id": 2,
+        "title": "✅ คำสั่ง if/else",
+        "content": "```python\ntemperature = 35\n\nif temperature > 30:\n    print(\"ร้อนมาก! ดื่มน้ำเยอะๆ\")\nelse:\n    print(\"อากาศดี!\")\n```\n\n**ผลลัพธ์:**\n```\nร้อนมาก! ดื่มน้ำเยอะๆ\n```\n\n**กฎสำคัญ:**\n- ต้องมี `:` หลัง if และ else\n- โค้ดข้างใน indent (เว้น 4 ช่อง)\n- Python ใช้ indent แทนวงเล็บ {}!"
+      },
+      {
+        "id": 3,
+        "title": "🔀 คำสั่ง elif",
+        "content": "ใช้ `elif` เมื่อมีหลายเงื่อนไข:\n\n```python\nscore = 75\n\nif score >= 90:\n    print(\"ยอดเยี่ยม! เกรด A\")\nelif score >= 80:\n    print(\"ดีมาก! เกรด B\")\nelif score >= 70:\n    print(\"ดี! เกรด C\")\nelif score >= 60:\n    print(\"ผ่าน! เกรด D\")\nelse:\n    print(\"ยังไม่ผ่าน ลองใหม่!\")\n```\n\n**ผลลัพธ์:**\n```\nดี! เกรด C\n```"
+      },
+      {
+        "id": 4,
+        "title": "⚖️ Boolean และการเปรียบเทียบ",
+        "content": "**ตัวดำเนินการเปรียบเทียบ:**\n\n| สัญลักษณ์ | ความหมาย |\n|---|---|\n| `==` | เท่ากับ |\n| `!=` | ไม่เท่ากับ |\n| `>` | มากกว่า |\n| `<` | น้อยกว่า |\n| `>=` | มากกว่าหรือเท่ากับ |\n| `<=` | น้อยกว่าหรือเท่ากับ |\n\n**Boolean:**\n```python\nx = 10\nprint(x > 5)   # True\nprint(x == 5)  # False\n\n# และ/หรือ\nage = 11\nprint(age >= 10 and age <= 12)  # True\nprint(age < 10 or age > 12)    # False\n```"
+      },
+      {
+        "id": 5,
+        "title": "✅ สรุปและทดสอบ",
+        "content": "**สิ่งที่เรียนรู้วันนี้:**\n\n✅ `if` — ตรวจสอบเงื่อนไข\n✅ `else` — กรณีที่เงื่อนไขไม่เป็นจริง\n✅ `elif` — เงื่อนไขเพิ่มเติม\n✅ Boolean — True / False\n✅ ตัวดำเนินการเปรียบเทียบ\n\n**ตัวอย่างโปรแกรม AI ตัดสินใจ:**\n```python\nxp = 850\n\nif xp >= 1500:\n    level = \"AI Master\"\nelif xp >= 1000:\n    level = \"นักพัฒนา\"\nelif xp >= 600:\n    level = \"นักสำรวจ\"\nelse:\n    level = \"มือใหม่\"\n\nprint(f\"ระดับของคุณ: {level}\")\n```\n\nพร้อมทำแบบทดสอบแล้ว! 🎯"
+      }
+    ],
+    "quiz": [
+      {
+        "id": 1,
+        "type": "multiple_choice",
+        "question": "ข้อใดคือไวยากรณ์ที่ถูกต้องของ if ใน Python?",
+        "options": ["if x > 5 { print() }", "if (x > 5): print()", "if x > 5: print()", "if x > 5 then print()"],
+        "correct": 2,
+        "explanation": "ใน Python ใช้ if เงื่อนไข: และไม่ใช้วงเล็บ {} แต่ต้อง indent โค้ดข้างใน"
+      },
+      {
+        "id": 2,
+        "type": "multiple_choice",
+        "question": "ผลลัพธ์ของโค้ดนี้คืออะไร?\nscore = 85\nif score >= 90:\n    print(\"A\")\nelif score >= 80:\n    print(\"B\")\nelse:\n    print(\"C\")",
+        "options": ["A", "B", "C", "AB"],
+        "correct": 1,
+        "explanation": "score = 85 ไม่ผ่านเงื่อนไข >= 90 แต่ผ่านเงื่อนไข >= 80 จึงพิมพ์ B"
+      },
+      {
+        "id": 3,
+        "type": "multiple_choice",
+        "question": "10 != 10 มีค่าเท่ากับอะไร?",
+        "options": ["True", "False", "10", "Error"],
+        "correct": 1,
+        "explanation": "!= หมายถึง 'ไม่เท่ากับ' เนื่องจาก 10 เท่ากับ 10 ดังนั้น 10 != 10 จึงเป็น False"
+      },
+      {
+        "id": 4,
+        "type": "multiple_choice",
+        "question": "age = 12\nif age >= 10 and age <= 15:\n    print(\"วัยรุ่น\")\nผลลัพธ์คืออะไร?",
+        "options": ["วัยรุ่น", "ไม่แสดงอะไร", "True", "Error"],
+        "correct": 0,
+        "explanation": "12 >= 10 เป็น True และ 12 <= 15 เป็น True ดังนั้น True and True = True จึงพิมพ์ 'วัยรุ่น'"
+      },
+      {
+        "id": 5,
+        "type": "coding",
+        "question": "เขียนโค้ด Python ที่ตรวจสอบว่า xp = 850 อยู่ในระดับไหน:\n- xp >= 1000: พิมพ์ 'นักพัฒนา'\n- xp >= 600: พิมพ์ 'นักสำรวจ'\n- อื่นๆ: พิมพ์ 'มือใหม่'",
+        "hint": "ใช้ if / elif / else",
+        "sampleCode": "xp = 850\n\n# เขียนเงื่อนไขที่นี่\nif xp >= 1000:\n    print(\"นักพัฒนา\")\n",
+        "checkKeywords": ["if", "elif", "else", "print"],
+        "expectedPattern": "elif|else",
+        "explanation": "xp = 850 → 850 < 1000 ดังนั้น elif 850 >= 600 → True → พิมพ์ 'นักสำรวจ'"
+      }
+    ]
+  },
+  {
+    "id": 3,
+    "title": "วนซ้ำกับ Loop",
+    "titleEn": "Loops",
+    "description": "สั่งให้ AI ทำงานซ้ำๆ อย่างชาญฉลาด เรียนรู้ for loop และ while loop",
+    "icon": "loop",
+    "color": "#A855F7",
+    "colorBg": "linear-gradient(135deg,#A855F7,#7C3AED)",
+    "difficulty": "intermediate",
+    "diffLabel": "ปานกลาง",
+    "xpReward": 200,
+    "estimatedMinutes": 30,
+    "topics": ["for loop", "while loop", "range()"],
+    "badgeOnComplete": "mission3_complete",
+    "steps": [
+      {
+        "id": 1,
+        "title": "🔄 ทำซ้ำในชีวิตจริง",
+        "content": "**ลองนับ 1 ถึง 10:**\n\nถ้าไม่มี Loop:\n```python\nprint(1)\nprint(2)\nprint(3)\n# ...ต้องเขียน 10 บรรทัด!\n```\n\nด้วย Loop แค่ 2 บรรทัด:\n```python\nfor i in range(1, 11):\n    print(i)\n```\n\n**Loop ทำให้:**\n- โค้ดสั้นลง\n- ทำงานเร็วขึ้น\n- ลดการพิมพ์ซ้ำ\n\nนี่คือพลังของการโปรแกรม! 💪"
+      },
+      {
+        "id": 2,
+        "title": "🔵 for loop",
+        "content": "**for loop** วนซ้ำตามจำนวนที่กำหนด:\n\n```python\n# range(5) = 0, 1, 2, 3, 4\nfor i in range(5):\n    print(f\"รอบที่ {i+1}\")\n```\n\n**ผลลัพธ์:**\n```\nรอบที่ 1\nรอบที่ 2\nรอบที่ 3\nรอบที่ 4\nรอบที่ 5\n```\n\n**range() มี 3 รูปแบบ:**\n```python\nrange(5)       # 0 ถึง 4\nrange(1, 6)    # 1 ถึง 5\nrange(0, 10, 2) # 0, 2, 4, 6, 8\n```"
+      },
+      {
+        "id": 3,
+        "title": "📋 วนซ้ำผ่าน List",
+        "content": "เราวน loop ผ่านรายการข้อมูลได้:\n\n```python\nfruits = [\"แอปเปิ้ล\", \"กล้วย\", \"ส้ม\", \"มะม่วง\"]\n\nfor fruit in fruits:\n    print(f\"ผลไม้: {fruit} 🍎\")\n```\n\n**ผลลัพธ์:**\n```\nผลไม้: แอปเปิ้ล 🍎\nผลไม้: กล้วย 🍎\nผลไม้: ส้ม 🍎\nผลไม้: มะม่วง 🍎\n```\n\n**ใช้ enumerate เพื่อดูลำดับ:**\n```python\nfor i, fruit in enumerate(fruits, 1):\n    print(f\"{i}. {fruit}\")\n```"
+      },
+      {
+        "id": 4,
+        "title": "🔴 while loop",
+        "content": "**while loop** วนซ้ำตราบเท่าที่เงื่อนไขยังเป็น True:\n\n```python\ncount = 0\nwhile count < 5:\n    print(f\"นับ: {count}\")\n    count = count + 1  # หรือ count += 1\n\nprint(\"เสร็จแล้ว!\")\n```\n\n**ผลลัพธ์:**\n```\nนับ: 0\nนับ: 1\nนับ: 2\nนับ: 3\nนับ: 4\nเสร็จแล้ว!\n```\n\n⚠️ **ระวัง!** ต้องแน่ใจว่าเงื่อนไขจะเป็น False ในที่สุด มิฉะนั้น loop จะวนไม่สิ้นสุด (Infinite Loop)!"
+      },
+      {
+        "id": 5,
+        "title": "✅ สรุปและทดสอบ",
+        "content": "**สิ่งที่เรียนรู้วันนี้:**\n\n✅ `for i in range()` — วนซ้ำตามจำนวน\n✅ `for item in list` — วนผ่านรายการ\n✅ `while condition` — วนจนกว่าเงื่อนไขไม่ตรง\n✅ `enumerate()` — วนพร้อมลำดับ\n\n**ตัวอย่าง: นับ XP 5 วัน**\n```python\ndaily_xp = [50, 100, 75, 120, 90]\ntotal = 0\n\nfor day, xp in enumerate(daily_xp, 1):\n    total += xp\n    print(f\"วันที่ {day}: +{xp} XP (รวม {total} XP)\")\n\nprint(f\"\\nXP ทั้งหมด: {total}\")\n```\n\nพร้อมทำแบบทดสอบ! 🚀"
+      }
+    ],
+    "quiz": [
+      {
+        "id": 1,
+        "type": "multiple_choice",
+        "question": "range(3) ให้ค่าใดบ้าง?",
+        "options": ["1, 2, 3", "0, 1, 2", "0, 1, 2, 3", "1, 2"],
+        "correct": 1,
+        "explanation": "range(3) เริ่มจาก 0 และจบที่ 2 (ไม่รวม 3) ดังนั้นได้ 0, 1, 2"
+      },
+      {
+        "id": 2,
+        "type": "multiple_choice",
+        "question": "for i in range(1, 4): print(i) จะพิมพ์อะไร?",
+        "options": ["1 2 3 4", "1 2 3", "0 1 2 3", "1 2 3 4 5"],
+        "correct": 1,
+        "explanation": "range(1, 4) เริ่มจาก 1 จบที่ 3 (ไม่รวม 4) ดังนั้นพิมพ์ 1, 2, 3"
+      },
+      {
+        "id": 3,
+        "type": "multiple_choice",
+        "question": "ข้อใดต่อไปนี้เป็น Infinite Loop?",
+        "options": ["for i in range(10)", "while True: pass", "while i < 10: i += 1", "for x in [1,2,3]"],
+        "correct": 1,
+        "explanation": "while True จะวนซ้ำตลอดไปเพราะ True ไม่มีวันเป็น False (ต้องใช้ break เพื่อออก)"
+      },
+      {
+        "id": 4,
+        "type": "multiple_choice",
+        "question": "fruits = ['Apple', 'Banana']\nfor fruit in fruits:\n    print(fruit)\nพิมพ์กี่บรรทัด?",
+        "options": ["1", "2", "3", "0"],
+        "correct": 1,
+        "explanation": "มีผลไม้ 2 ตัว ดังนั้น loop จะวน 2 รอบ พิมพ์ 2 บรรทัด"
+      },
+      {
+        "id": 5,
+        "type": "coding",
+        "question": "เขียนโค้ด for loop พิมพ์ตัวเลข 1 ถึง 5 แต่ละตัวบรรทัดใหม่",
+        "hint": "ใช้ for i in range(1, 6): print(i)",
+        "sampleCode": "# เขียน loop ที่นี่\nfor i in range():\n    print()",
+        "checkKeywords": ["for", "range", "print"],
+        "expectedPattern": "for.*range",
+        "explanation": "for i in range(1, 6): จะวน i = 1,2,3,4,5 แล้ว print(i) แต่ละตัว"
+      }
+    ]
+  },
+  {
+    "id": 4,
+    "title": "ฟังก์ชั่น — สร้างเครื่องมือของตัวเอง",
+    "titleEn": "Functions",
+    "description": "สร้าง 'ทักษะ' ให้ AI! เรียนรู้ def และ return เพื่อประหยัดโค้ด",
+    "icon": "functions",
+    "color": "#F59E0B",
+    "colorBg": "linear-gradient(135deg,#F59E0B,#D97706)",
+    "difficulty": "intermediate",
+    "diffLabel": "ปานกลาง",
+    "xpReward": 250,
+    "estimatedMinutes": 35,
+    "topics": ["def", "return", "parameters", "arguments"],
+    "badgeOnComplete": "mission4_complete",
+    "steps": [
+      {
+        "id": 1,
+        "title": "🔧 ฟังก์ชั่นคืออะไร?",
+        "content": "**ฟังก์ชั่น** คือชุดคำสั่งที่ตั้งชื่อไว้ เรียกใช้ได้ซ้ำๆ\n\n**ทำไมต้องใช้ฟังก์ชั่น?**\n- ✅ เขียนครั้งเดียว ใช้ได้หลายครั้ง\n- ✅ แก้ไขที่เดียว ใช้ผลได้ทุกที่\n- ✅ โค้ดอ่านง่ายขึ้น\n\n**เปรียบเสมือน...**\nฟังก์ชั่นเหมือนสูตรอาหาร เขียนสูตรครั้งเดียว ทำอาหารได้กี่ครั้งก็ได้! 🍳"
+      },
+      {
+        "id": 2,
+        "title": "📝 def — สร้างฟังก์ชั่น",
+        "content": "```python\n# สร้างฟังก์ชั่น\ndef greet():\n    print(\"สวัสดี! ยินดีต้อนรับ\")\n    print(\"พร้อมผจญภัยแล้วหรือยัง?\")\n\n# เรียกใช้ฟังก์ชั่น\ngreet()\ngreet()\ngreet()\n```\n\n**ผลลัพธ์:**\n```\nสวัสดี! ยินดีต้อนรับ\nพร้อมผจญภัยแล้วหรือยัง?\nสวัสดี! ยินดีต้อนรับ\nพร้อมผจญภัยแล้วหรือยัง?\nสวัสดี! ยินดีต้อนรับ\nพร้อมผจญภัยแล้วหรือยัง?\n```\n\nเขียนแค่ 3 บรรทัดแต่ทำงาน 6 บรรทัด!"
+      },
+      {
+        "id": 3,
+        "title": "📨 Parameters — รับข้อมูล",
+        "content": "ฟังก์ชั่นรับข้อมูลได้ผ่าน **parameters**:\n\n```python\ndef greet(name, level):\n    print(f\"สวัสดี {name}!\")\n    print(f\"คุณอยู่ระดับ: {level}\")\n\n# เรียกใช้พร้อมส่งข้อมูล\ngreet(\"นภัสสร\", \"นักพัฒนา\")\ngreet(\"มาริสา\", \"AI Master\")\n```\n\n**ผลลัพธ์:**\n```\nสวัสดี นภัสสร!\nคุณอยู่ระดับ: นักพัฒนา\nสวัสดี มาริสา!\nคุณอยู่ระดับ: AI Master\n```"
+      },
+      {
+        "id": 4,
+        "title": "↩️ return — ส่งค่ากลับ",
+        "content": "ฟังก์ชั่นส่งผลลัพธ์กลับด้วย `return`:\n\n```python\ndef calculate_xp(score, bonus):\n    total = score + bonus\n    return total\n\ndef get_level(xp):\n    if xp >= 1500:\n        return \"AI Master\"\n    elif xp >= 1000:\n        return \"นักพัฒนา\"\n    elif xp >= 600:\n        return \"นักสำรวจ\"\n    else:\n        return \"มือใหม่\"\n\n# ใช้งาน\nmy_xp = calculate_xp(850, 100)\nmy_level = get_level(my_xp)\nprint(f\"XP: {my_xp}, ระดับ: {my_level}\")\n```\n\n**ผลลัพธ์:**\n```\nXP: 950, ระดับ: นักสำรวจ\n```"
+      },
+      {
+        "id": 5,
+        "title": "✅ สรุปและทดสอบ",
+        "content": "**สิ่งที่เรียนรู้วันนี้:**\n\n✅ `def name():` — สร้างฟังก์ชั่น\n✅ `parameters` — รับข้อมูลเข้าฟังก์ชั่น\n✅ `return` — ส่งค่ากลับ\n✅ เรียกใช้ฟังก์ชั่นซ้ำๆ ได้\n\n**ตัวอย่างระบบ XP แบบมืออาชีพ:**\n```python\ndef award_xp(player, mission_xp, bonus=0):\n    total = mission_xp + bonus\n    player['xp'] += total\n    print(f\"🎉 {player['name']} ได้รับ {total} XP!\")\n    return total\n\nplayer = {'name': 'นภัสสร', 'xp': 850}\naward_xp(player, 200, bonus=50)\nprint(f\"XP รวม: {player['xp']}\")\n```\n\nพร้อมทำแบบทดสอบ! 🏆"
+      }
+    ],
+    "quiz": [
+      {
+        "id": 1,
+        "type": "multiple_choice",
+        "question": "คำสั่งใดใช้สร้างฟังก์ชั่นใน Python?",
+        "options": ["function myFunc():", "create myFunc():", "def myFunc():", "func myFunc():"],
+        "correct": 2,
+        "explanation": "ใน Python ใช้ def ในการสร้างฟังก์ชั่น เช่น def greet(): ตามด้วย : และ indent"
+      },
+      {
+        "id": 2,
+        "type": "multiple_choice",
+        "question": "def add(a, b):\n    return a + b\nresult = add(3, 7)\nprint(result)\nผลลัพธ์คืออะไร?",
+        "options": ["3", "7", "10", "37"],
+        "correct": 2,
+        "explanation": "add(3, 7) คำนวณ a + b = 3 + 7 = 10 แล้ว return 10 ดังนั้น result = 10"
+      },
+      {
+        "id": 3,
+        "type": "multiple_choice",
+        "question": "ฟังก์ชั่นที่มี return ต่างจากที่ไม่มี return อย่างไร?",
+        "options": ["ไม่ต่างกัน", "มี return ส่งค่ากลับไปให้ผู้เรียก", "มี return พิมพ์ค่าอัตโนมัติ", "มี return วนซ้ำ"],
+        "correct": 1,
+        "explanation": "return ส่งค่ากลับไปยังผู้เรียกฟังก์ชั่น ทำให้นำค่านั้นไปใช้ต่อได้"
+      },
+      {
+        "id": 4,
+        "type": "multiple_choice",
+        "question": "def greet(name='ผู้เรียน'):\n    print(f'สวัสดี {name}')\ngreet()\nผลลัพธ์คืออะไร?",
+        "options": ["สวัสดี", "สวัสดี name", "สวัสดี ผู้เรียน", "Error"],
+        "correct": 2,
+        "explanation": "name='ผู้เรียน' คือค่า default ถ้าไม่ส่ง argument จะใช้ค่า default แทน"
+      },
+      {
+        "id": 5,
+        "type": "coding",
+        "question": "สร้างฟังก์ชั่นชื่อ calculate_level ที่รับ xp แล้ว return ชื่อระดับ:\n- xp >= 1500: 'AI Master'\n- xp >= 1000: 'นักพัฒนา'\n- อื่นๆ: 'มือใหม่'\nแล้วเรียกใช้ด้วย xp = 1200",
+        "hint": "ใช้ def calculate_level(xp): และ if/elif/else ข้างใน",
+        "sampleCode": "def calculate_level(xp):\n    # เขียนเงื่อนไขที่นี่\n    if xp >= 1500:\n        return \"AI Master\"\n    \n# เรียกใช้ฟังก์ชั่น\nresult = calculate_level(1200)\nprint(result)",
+        "checkKeywords": ["def", "return", "calculate_level"],
+        "expectedPattern": "def calculate_level",
+        "explanation": "def calculate_level(xp): รับ xp แล้วใช้ if/elif/else ส่งชื่อระดับกลับ"
+      }
+    ]
+  },
+  {
+    "id": 5,
+    "title": "AI สร้างได้! — Mini Project",
+    "titleEn": "Mini AI Project",
+    "description": "ใช้ทุกที่เรียนมาสร้าง Mini AI ของตัวเอง โปรเจกต์สุดท้ายที่ท้าทายที่สุด!",
+    "icon": "smart_toy",
+    "color": "#EF4444",
+    "colorBg": "linear-gradient(135deg,#EF4444,#DC2626)",
+    "difficulty": "advanced",
+    "diffLabel": "ยาก",
+    "xpReward": 350,
+    "estimatedMinutes": 45,
+    "topics": ["Mini AI", "Input/Output", "Logic", "Integration"],
+    "badgeOnComplete": "mission5_complete",
+    "steps": [
+      {
+        "id": 1,
+        "title": "🤖 AI คืออะไร?",
+        "content": "**AI (Artificial Intelligence)** คือโปรแกรมที่เรียนรู้และตัดสินใจได้\n\n**ประเภท AI ในชีวิตจริง:**\n- 🎵 AI แนะนำเพลง (Spotify)\n- 🛒 AI แนะนำสินค้า (Shopee)\n- 💬 AI แชทบอท (ChatGPT)\n- 🚗 AI ขับรถ (Tesla)\n\n**วันนี้เราจะสร้าง:**\nChatbot AI แบบง่ายๆ ที่ตอบคำถามได้! 🎯\n\nเราจะใช้ทุกอย่างที่เรียนมา:\n- ตัวแปร, print()\n- if/elif/else\n- Loop\n- ฟังก์ชั่น"
+      },
+      {
+        "id": 2,
+        "title": "💬 รับข้อมูลจากผู้ใช้",
+        "content": "ใช้ `input()` รับข้อมูลจากผู้ใช้:\n\n```python\nname = input(\"ชื่อของคุณคืออะไร? \")\nprint(f\"สวัสดี {name}! ยินดีต้อนรับ 👋\")\n\nage = int(input(\"อายุเท่าไหร่? \"))\nif age < 12:\n    print(\"น้องยังเด็กเลย 😊\")\nelse:\n    print(\"โตแล้ว! 💪\")\n```\n\n**หมายเหตุ:**\n- `input()` รับค่าเป็น string เสมอ\n- ใช้ `int()` แปลงเป็นเลขจำนวนเต็ม\n- ใช้ `float()` แปลงเป็นทศนิยม"
+      },
+      {
+        "id": 3,
+        "title": "🧠 สร้าง Chatbot AI",
+        "content": "ใส่ทุกอย่างรวมกัน สร้าง Chatbot:\n\n```python\ndef ai_response(question):\n    question = question.lower()  # แปลงเป็นตัวพิมพ์เล็ก\n    \n    if \"สวัสดี\" in question or \"hello\" in question:\n        return \"สวัสดี! ฉันคือ AI ผู้ช่วยของคุณ 🤖\"\n    elif \"ชื่อ\" in question:\n        return \"ฉันชื่อ ACA-Bot!\"\n    elif \"ขอบคุณ\" in question:\n        return \"ยินดีค่ะ! 😊\"\n    else:\n        return \"ขอโทษ ฉันไม่เข้าใจคำถามนั้น 🤔\"\n\n# ทดสอบ Chatbot\nprint(ai_response(\"สวัสดี\"))\nprint(ai_response(\"ชื่ออะไร\"))\nprint(ai_response(\"ขอบคุณ\"))\n```"
+      },
+      {
+        "id": 4,
+        "title": "🔁 Chatbot ที่ตอบสนองต่อเนื่อง",
+        "content": "เพิ่ม while loop ให้ Chatbot คุยได้ต่อเนื่อง:\n\n```python\ndef ai_chat(question):\n    q = question.lower()\n    if \"สวัสดี\" in q:\n        return \"สวัสดี! 🤖 มีอะไรให้ช่วยไหม?\"\n    elif \"ชื่อ\" in q:\n        return \"ฉันชื่อ ACA-Bot!\"\n    elif \"กี่โมง\" in q:\n        return \"ฉันไม่รู้เวลา แต่ตอนนี้เป็นเวลาแห่งการเรียนรู้! 📚\"\n    elif \"ลาก่อน\" in q or \"bye\" in q:\n        return \"ลาก่อน! แล้วพบกันใหม่ 👋\"\n    else:\n        return f'ขอโทษ ฉันไม่รู้เรื่อง \"{question}\" 🤔'\n\n# Main loop\nprint(\"=== ACA-Bot เริ่มทำงาน ===\")\nwhile True:\n    user_input = input(\"คุณ: \")\n    if user_input == \"ลาก่อน\":\n        print(\"Bot: ลาก่อน! แล้วพบกันใหม่ 👋\")\n        break\n    response = ai_chat(user_input)\n    print(f\"Bot: {response}\")\n```"
+      },
+      {
+        "id": 5,
+        "title": "✅ โปรเจกต์สมบูรณ์",
+        "content": "**ยินดีด้วย! คุณสร้าง AI ได้แล้ว! 🎉**\n\n**สิ่งที่คุณใช้ในโปรเจกต์นี้:**\n- ✅ `input()` / `print()` — รับ/แสดงข้อมูล\n- ✅ `def function()` — สร้างฟังก์ชั่น\n- ✅ `if/elif/else` — ตรรกะการตัดสินใจ\n- ✅ `while loop` — วนซ้ำต่อเนื่อง\n- ✅ String methods — `.lower()`, `in`\n\n**ขั้นต่อไป (ถ้าอยากพัฒนาต่อ):**\n- เพิ่มคำถามและคำตอบมากขึ้น\n- เชื่อมต่อกับ API จริง\n- ใช้ Machine Learning\n- สร้าง Web App!\n\nคุณพร้อมเป็น **AI Master** แล้ว! 🏆"
+      }
+    ],
+    "quiz": [
+      {
+        "id": 1,
+        "type": "multiple_choice",
+        "question": "input() ใน Python ใช้ทำอะไร?",
+        "options": ["แสดงข้อความ", "รับข้อมูลจากผู้ใช้", "คำนวณตัวเลข", "สร้างฟังก์ชั่น"],
+        "correct": 1,
+        "explanation": "input() รอรับข้อมูลจากผู้ใช้ผ่าน keyboard และส่งค่ากลับเป็น string เสมอ"
+      },
+      {
+        "id": 2,
+        "type": "multiple_choice",
+        "question": "age = input('อายุ: ')\nage = age + 1\nเกิดอะไรขึ้น?",
+        "options": ["ทำงานปกติ", "Error เพราะ input คืน string", "age กลายเป็น '11'", "age กลายเป็น 2"],
+        "correct": 1,
+        "explanation": "input() คืนค่าเป็น string เสมอ ต้องใช้ int(input()) ก่อนจึงจะบวกเลขได้"
+      },
+      {
+        "id": 3,
+        "type": "multiple_choice",
+        "question": "'python' in 'i love python' มีค่าเท่ากับ?",
+        "options": ["True", "False", "Error", "None"],
+        "correct": 0,
+        "explanation": "in ใน Python ตรวจว่า string ย่อยอยู่ใน string หลักหรือไม่ 'python' อยู่ใน 'i love python' จึงเป็น True"
+      },
+      {
+        "id": 4,
+        "type": "multiple_choice",
+        "question": "เพื่อให้ Chatbot ออกจาก loop เมื่อพิมพ์ 'ลาก่อน' ควรใช้คำสั่งใด?",
+        "options": ["exit", "stop", "break", "end"],
+        "correct": 2,
+        "explanation": "break ใช้ออกจาก loop ทันที เมื่อ user พิมพ์ 'ลาก่อน' ใช้ break เพื่อออกจาก while loop"
+      },
+      {
+        "id": 5,
+        "type": "coding",
+        "question": "สร้างฟังก์ชั่น ai_greet(name) ที่:\n- ถ้า name == 'ครู': return 'สวัสดีครับ/ค่ะ คุณครู!'\n- อื่นๆ: return f'สวัสดี {name}! ยินดีต้อนรับ'\nแล้วทดสอบด้วย ai_greet('นภัสสร')",
+        "hint": "ใช้ def ai_greet(name): if name == 'ครู': return...",
+        "sampleCode": "def ai_greet(name):\n    if name == \"ครู\":\n        return \"สวัสดีครับ/ค่ะ คุณครู!\"\n    else:\n        return f\"สวัสดี {name}! ยินดีต้อนรับ\"\n\n# ทดสอบ\nprint(ai_greet(\"นภัสสร\"))",
+        "checkKeywords": ["def", "ai_greet", "return", "if"],
+        "expectedPattern": "def ai_greet",
+        "explanation": "def ai_greet(name): รับชื่อ แล้วตัดสินใจด้วย if/else ส่งข้อความต้อนรับกลับ"
+      }
+    ]
+  }
+]

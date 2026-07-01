@@ -1,0 +1,570 @@
+You are a Senior Frontend Engineer and UX/UI Designer.
+
+You are developing an educational web application called
+
+AI Coding Adventure Learning Platform
+
+Target Users
+
+- Grade 5 Students
+- Teachers
+- School Administrators
+
+====================================
+
+TECH STACK
+
+====================================
+
+HTML5
+
+CSS3
+
+Vanilla JavaScript
+
+GSAP
+
+Material Symbols
+
+Responsive Design
+
+No Framework
+
+====================================
+
+PROJECT STRUCTURE
+
+====================================
+
+assets/
+
+components/
+
+pages/
+
+styles/
+
+scripts/
+
+services/
+
+dashboard/
+
+data/
+
+docs/
+
+====================================
+
+DESIGN REFERENCES
+
+====================================
+
+Use these references ONLY for inspiration.
+
+Do NOT copy any code or layout.
+
+Create an original design inspired by:
+
+- https://www.webild.io/templates
+
+- https://demos.gsap.com/explore/
+
+- https://gsapify.com/gsap-animations/
+
+Use modern SaaS UI.
+
+Use flat design.
+
+Use glassmorphism where appropriate.
+
+Use soft shadows.
+
+Use rounded corners (20px).
+
+====================================
+
+COLOR SYSTEM
+
+====================================
+
+Primary
+
+#2563EB
+
+Secondary
+
+#60A5FA
+
+Accent
+
+#FBBF24
+
+Background
+
+#F8FAFC
+
+Card
+
+#FFFFFF
+
+Success
+
+#22C55E
+
+Danger
+
+#EF4444
+
+Text
+
+#1E293B
+
+====================================
+
+TYPOGRAPHY
+
+====================================
+
+Heading
+
+Poppins
+
+Body
+
+Prompt
+
+UI
+
+Nunito
+
+====================================
+
+LANDING PAGE SECTIONS
+
+====================================
+
+1 Navigation
+
+Logo
+
+Home
+
+Mission
+
+Portfolio
+
+Dashboard
+
+About
+
+Login Button
+
+------------------------------------
+
+2 Hero
+
+Big headline
+
+Learn Coding Through Adventure
+
+Subheadline
+
+AI Coding Adventure Learning Platform
+
+Two CTA Buttons
+
+Start Learning
+
+Watch Demo
+
+Robot Illustration Placeholder
+
+Animated Background
+
+------------------------------------
+
+3 Features
+
+Game Based Learning
+
+AI Assistant
+
+Learning Analytics
+
+Digital Portfolio
+
+Google Classroom Ready
+
+------------------------------------
+
+4 Mission Preview
+
+Display 5 Mission Cards
+
+Mission 1
+
+Mission 2
+
+Mission 3
+
+Mission 4
+
+Mission 5
+
+Each card contains
+
+Title
+
+Icon
+
+Description
+
+Difficulty
+
+Button
+
+------------------------------------
+
+5 Statistics
+
+Animated Counter
+
+Students
+
+Missions
+
+Average Score
+
+Badges
+
+------------------------------------
+
+6 Teacher Dashboard Preview
+
+Mini Analytics Cards
+
+Progress Chart Placeholder
+
+Student Table Placeholder
+
+AI Recommendation Card
+
+------------------------------------
+
+7 Footer
+
+School Information
+
+Developer
+
+Version
+
+Social Links Placeholder
+
+====================================
+
+ANIMATION
+
+====================================
+
+Use GSAP
+
+Hero Fade Up
+
+Cards Fade In
+
+Counter Animation
+
+ScrollTrigger
+
+Hover Animation
+
+Smooth Reveal
+
+====================================
+
+RESPONSIVE
+
+====================================
+
+Desktop
+
+Tablet
+
+Mobile
+
+====================================
+
+ACCESSIBILITY
+
+====================================
+
+Semantic HTML
+
+Alt Text
+
+Keyboard Navigation
+
+Visible Focus
+
+====================================
+
+CODE STYLE
+
+====================================
+
+Separate
+
+HTML
+
+CSS
+
+JavaScript
+
+Clean comments
+
+Readable code
+
+No inline CSS
+
+No inline JavaScript
+
+====================================
+
+OUTPUT
+
+====================================
+
+Generate
+
+index.html
+
+styles/globals.css
+
+scripts/app.js
+
+Do not explain.
+
+Only generate production-ready code.
+
+You are a Senior Full Stack Engineer and Solution Architect.
+
+Continue developing the existing project:
+
+AI Coding Adventure Learning Platform
+
+Do NOT redesign the Landing Page.
+Continue from the current project.
+
+==================================================
+OBJECTIVE
+==================================================
+
+Build a complete Authentication System.
+
+This is NOT only a login page.
+
+Build a reusable authentication module that supports future integration with Google Apps Script.
+
+==================================================
+USERS
+==================================================
+
+Student
+
+Teacher
+
+Administrator
+
+==================================================
+PROJECT STRUCTURE
+==================================================
+
+pages/
+    login.html
+
+styles/
+    auth.css
+
+scripts/
+    auth.js
+
+services/
+    auth-service.js
+
+==================================================
+LOGIN PAGE
+==================================================
+
+Modern SaaS UI
+
+Glassmorphism
+
+Blue White Theme
+
+Responsive
+
+Centered Card
+
+Animated Background
+
+Robot Illustration Placeholder
+
+Fields
+
+Student ID
+
+Password
+
+Role
+
+(Student / Teacher / Admin)
+
+Remember Me
+
+Forgot Password (placeholder)
+
+Login Button
+
+Back to Home
+
+==================================================
+VALIDATION
+==================================================
+
+Empty Fields
+
+Password Length
+
+Student ID Format
+
+Error Message
+
+Loading State
+
+==================================================
+SESSION
+==================================================
+
+Use localStorage
+
+Save
+
+User ID
+
+User Name
+
+Role
+
+Login Time
+
+Theme
+
+==================================================
+ROUTING
+==================================================
+
+Student
+
+→ pages/home.html
+
+Teacher
+
+→ dashboard/index.html
+
+Admin
+
+→ dashboard/index.html
+
+==================================================
+MOCK DATABASE
+==================================================
+
+Create
+
+data/users.json
+
+Include
+
+3 Student Accounts
+
+1 Teacher
+
+1 Administrator
+
+==================================================
+AUTH SERVICE
+==================================================
+
+Create reusable AuthService
+
+Functions
+
+login()
+
+logout()
+
+isLoggedIn()
+
+getCurrentUser()
+
+requireRole()
+
+==================================================
+UI
+==================================================
+
+Material Symbols
+
+Rounded 20px
+
+Soft Shadow
+
+GSAP Animation
+
+Hover Effects
+
+Loading Animation
+
+==================================================
+ACCESSIBILITY
+==================================================
+
+Keyboard Navigation
+
+Semantic HTML
+
+ARIA Labels
+
+==================================================
+RESPONSIVE
+==================================================
+
+Desktop
+
+Tablet
+
+Mobile
+
+==================================================
+OUTPUT
+==================================================
+
+Generate only
+
+pages/login.html
+
+styles/auth.css
+
+scripts/auth.js
+
+services/auth-service.js
+
+data/users.json
+
+Use clean code.
+
+Production-ready.
+
+Do not explain.

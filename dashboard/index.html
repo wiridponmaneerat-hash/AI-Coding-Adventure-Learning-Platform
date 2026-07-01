@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Teacher Dashboard — AI Coding Adventure">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Teacher Dashboard — AI Coding Adventure</title>
+  <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="../assets/icon-192.svg">
+  <link rel="manifest" href="../manifest.json">
+  <meta name="theme-color" content="#2563EB">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700&family=Prompt:wght@400;500;600&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="../styles/starfield.css">
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════
+     TOP NAV
+═══════════════════════════════════════ -->
+<nav class="db-nav" role="navigation" aria-label="Teacher navigation">
+  <div class="db-nav-inner">
+    <div class="db-nav-brand">
+      <img src="../assets/icons/AI.png" alt="" style="width:24px;height:24px;object-fit:contain;filter:brightness(0) invert(1);vertical-align:middle" aria-hidden="true">
+      <span class="db-nav-brand-text">AI Coding Adventure</span>
+      <span class="db-nav-role-chip">Teacher</span>
+    </div>
+    <div class="db-nav-right">
+      <div class="db-nav-avatar-wrap">
+        <div class="db-nav-avatar" id="dbNavAvatar" aria-hidden="true">ว</div>
+        <div class="db-nav-teacher-info">
+          <span class="db-nav-teacher-name" id="dbNavName">ครูวิริยา สมใจ</span>
+          <span class="db-nav-subject" id="dbNavSubject">วิทยาการคำนวณ</span>
+        </div>
+      </div>
+      <div class="db-notif-wrap" id="dbNotifWrap">
+        <button class="db-notif-btn" id="dbNotifBtn" aria-label="การแจ้งเตือน" aria-expanded="false">
+          <span class="material-symbols-rounded" aria-hidden="true">notifications</span>
+          <span class="db-notif-dot" aria-hidden="true"></span>
+        </button>
+      </div>
+      <button class="db-profile-btn" id="dbProfileBtn" aria-label="ตั้งค่าโปรไฟล์">
+        <span class="material-symbols-rounded" aria-hidden="true">manage_accounts</span>
+        ตั้งค่า
+      </button>
+      <button class="db-logout-btn" id="dbLogout" aria-label="ออกจากระบบ">
+        <span class="material-symbols-rounded" aria-hidden="true">logout</span>
+        ออกจากระบบ
+      </button>
+    </div>
+  </div>
+</nav>
+
+<!-- ═══════════════════════════════════════
+     MAIN CONTENT
+═══════════════════════════════════════ -->
+<main class="db-main" role="main">
+  <div class="db-container">
+
+    <!-- Welcome Hero -->
+    <section class="db-hero" aria-labelledby="dbWelcomeHeading">
+      <div class="db-hero-text">
+        <p class="db-hero-eyebrow">ยินดีต้อนรับ</p>
+        <h1 class="db-hero-heading" id="dbWelcomeHeading">
+          <span id="dbHeroName">ครูวิริยา สมใจ</span>
+        </h1>
+        <p class="db-hero-sub">ห้องเรียน: <span id="dbHeroClasses">ป.5</span> · <span id="dbHeroDate"></span></p>
+      </div>
+      <div class="db-hero-decoration" aria-hidden="true">
+        <img src="../assets/icons/school.png" alt="" class="db-hero-icon-img">
+      </div>
+    </section>
+
+    <!-- Stats Cards -->
+    <section class="db-stats-row" aria-label="ภาพรวมห้องเรียน">
+      <div class="db-stat-card db-grad-border" role="status">
+        <div class="db-stat-icon db-stat-icon--blue">
+          <img src="../assets/icons/Student.png" alt="" class="db-icon-img">
+        </div>
+        <div class="db-stat-body">
+          <p class="db-stat-label">นักเรียนทั้งหมด</p>
+          <p class="db-stat-value" id="dbStatStudents">—</p>
+        </div>
+      </div>
+      <div class="db-stat-card db-grad-border" role="status">
+        <div class="db-stat-icon db-stat-icon--green">
+          <img src="../assets/icons/Mission.png" alt="" class="db-icon-img">
+        </div>
+        <div class="db-stat-body">
+          <p class="db-stat-label">ภารกิจที่ผ่านแล้ว</p>
+          <p class="db-stat-value" id="dbStatMissions">—</p>
+        </div>
+      </div>
+      <div class="db-stat-card db-grad-border" role="status">
+        <div class="db-stat-icon db-stat-icon--amber">
+          <img src="../assets/icons/Trophy.png" alt="" class="db-icon-img">
+        </div>
+        <div class="db-stat-body">
+          <p class="db-stat-label">XP เฉลี่ยนักเรียน</p>
+          <p class="db-stat-value" id="dbStatAvgXP">—</p>
+        </div>
+      </div>
+      <div class="db-stat-card db-grad-border" role="status">
+        <div class="db-stat-icon db-stat-icon--purple">
+          <img src="../assets/icons/analytics.png" alt="" class="db-icon-img">
+        </div>
+        <div class="db-stat-body">
+          <p class="db-stat-label">Badge ที่มอบแล้ว</p>
+          <p class="db-stat-value" id="dbStatBadges">—</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Tab navigation -->
+    <div class="db-tabs" role="tablist" aria-label="หมวดหมู่การจัดการ">
+      <button class="db-tab db-tab--active" id="dbTabOverview" role="tab" aria-selected="true" aria-controls="dbPanelOverview" data-panel="dbPanelOverview">
+        <img src="../assets/icons/Dashboard.png" alt="" class="db-tab-icon-img"> ภาพรวม
+      </button>
+      <button class="db-tab" id="dbTabStudents" role="tab" aria-selected="false" aria-controls="dbPanelStudents" data-panel="dbPanelStudents">
+        <img src="../assets/icons/Student.png" alt="" class="db-tab-icon-img"> จัดการนักเรียน
+      </button>
+      <button class="db-tab db-tab--admin" id="dbTabTeachers" role="tab" aria-selected="false" aria-controls="dbPanelTeachers" data-panel="dbPanelTeachers" hidden>
+        <img src="../assets/icons/account_circle.png" alt="" class="db-tab-icon-img"> จัดการครู
+      </button>
+    </div>
+
+    <!-- Panel: Overview -->
+    <div id="dbPanelOverview" role="tabpanel" aria-labelledby="dbTabOverview">
+    <!-- Main Grid -->
+    <div class="db-grid">
+
+      <!-- Student Table -->
+      <section class="db-card db-students-section" aria-labelledby="dbStudentsHeading">
+        <div class="db-card-header">
+          <h2 class="db-card-title" id="dbStudentsHeading">
+            <img src="../assets/icons/Trophy.png" alt="" style="width:20px;height:20px;object-fit:contain;vertical-align:middle" aria-hidden="true">
+            อันดับนักเรียน
+          </h2>
+          <span class="db-card-badge" id="dbStudentCount">0 คน</span>
+        </div>
+        <div class="db-table-wrap" role="region" aria-label="ตารางอันดับนักเรียน" tabindex="0">
+          <table class="db-table" aria-label="รายชื่อนักเรียนเรียงตาม XP">
+            <thead>
+              <tr>
+                <th class="db-th db-th--rank" scope="col">อันดับ</th>
+                <th class="db-th" scope="col">นักเรียน</th>
+                <th class="db-th" scope="col">ระดับ</th>
+                <th class="db-th" scope="col">XP</th>
+                <th class="db-th" scope="col">ภารกิจ</th>
+                <th class="db-th" scope="col">Badge</th>
+              </tr>
+            </thead>
+            <tbody id="dbStudentBody">
+              <tr><td colspan="6" class="db-td-loading">กำลังโหลด...</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- Right column -->
+      <div class="db-right-col">
+
+        <!-- XP Distribution Chart -->
+        <section class="db-card" aria-labelledby="dbChartHeading">
+          <div class="db-card-header">
+            <h2 class="db-card-title" id="dbChartHeading">
+              <span class="material-symbols-rounded" aria-hidden="true">bar_chart</span>
+              XP ต่อภารกิจ
+            </h2>
+          </div>
+          <div class="db-chart-wrap">
+            <canvas id="scoreChart" role="img" aria-label="กราฟแสดงคะแนนเฉลี่ยของนักเรียนในแต่ละภารกิจ" width="400" height="260"></canvas>
+          </div>
+        </section>
+
+        <!-- Mission Completion -->
+        <section class="db-card" aria-labelledby="dbMissionHeading">
+          <div class="db-card-header">
+            <h2 class="db-card-title" id="dbMissionHeading">
+              <img src="../assets/icons/Mission.png" alt="" style="width:20px;height:20px;object-fit:contain;vertical-align:middle" aria-hidden="true">
+              ความคืบหน้าภารกิจ
+            </h2>
+          </div>
+          <ul class="db-mission-list" id="dbMissionList" aria-label="ความคืบหน้าของแต่ละภารกิจ">
+            <li class="db-mission-item db-mission-skeleton" aria-hidden="true"></li>
+            <li class="db-mission-item db-mission-skeleton" aria-hidden="true"></li>
+            <li class="db-mission-item db-mission-skeleton" aria-hidden="true"></li>
+            <li class="db-mission-item db-mission-skeleton" aria-hidden="true"></li>
+            <li class="db-mission-item db-mission-skeleton" aria-hidden="true"></li>
+          </ul>
+        </section>
+
+      </div><!-- /.db-right-col -->
+    </div><!-- /.db-grid -->
+    <!-- AI Teaching Recommendation Section -->
+    <section class="db-ai-section" id="dbAISection" aria-labelledby="dbAIHeading">
+      <div class="db-card-header">
+        <h2 class="db-card-title" id="dbAIHeading">
+          <img src="../assets/icons/AI.png" alt="" style="width:22px;height:22px;object-fit:contain;vertical-align:middle" aria-hidden="true">
+          AI แนะนำการสอน
+        </h2>
+        <button class="db-ai-refresh-btn" id="dbAIRefreshBtn" aria-label="วิเคราะห์ใหม่">
+          <span class="material-symbols-rounded">refresh</span>
+          วิเคราะห์ใหม่
+        </button>
+      </div>
+      <div class="db-ai-insights" id="dbAIInsights">
+        <!-- Rendered by script.js -->
+      </div>
+    </section>
+    </div><!-- /#dbPanelOverview -->
+
+    <!-- Panel: Student Management -->
+    <div id="dbPanelStudents" role="tabpanel" aria-labelledby="dbTabStudents" hidden>
+      <div class="db-mgmt-toolbar">
+        <div class="db-class-filter" id="dbClassFilter" role="group" aria-label="กรองตามชั้น"></div>
+        <div class="db-mgmt-actions">
+          <label class="db-upload-btn" for="dbExcelUpload" tabindex="0" role="button" aria-label="นำเข้าจากไฟล์ Excel">
+            <span class="material-symbols-rounded" aria-hidden="true">upload_file</span> นำเข้า Excel
+            <input type="file" id="dbExcelUpload" accept=".xlsx,.xls,.csv" style="display:none" />
+          </label>
+          <button class="db-add-btn" id="dbAddStudentBtn" aria-label="เพิ่มนักเรียน">
+            <span class="material-symbols-rounded" aria-hidden="true">person_add</span> เพิ่มนักเรียน
+          </button>
+        </div>
+      </div>
+      <section class="db-card" aria-labelledby="dbMgmtStudentsHeading">
+        <div class="db-card-header">
+          <h2 class="db-card-title" id="dbMgmtStudentsHeading">
+            <span class="material-symbols-rounded" aria-hidden="true">groups</span> รายชื่อนักเรียน
+          </h2>
+          <span class="db-card-badge" id="dbMgmtStudentCount">0 คน</span>
+        </div>
+        <div class="db-table-wrap" role="region" aria-label="ตารางรายชื่อนักเรียน" tabindex="0">
+          <table class="db-table">
+            <thead>
+              <tr>
+                <th class="db-th" scope="col">นักเรียน</th>
+                <th class="db-th" scope="col">ชั้น</th>
+                <th class="db-th" scope="col">XP</th>
+                <th class="db-th" scope="col">ภารกิจ</th>
+                <th class="db-th" scope="col">จัดการ</th>
+              </tr>
+            </thead>
+            <tbody id="dbMgmtStudentBody">
+              <tr><td colspan="5" class="db-td-loading">กำลังโหลด...</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </div><!-- /#dbPanelStudents -->
+
+    <!-- Panel: Teacher Management (admin only) -->
+    <div id="dbPanelTeachers" role="tabpanel" aria-labelledby="dbTabTeachers" hidden>
+      <div class="db-mgmt-toolbar">
+        <div></div>
+        <button class="db-add-btn" id="dbAddTeacherBtn" aria-label="เพิ่มครู">
+          <span class="material-symbols-rounded" aria-hidden="true">person_add</span> เพิ่มครู
+        </button>
+      </div>
+      <section class="db-card" aria-labelledby="dbMgmtTeachersHeading">
+        <div class="db-card-header">
+          <h2 class="db-card-title" id="dbMgmtTeachersHeading">
+            <span class="material-symbols-rounded" aria-hidden="true">school</span> รายชื่อครู
+          </h2>
+          <span class="db-card-badge" id="dbMgmtTeacherCount">0 คน</span>
+        </div>
+        <div class="db-table-wrap" role="region" aria-label="ตารางรายชื่อครู" tabindex="0">
+          <table class="db-table">
+            <thead>
+              <tr>
+                <th class="db-th" scope="col">ครู</th>
+                <th class="db-th" scope="col">วิชา</th>
+                <th class="db-th" scope="col">ชั้นเรียน</th>
+                <th class="db-th" scope="col">จัดการ</th>
+              </tr>
+            </thead>
+            <tbody id="dbMgmtTeacherBody">
+              <tr><td colspan="4" class="db-td-loading">กำลังโหลด...</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </div><!-- /#dbPanelTeachers -->
+
+  </div><!-- /.db-container -->
+</main>
+
+<!-- ═══════════════════════════════════════
+     STUDENT MODAL
+═══════════════════════════════════════ -->
+<div class="db-modal-overlay" id="dbStudentModal" hidden role="dialog" aria-modal="true" aria-labelledby="dbStudentModalTitle">
+  <div class="db-modal">
+    <div class="db-modal-header">
+      <h3 class="db-modal-title" id="dbStudentModalTitle">เพิ่มนักเรียน</h3>
+      <button class="db-modal-close" id="dbStudentModalClose" aria-label="ปิด">
+        <span class="material-symbols-rounded" aria-hidden="true">close</span>
+      </button>
+    </div>
+    <form id="dbStudentForm" novalidate>
+      <div class="db-form-group">
+        <label class="db-form-label" for="dbStuId">รหัสนักเรียน <span aria-hidden="true">*</span></label>
+        <input class="db-form-input" type="text" id="dbStuId" placeholder="เช่น STD011" autocomplete="off" required />
+      </div>
+      <div class="db-form-group">
+        <label class="db-form-label" for="dbStuName">ชื่อ-สกุล <span aria-hidden="true">*</span></label>
+        <input class="db-form-input" type="text" id="dbStuName" placeholder="ชื่อ-นามสกุล" required />
+      </div>
+      <div class="db-form-group">
+        <label class="db-form-label" for="dbStuClass">ชั้นเรียน <span aria-hidden="true">*</span></label>
+        <select class="db-form-input" id="dbStuClass">
+          <option value="ป.5">ป.5</option>
+        </select>
+      </div>
+      <div class="db-form-error" id="dbStuError" hidden></div>
+      <div class="db-modal-actions">
+        <button type="button" class="db-modal-cancel" id="dbStudentCancelBtn">ยกเลิก</button>
+        <button type="submit" class="db-modal-submit">
+          <span class="material-symbols-rounded" aria-hidden="true">save</span> บันทึก
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════
+     TEACHER MODAL
+═══════════════════════════════════════ -->
+<div class="db-modal-overlay" id="dbTeacherModal" hidden role="dialog" aria-modal="true" aria-labelledby="dbTeacherModalTitle">
+  <div class="db-modal">
+    <div class="db-modal-header">
+      <h3 class="db-modal-title" id="dbTeacherModalTitle">เพิ่มครู</h3>
+      <button class="db-modal-close" id="dbTeacherModalClose" aria-label="ปิด">
+        <span class="material-symbols-rounded" aria-hidden="true">close</span>
+      </button>
+    </div>
+    <form id="dbTeacherForm" novalidate>
+      <div class="db-form-group">
+        <label class="db-form-label" for="dbTchId">รหัสครู <span aria-hidden="true">*</span></label>
+        <input class="db-form-input" type="text" id="dbTchId" placeholder="เช่น TCH002" autocomplete="off" required />
+      </div>
+      <div class="db-form-group">
+        <label class="db-form-label" for="dbTchName">ชื่อ-สกุล <span aria-hidden="true">*</span></label>
+        <input class="db-form-input" type="text" id="dbTchName" placeholder="ชื่อ-นามสกุล" required />
+      </div>
+      <div class="db-form-group">
+        <label class="db-form-label" for="dbTchSubject">วิชาที่สอน</label>
+        <input class="db-form-input" type="text" id="dbTchSubject" placeholder="เช่น วิทยาการคำนวณ" />
+      </div>
+      <div class="db-form-group">
+        <label class="db-form-label" for="dbTchClasses">ชั้นเรียนที่รับผิดชอบ</label>
+        <input class="db-form-input" type="text" id="dbTchClasses" placeholder="เช่น ป.5/1, ป.5/2" autocomplete="off" />
+        <span class="db-form-hint">คั่นหลายชั้นด้วยเครื่องหมายจุลภาค (,)</span>
+      </div>
+      <div class="db-form-group">
+        <label class="db-form-label" for="dbTchPassword">รหัสผ่าน</label>
+        <input class="db-form-input" type="password" id="dbTchPassword" placeholder="ปล่อยว่างถ้าไม่เปลี่ยน" autocomplete="new-password" />
+      </div>
+      <div class="db-form-error" id="dbTchError" hidden></div>
+      <div class="db-modal-actions">
+        <button type="button" class="db-modal-cancel" id="dbTeacherCancelBtn">ยกเลิก</button>
+        <button type="submit" class="db-modal-submit">
+          <span class="material-symbols-rounded" aria-hidden="true">save</span> บันทึก
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════
+     IMPORT PREVIEW MODAL
+═══════════════════════════════════════ -->
+<div class="db-modal-overlay" id="dbImportModal" hidden role="dialog" aria-modal="true" aria-labelledby="dbImportModalTitle">
+  <div class="db-modal db-modal--wide">
+    <div class="db-modal-header">
+      <h3 class="db-modal-title" id="dbImportModalTitle">นำเข้ารายชื่อนักเรียน</h3>
+      <button class="db-modal-close" id="dbImportModalClose" aria-label="ปิด">
+        <span class="material-symbols-rounded" aria-hidden="true">close</span>
+      </button>
+    </div>
+    <p class="db-import-hint">ตรวจสอบข้อมูลก่อนยืนยัน คอลัมน์ที่ต้องการ: รหัส | ชื่อ-สกุล | ชั้น</p>
+    <div class="db-table-wrap" style="max-height:320px;overflow-y:auto">
+      <table class="db-table">
+        <thead>
+          <tr>
+            <th class="db-th">รหัส</th>
+            <th class="db-th">ชื่อ-สกุล</th>
+            <th class="db-th">ชั้น</th>
+            <th class="db-th">สถานะ</th>
+          </tr>
+        </thead>
+        <tbody id="dbImportBody"></tbody>
+      </table>
+    </div>
+    <div class="db-import-summary" id="dbImportSummary"></div>
+    <div class="db-modal-actions">
+      <button type="button" class="db-modal-cancel" id="dbImportCancelBtn">ยกเลิก</button>
+      <button type="button" class="db-modal-submit" id="dbImportConfirmBtn">
+        <span class="material-symbols-rounded" aria-hidden="true">upload</span>
+        นำเข้า (<span id="dbImportCount">0</span> คน)
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════
+     PROFILE SETTINGS MODAL
+═══════════════════════════════════════ -->
+<div class="db-modal-overlay" id="dbProfileModal" hidden role="dialog" aria-modal="true" aria-labelledby="dbProfileModalTitle">
+  <div class="db-modal db-prof-card">
+
+    <!-- Corner trim (purple card decoration) -->
+    <div id="db-prof-corner" aria-hidden="true"></div>
+
+    <!-- Sliding purple background -->
+    <div id="db-prof-bg" aria-hidden="true"></div>
+
+    <!-- Header (purple bar) -->
+    <div class="db-modal-header" id="db-prof-header">
+      <h3 class="db-modal-title" id="dbProfileModalTitle">
+        <span class="material-symbols-rounded" aria-hidden="true">manage_accounts</span>
+        ตั้งค่าโปรไฟล์
+      </h3>
+      <p id="db-prof-behind" aria-hidden="true">AI Coding</p>
+      <button class="db-modal-close" id="dbProfileModalClose" aria-label="ปิด">
+        <span class="material-symbols-rounded" aria-hidden="true">close</span>
+      </button>
+    </div>
+
+    <form id="dbProfileForm" novalidate>
+
+      <!-- Avatar info row -->
+      <div class="db-profile-info-row" id="db-prof-info">
+        <div class="db-profile-avatar" id="dbProfileAvatar">ว</div>
+        <div>
+          <p class="db-profile-name" id="dbProfileName">ครูวิริยา สมใจ</p>
+          <p class="db-profile-role">ครู · วิทยาการคำนวณ</p>
+        </div>
+      </div>
+
+      <!-- Display name section -->
+      <div id="db-prof-name-area">
+        <div class="db-form-divider">เปลี่ยนชื่อแสดง</div>
+        <div class="db-form-group">
+          <label class="db-form-label" for="dbProfileDisplayName">ชื่อ-สกุล</label>
+          <input class="db-form-input" type="text" id="dbProfileDisplayName" placeholder="ชื่อ-นามสกุล" autocomplete="off" />
+        </div>
+      </div>
+
+      <!-- Password section -->
+      <div id="db-prof-pwd-area">
+        <div class="db-form-divider">เปลี่ยนรหัสผ่าน</div>
+        <div class="db-form-group">
+          <label class="db-form-label" for="dbProfileOldPwd">รหัสผ่านปัจจุบัน</label>
+          <input class="db-form-input" type="password" id="dbProfileOldPwd" placeholder="รหัสผ่านเดิม" autocomplete="current-password" />
+        </div>
+        <div class="db-form-group">
+          <label class="db-form-label" for="dbProfileNewPwd">รหัสผ่านใหม่</label>
+          <input class="db-form-input" type="password" id="dbProfileNewPwd" placeholder="อย่างน้อย 6 ตัวอักษร" autocomplete="new-password" />
+        </div>
+        <div class="db-form-group">
+          <label class="db-form-label" for="dbProfileConfirmPwd">ยืนยันรหัสผ่านใหม่</label>
+          <input class="db-form-input" type="password" id="dbProfileConfirmPwd" placeholder="พิมพ์รหัสผ่านใหม่อีกครั้ง" autocomplete="new-password" />
+        </div>
+      </div>
+
+      <!-- Footer / Actions section -->
+      <div id="db-prof-footer">
+        <div class="db-form-error" id="dbProfileError" hidden></div>
+        <div class="db-form-success" id="dbProfileSuccess" hidden></div>
+        <div class="db-modal-actions">
+          <button type="button" class="db-modal-cancel" id="dbProfileCancelBtn">ยกเลิก</button>
+          <button type="submit" class="db-modal-submit">
+            <span class="material-symbols-rounded" aria-hidden="true">save</span> บันทึก
+          </button>
+        </div>
+      </div>
+
+    </form>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js" defer></script>
+<script src="../config/app-config.js" defer></script>
+<script src="../services/api.js" defer></script>
+<script src="../services/analytics-service.js" defer></script>
+<script src="../services/auth-service.js" defer></script>
+<script src="../services/google-sheet.js" defer></script>
+<script src="script.js" defer></script>
+<script src="../scripts/starfield.js"></script>
+<script>
+(function () {
+  var bg = document.getElementById('db-prof-bg');
+  if (!bg) return;
+  var sections = [
+    { id: 'db-prof-info',     h: '3.5em', y: '3.5em' },
+    { id: 'db-prof-name-area',h: '5em',   y: '7em'   },
+    { id: 'db-prof-pwd-area', h: '11em',  y: '12em'  },
+    { id: 'db-prof-footer',   h: '5em',   y: '23em'  }
+  ];
+  sections.forEach(function (s) {
+    var el = document.getElementById(s.id);
+    if (!el) return;
+    el.addEventListener('mouseenter', function () {
+      bg.style.height = s.h;
+      bg.style.transform = 'translateY(' + s.y + ')';
+    });
+    el.addEventListener('mouseleave', function () {
+      bg.style.height = '3.5em';
+      bg.style.transform = 'translateY(0)';
+    });
+  });
+})();
+</script>
+</body>
+</html>

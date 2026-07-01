@@ -1,0 +1,122 @@
+[
+  {
+    "id": "first_login",
+    "code": "first_login",
+    "icon": "login",
+    "name": "นักผจญภัยใหม่",
+    "description": "เข้าสู่ระบบครั้งแรก",
+    "color": "#60A5FA",
+    "colorBg": "linear-gradient(135deg,#60A5FA,#2563EB)",
+    "rarity": "common",
+    "xpBonus": 0,
+    "trigger": "first_login"
+  },
+  {
+    "id": "mission1_complete",
+    "code": "mission1_complete",
+    "icon": "terminal",
+    "name": "Hello Coder!",
+    "description": "ผ่าน Mission 1: Hello World",
+    "color": "#22C55E",
+    "colorBg": "linear-gradient(135deg,#22C55E,#16A34A)",
+    "rarity": "common",
+    "xpBonus": 0,
+    "trigger": "mission1_complete"
+  },
+  {
+    "id": "mission2_complete",
+    "code": "mission2_complete",
+    "icon": "account_tree",
+    "name": "นักตัดสินใจ",
+    "description": "ผ่าน Mission 2: Conditions",
+    "color": "#3B82F6",
+    "colorBg": "linear-gradient(135deg,#3B82F6,#2563EB)",
+    "rarity": "uncommon",
+    "xpBonus": 50,
+    "trigger": "mission2_complete"
+  },
+  {
+    "id": "mission3_complete",
+    "code": "mission3_complete",
+    "icon": "loop",
+    "name": "นักวนซ้ำ",
+    "description": "ผ่าน Mission 3: Loops",
+    "color": "#A855F7",
+    "colorBg": "linear-gradient(135deg,#A855F7,#7C3AED)",
+    "rarity": "uncommon",
+    "xpBonus": 50,
+    "trigger": "mission3_complete"
+  },
+  {
+    "id": "mission4_complete",
+    "code": "mission4_complete",
+    "icon": "functions",
+    "name": "นักสร้างฟังก์ชั่น",
+    "description": "ผ่าน Mission 4: Functions",
+    "color": "#F59E0B",
+    "colorBg": "linear-gradient(135deg,#F59E0B,#D97706)",
+    "rarity": "rare",
+    "xpBonus": 100,
+    "trigger": "mission4_complete"
+  },
+  {
+    "id": "mission5_complete",
+    "code": "mission5_complete",
+    "icon": "smart_toy",
+    "name": "AI Creator",
+    "description": "ผ่าน Mission 5: Mini AI Project",
+    "color": "#EF4444",
+    "colorBg": "linear-gradient(135deg,#EF4444,#DC2626)",
+    "rarity": "epic",
+    "xpBonus": 200,
+    "trigger": "mission5_complete"
+  },
+  {
+    "id": "perfect_score",
+    "code": "perfect_score",
+    "icon": "star",
+    "name": "Perfect Score!",
+    "description": "ได้คะแนน 100% ในแบบทดสอบ",
+    "color": "#FBBF24",
+    "colorBg": "linear-gradient(135deg,#FBBF24,#F59E0B)",
+    "rarity": "rare",
+    "xpBonus": 50,
+    "trigger": "perfect_score"
+  },
+  {
+    "id": "speed_learner",
+    "code": "speed_learner",
+    "icon": "bolt",
+    "name": "นักเรียนเร็ว",
+    "description": "ทำ Mission สำเร็จภายใน 15 นาที",
+    "color": "#06B6D4",
+    "colorBg": "linear-gradient(135deg,#06B6D4,#0891B2)",
+    "rarity": "uncommon",
+    "xpBonus": 30,
+    "trigger": "speed_complete"
+  },
+  {
+    "id": "portfolio_first",
+    "code": "portfolio_first",
+    "icon": "folder_special",
+    "name": "นักสะสมผลงาน",
+    "description": "อัปโหลดผลงานชิ้นแรก",
+    "color": "#8B5CF6",
+    "colorBg": "linear-gradient(135deg,#8B5CF6,#7C3AED)",
+    "rarity": "common",
+    "xpBonus": 20,
+    "trigger": "first_portfolio"
+  },
+  {
+    "id": "all_missions",
+    "code": "all_missions",
+    "icon": "emoji_events",
+    "name": "AI Master!",
+    "description": "ผ่านทุก Mission ครบทั้ง 5 ด่าน!",
+    "color": "#F97316",
+    "colorBg": "linear-gradient(135deg,#F97316,#EA580C)",
+    "rarity": "legendary",
+    "xpBonus": 500,
+    "trigger": "all_missions_complete"
+  }
+]

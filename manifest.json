@@ -1,0 +1,47 @@
+{
+  "name": "AI Coding Adventure",
+  "short_name": "ACA",
+  "description": "แพลตฟอร์มเรียนวิทยาการคำนวณผ่านการผจญภัย สำหรับนักเรียนชั้น ป.5 ด้วย AI และ Gamification",
+  "start_url": "/AI-Coding-Adventure/pages/login.html",
+  "scope": "/AI-Coding-Adventure/",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#0F172A",
+  "theme_color": "#2563EB",
+  "lang": "th",
+  "dir": "ltr",
+  "categories": ["education", "kids"],
+  "icons": [
+    {
+      "src": "assets/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    },
+    {
+      "src": "assets/icon-192.svg",
+      "sizes": "192x192",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "assets/icon-512.svg",
+      "sizes": "512x512",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "เข้าสู่ระบบ",
+      "url": "/AI-Coding-Adventure/pages/login.html",
+      "icons": [{ "src": "assets/favicon.svg", "sizes": "any", "type": "image/svg+xml" }]
+    },
+    {
+      "name": "Mission",
+      "url": "/AI-Coding-Adventure/pages/missions.html",
+      "icons": [{ "src": "assets/favicon.svg", "sizes": "any", "type": "image/svg+xml" }]
+    }
+  ],
+  "screenshots": []
+}

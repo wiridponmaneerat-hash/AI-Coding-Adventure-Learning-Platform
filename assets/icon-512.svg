@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="AI Coding Adventure">
+  <rect width="512" height="512" rx="100" fill="#2563EB"/>
+  <!-- glow -->
+  <circle cx="256" cy="256" r="200" fill="#1D4ED8" opacity="0.4"/>
+  <!-- antenna -->
+  <rect x="230" y="60" width="52" height="84" rx="26" fill="#93C5FD"/>
+  <circle cx="256" cy="52" r="36" fill="#FBBF24"/>
+  <!-- head -->
+  <rect x="104" y="144" width="304" height="260" rx="60" fill="white"/>
+  <!-- eyes -->
+  <rect x="144" y="196" width="90" height="90" rx="22" fill="#2563EB"/>
+  <circle cx="189" cy="241" r="26" fill="white"/>
+  <rect x="278" y="196" width="90" height="90" rx="22" fill="#2563EB"/>
+  <circle cx="323" cy="241" r="26" fill="white"/>
+  <!-- mouth -->
+  <rect x="164" y="322" width="184" height="38" rx="19" fill="#BFDBFE"/>
+  <!-- small AI text -->
+  <text x="256" y="395" text-anchor="middle" fill="#93C5FD" font-family="sans-serif" font-size="36" font-weight="700">AI</text>
+</svg>

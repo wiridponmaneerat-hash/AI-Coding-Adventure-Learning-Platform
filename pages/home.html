@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="หน้าหลักนักเรียน — AI Coding Adventure Learning Platform" />
+  <meta name="robots" content="noindex, nofollow">
+  <title>หน้าหลัก — AI Coding Adventure</title>
+  <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="../assets/icon-192.svg">
+  <link rel="manifest" href="../manifest.json">
+  <meta name="theme-color" content="#2563EB">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800;900&family=Poppins:wght@400;500;600;700;800;900&family=Prompt:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,400,1,0" />
+
+  <link rel="stylesheet" href="../styles/globals.css" />
+  <link rel="stylesheet" href="../styles/home.css" />
+  <link rel="stylesheet" href="../styles/starfield.css" />
+</head>
+
+<body class="home-page">
+
+<!-- ===== TOP NAVIGATION ===== -->
+<nav class="home-nav" id="homeNav" role="navigation" aria-label="การนำทางหลัก">
+  <div class="home-nav-inner">
+
+    <a href="../index.html" class="hn-logo" aria-label="AI Coding Adventure หน้าหลัก">
+      <div class="hn-logo-icon" aria-hidden="true">
+        <span class="material-symbols-rounded">smart_toy</span>
+      </div>
+      <div class="hn-logo-text">
+        <span class="hn-logo-main">AI Coding</span>
+        <span class="hn-logo-sub">Adventure</span>
+      </div>
+    </a>
+
+    <ul class="hn-links" id="hnMenu" role="list">
+      <li><a href="home.html" class="hn-link hn-link--active" aria-current="page"><img src="../assets/icons/home.png" alt="" class="hn-nav-icon">หน้าหลัก</a></li>
+      <li><a href="missions.html" class="hn-link"><img src="../assets/icons/Mission.png" alt="" class="hn-nav-icon">Mission</a></li>
+      <li><a href="portfolio.html" class="hn-link"><img src="../assets/icons/Portfolio.png" alt="" class="hn-nav-icon">Portfolio</a></li>
+      <li><a href="leaderboard.html" class="hn-link"><img src="../assets/icons/Trophy.png" alt="" class="hn-nav-icon">อันดับ</a></li>
+      <li><a href="profile.html" class="hn-link"><img src="../assets/icons/account_circle.png" alt="" class="hn-nav-icon">โปรไฟล์</a></li>
+    </ul>
+
+    <div class="hn-right">
+      <button class="hn-notif-btn" aria-label="การแจ้งเตือน">
+        <span class="material-symbols-rounded" aria-hidden="true">notifications</span>
+        <span class="notif-dot" aria-hidden="true"></span>
+      </button>
+
+      <div class="hn-user-chip" id="navUserChip">
+        <div class="hn-user-avatar" id="navAvatar" aria-hidden="true">?</div>
+        <div class="hn-user-info" aria-live="polite">
+          <span class="hn-user-name" id="navName">Loading...</span>
+          <span class="hn-user-role">นักเรียน</span>
+        </div>
+      </div>
+
+      <button class="hn-logout-btn" id="logoutBtn" aria-label="ออกจากระบบ" title="ออกจากระบบ">
+        <span class="material-symbols-rounded" aria-hidden="true">logout</span>
+      </button>
+
+      <button class="hn-hamburger" id="hnHamburger" aria-label="เปิด/ปิดเมนู" aria-expanded="false" aria-controls="hnMenu">
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+      </button>
+    </div>
+
+  </div>
+</nav>
+
+<!-- ===== MAIN CONTENT ===== -->
+<main class="home-main" id="homeMain" role="main">
+  <div class="home-container">
+
+    <!-- 1. WELCOME CARD -->
+    <section class="welcome-section" id="welcomeSection" aria-label="ยินดีต้อนรับ">
+      <div class="welcome-card">
+        <div class="welcome-bg" aria-hidden="true">
+          <div class="wc-orb wc-orb--1"></div>
+          <div class="wc-orb wc-orb--2"></div>
+          <div class="wc-grid"></div>
+        </div>
+
+        <div class="welcome-left">
+          <p class="welcome-greeting" id="welcomeGreeting">สวัสดี! 👋</p>
+          <h1 class="welcome-name" id="welcomeName" aria-live="polite">Loading...</h1>
+          <div class="welcome-meta">
+            <span class="wm-chip">
+              <span class="material-symbols-rounded" aria-hidden="true">school</span>
+              <span id="welcomeClass">ป.5/1</span>
+            </span>
+            <span class="wm-chip">
+              <span class="material-symbols-rounded" aria-hidden="true">schedule</span>
+              <span id="welcomeTime">วันนี้</span>
+            </span>
+          </div>
+          <div class="welcome-badges-row">
+            <div class="wlevel-badge" id="welcomeLevel">
+              <span class="material-symbols-rounded" aria-hidden="true">military_tech</span>
+              <span id="levelLabel">Level 1</span>
+              <span class="wlevel-name" id="levelName">Beginner</span>
+            </div>
+            <div class="wxp-chip" id="welcomeXP">
+              <span class="material-symbols-rounded" aria-hidden="true">bolt</span>
+              <span id="xpLabel">0 XP</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="welcome-right" aria-hidden="true">
+          <div class="welcome-avatar-wrap">
+            <div class="welcome-avatar-ring wa-ring--3"></div>
+            <div class="welcome-avatar-ring wa-ring--2"></div>
+            <div class="welcome-avatar-ring wa-ring--1"></div>
+            <div class="welcome-avatar" id="welcomeAvatar">?</div>
+          </div>
+          <div class="welcome-streak">
+            <span class="material-symbols-rounded">local_fire_department</span>
+            <span id="streakText">3 วัน</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2. STATISTICS ROW -->
+    <div class="stats-row" role="region" aria-label="สถิติการเรียนรู้">
+      <div class="stat-card shimmer-card card-lift" id="statMissions">
+        <div class="sc-icon sc-icon--blue" aria-hidden="true">
+          <img src="../assets/icons/Mission.png" alt="" class="sc-icon-img">
+        </div>
+        <div class="sc-body">
+          <div class="sc-value" id="statMissionsVal">0</div>
+          <div class="sc-label">ภารกิจสำเร็จ</div>
+          <div class="sc-sub">จาก 5 ภารกิจ</div>
+        </div>
+        <div class="sc-trend sc-trend--up">+0%</div>
+      </div>
+
+      <div class="stat-card shimmer-card card-lift" id="statScore">
+        <div class="sc-icon sc-icon--green" aria-hidden="true">
+          <img src="../assets/icons/analytics.png" alt="" class="sc-icon-img">
+        </div>
+        <div class="sc-body">
+          <div class="sc-value" id="statScoreVal">0%</div>
+          <div class="sc-label">คะแนนเฉลี่ย</div>
+          <div class="sc-sub">ทุกภารกิจ</div>
+        </div>
+        <div class="sc-trend sc-trend--up">สูงสุด</div>
+      </div>
+
+      <div class="stat-card shimmer-card card-lift" id="statXP">
+        <div class="sc-icon sc-icon--purple" aria-hidden="true">
+          <img src="../assets/icons/Dashboard.png" alt="" class="sc-icon-img">
+        </div>
+        <div class="sc-body">
+          <div class="sc-value" id="statXPVal">0</div>
+          <div class="sc-label">XP สะสม</div>
+          <div class="sc-sub">คะแนนประสบการณ์</div>
+        </div>
+        <div class="sc-trend sc-trend--up">ระดับ <span id="statLevel">1</span></div>
+      </div>
+
+      <div class="stat-card shimmer-card card-lift" id="statBadges">
+        <div class="sc-icon sc-icon--yellow" aria-hidden="true">
+          <img src="../assets/icons/Trophy.png" alt="" class="sc-icon-img">
+        </div>
+        <div class="sc-body">
+          <div class="sc-value" id="statBadgesVal">0</div>
+          <div class="sc-label">เหรียญรางวัล</div>
+          <div class="sc-sub">จาก 7 เหรียญ</div>
+        </div>
+        <div class="sc-trend sc-trend--neutral">สะสม</div>
+      </div>
+    </div>
+
+    <!-- 3. MIDDLE ROW: Today's Mission + XP Progress -->
+    <div class="mid-row">
+
+      <!-- Today's Mission -->
+      <div class="today-card" id="todayCard" role="region" aria-label="ภารกิจวันนี้">
+        <div class="today-tag-row">
+          <span class="today-tag">
+            <span class="material-symbols-rounded" aria-hidden="true">today</span>
+            ภารกิจวันนี้
+          </span>
+          <span class="today-date" id="todayDate" aria-live="polite"></span>
+        </div>
+
+        <div class="today-body" id="todayBody">
+          <div class="today-mission-icon" id="todayIcon" aria-hidden="true">
+            <span class="material-symbols-rounded">explore</span>
+          </div>
+          <div class="today-mission-info">
+            <span class="today-diff-badge" id="todayDiff">Beginner</span>
+            <h2 class="today-mission-title" id="todayTitle">กำลังโหลด...</h2>
+            <p class="today-mission-desc" id="todayDesc">-</p>
+          </div>
+        </div>
+
+        <div class="today-footer-row">
+          <div class="today-xp-reward">
+            <span class="material-symbols-rounded" aria-hidden="true">emoji_events</span>
+            <span id="todayXP">100 XP</span>
+          </div>
+          <div class="today-time-reward">
+            <span class="material-symbols-rounded" aria-hidden="true">timer</span>
+            <span id="todayTime">45 นาที</span>
+          </div>
+          <a href="#" class="today-start-btn" id="todayBtn" aria-label="เริ่มภารกิจวันนี้">
+            เริ่มเลย
+            <span class="material-symbols-rounded" aria-hidden="true">arrow_forward</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- XP Progress Card -->
+      <div class="xp-card" role="region" aria-label="ระดับและ XP Progress">
+        <div class="xp-card-header">
+          <h2 class="xp-card-title">
+            <span class="material-symbols-rounded" aria-hidden="true">bolt</span>
+            ระดับของคุณ
+          </h2>
+          <div class="xp-level-pill" id="xpLevelPill">
+            <span class="material-symbols-rounded" aria-hidden="true">military_tech</span>
+            <span id="xpLevelName">Beginner</span>
+          </div>
+        </div>
+
+        <div class="xp-body">
+          <div class="xp-circle-wrap">
+            <svg class="xp-svg" viewBox="0 0 120 120" aria-hidden="true" focusable="false">
+              <circle class="xp-track" cx="60" cy="60" r="50"/>
+              <circle class="xp-fill" id="xpFillCircle" cx="60" cy="60" r="50"
+                      stroke-dasharray="314.16"
+                      stroke-dashoffset="314.16"
+                      transform="rotate(-90 60 60)"/>
+            </svg>
+            <div class="xp-circle-center">
+              <span class="xp-circle-icon material-symbols-rounded" aria-hidden="true">bolt</span>
+              <span class="xp-circle-num" id="xpCircleNum">0</span>
+              <span class="xp-circle-unit">XP</span>
+            </div>
+          </div>
+
+          <div class="xp-details">
+            <div class="xpd-row">
+              <span class="xpd-label">ระดับปัจจุบัน</span>
+              <strong class="xpd-val" id="xpdCurrentLevel">Level 1</strong>
+            </div>
+            <div class="xpd-bar-wrap">
+              <div class="xpd-bar">
+                <div class="xpd-bar-fill" id="xpdBarFill" style="width:0%"></div>
+              </div>
+              <div class="xpd-bar-labels">
+                <span id="xpdMin">0</span>
+                <span id="xpdCurrent">0 XP</span>
+                <span id="xpdMax">200</span>
+              </div>
+            </div>
+            <div class="xpd-row xpd-row--mt">
+              <span class="xpd-label">ระดับถัดไป</span>
+              <strong class="xpd-val" id="xpdNextLevel">Level 2</strong>
+            </div>
+            <div class="xpd-row">
+              <span class="xpd-label">XP ที่ต้องการ</span>
+              <strong class="xpd-val xpd-accent" id="xpdNeeded">200 XP</strong>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- 4. ALL MISSIONS -->
+    <section class="missions-section" id="missionsSection" aria-label="ภารกิจทั้งหมด">
+      <div class="section-hdr">
+        <div class="section-hdr-left">
+          <h2 class="section-hdr-title">
+            <img src="../assets/icons/Mission.png" alt="" class="hn-nav-icon" style="width:22px;height:22px;filter:none">
+            ภารกิจทั้งหมด
+          </h2>
+          <span class="section-hdr-sub">5 ภารกิจสู่การเป็น Coder</span>
+        </div>
+        <a href="missions.html" class="section-hdr-link">
+          ดูทั้งหมด
+          <span class="material-symbols-rounded" aria-hidden="true">chevron_right</span>
+        </a>
+      </div>
+      <div class="missions-grid" id="missionsGrid" role="list" aria-label="รายการภารกิจ">
+        <!-- Dynamically rendered by home.js -->
+      </div>
+    </section>
+
+    <!-- 5. BOTTOM ROW: Badges + AI Recommendation -->
+    <div class="bottom-row">
+
+      <!-- Achievements / Badges -->
+      <section class="badges-section" id="badgesSection" aria-label="เหรียญรางวัล">
+        <div class="section-hdr">
+          <div class="section-hdr-left">
+            <h2 class="section-hdr-title">
+              <img src="../assets/icons/Trophy.png" alt="" class="hn-nav-icon" style="width:22px;height:22px;filter:none">
+              รางวัลของฉัน
+            </h2>
+            <span class="section-hdr-sub" id="badgeCountText">0 / 7 เหรียญ</span>
+          </div>
+        </div>
+        <div class="badges-grid" id="badgesGrid" role="list" aria-label="รายการเหรียญรางวัล">
+          <!-- Dynamically rendered by home.js -->
+        </div>
+      </section>
+
+      <!-- AI Recommendation Card -->
+      <div class="ai-rec-card" id="aiRecCard" role="region" aria-label="คำแนะนำจาก AI">
+        <div class="ai-rec-glow" aria-hidden="true"></div>
+
+        <div class="ai-rec-header">
+          <div class="ai-rec-avatar-wrap">
+            <div class="ai-rec-avatar" aria-hidden="true">
+              <img src="../assets/img/characters/ai-robot.png" alt="" class="ai-robot-img">
+            </div>
+            <span class="ai-status-dot" aria-hidden="true"></span>
+          </div>
+          <div class="ai-rec-id">
+            <span class="ai-rec-name">AI Advisor</span>
+            <span class="ai-rec-online">ออนไลน์</span>
+          </div>
+          <button class="ai-refresh-btn" id="aiRefreshBtn" aria-label="รับคำแนะนำใหม่">
+            <span class="material-symbols-rounded">refresh</span>
+          </button>
+        </div>
+
+        <div class="ai-chat-bubble" id="aiBubble" aria-live="polite">
+          <strong id="aiTitle">กำลังวิเคราะห์...</strong>
+          <p id="aiMessage"></p>
+        </div>
+
+        <a href="#" class="ai-action-btn" id="aiActionBtn" aria-label="ไปยังภารกิจที่แนะนำ">
+          <span class="material-symbols-rounded" aria-hidden="true">play_circle</span>
+          <span id="aiActionLabel">เริ่มเลย</span>
+        </a>
+      </div>
+
+    </div>
+
+    <!-- 6. LEADERBOARD + TIPS ROW -->
+    <div class="extra-row">
+
+      <!-- Mini Leaderboard -->
+      <section class="mini-lb-card" id="miniLbCard" aria-label="อันดับในชั้นเรียน">
+        <div class="section-hdr">
+          <div class="section-hdr-left">
+            <h2 class="section-hdr-title">
+              <span class="material-symbols-rounded" aria-hidden="true">leaderboard</span>
+              อันดับห้องเรียน
+            </h2>
+            <span class="section-hdr-sub">Top 3 ผู้นำ XP</span>
+          </div>
+          <a href="leaderboard.html" class="section-hdr-link">
+            ดูทั้งหมด
+            <span class="material-symbols-rounded" aria-hidden="true">chevron_right</span>
+          </a>
+        </div>
+        <ol class="mini-lb-list" id="miniLbList" aria-label="อันดับสูงสุด 3 อันดับ">
+          <!-- Rendered by home.js -->
+        </ol>
+      </section>
+
+      <!-- Daily Coding Tips -->
+      <section class="tips-card" id="tipsCard" aria-label="เคล็ดลับการเขียนโค้ด">
+        <div class="tips-header">
+          <div class="tips-avatar" aria-hidden="true">
+            <span class="material-symbols-rounded">tips_and_updates</span>
+          </div>
+          <div>
+            <h2 class="tips-title">เคล็ดลับวันนี้</h2>
+            <p class="tips-sub">Python Tips 💡</p>
+          </div>
+        </div>
+        <div class="tips-body" id="tipBody">
+          <!-- Rendered by home.js -->
+        </div>
+        <div class="tips-nav">
+          <button class="tips-nav-btn" id="tipPrev" aria-label="เคล็ดลับก่อนหน้า">
+            <span class="material-symbols-rounded">chevron_left</span>
+          </button>
+          <span class="tips-counter" id="tipCounter">1 / 5</span>
+          <button class="tips-nav-btn" id="tipNext" aria-label="เคล็ดลับถัดไป">
+            <span class="material-symbols-rounded">chevron_right</span>
+          </button>
+        </div>
+      </section>
+
+    </div>
+
+    <!-- 7. RECENT ACTIVITY -->
+    <section class="activity-section" id="activitySection" aria-label="กิจกรรมล่าสุด">
+      <div class="section-hdr">
+        <div class="section-hdr-left">
+          <h2 class="section-hdr-title">
+            <span class="material-symbols-rounded" aria-hidden="true">history</span>
+            กิจกรรมล่าสุด
+          </h2>
+          <span class="section-hdr-sub">7 วันที่ผ่านมา</span>
+        </div>
+      </div>
+      <div class="activity-list" id="activityList" role="list" aria-label="รายการกิจกรรม">
+        <!-- Dynamically rendered by home.js -->
+      </div>
+    </section>
+
+  </div>
+</main>
+
+<!-- ===== FOOTER ===== -->
+<footer class="home-footer" role="contentinfo">
+  <div class="home-footer-inner">
+    <a href="../index.html" class="hf-logo" aria-label="กลับหน้าหลัก">
+      <img src="../assets/icons/AI.png" alt="" style="width:22px;height:22px;object-fit:contain;filter:brightness(0) invert(1)">
+      AI Coding Adventure
+    </a>
+    <div class="hf-meta">
+      <span>โรงเรียนวัดนวลนรดิศ</span>
+      <span class="hf-sep" aria-hidden="true">•</span>
+      <span class="hf-ver">v1.0.0</span>
+      <span class="hf-sep" aria-hidden="true">•</span>
+      <span>© 2026</span>
+    </div>
+  </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js" defer></script>
+<script src="../config/app-config.js" defer></script>
+<script src="../services/api.js" defer></script>
+<script src="../services/analytics-service.js" defer></script>
+<script src="../services/auth-service.js" defer></script>
+<script src="../services/student-service.js" defer></script>
+<script src="../scripts/home.js" defer></script>
+<script src="../scripts/starfield.js"></script>
+
+</body>
+</html>

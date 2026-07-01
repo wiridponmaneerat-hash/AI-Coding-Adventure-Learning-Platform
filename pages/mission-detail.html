@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="รายละเอียด Mission — AI Coding Adventure" />
+  <meta name="robots" content="noindex, nofollow">
+  <title>Mission — AI Coding Adventure</title>
+  <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="../assets/icon-192.svg">
+  <link rel="manifest" href="../manifest.json">
+  <meta name="theme-color" content="#2563EB">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800;900&family=Poppins:wght@400;500;600;700;800;900&family=Prompt:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,400,1,0" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap" />
+
+  <link rel="stylesheet" href="../styles/globals.css" />
+  <link rel="stylesheet" href="../styles/home.css" />
+  <link rel="stylesheet" href="../styles/mission-detail.css" />
+</head>
+
+<body class="home-page">
+
+<!-- ===== TOP NAVIGATION ===== -->
+<nav class="home-nav" id="homeNav" role="navigation" aria-label="การนำทางหลัก">
+  <div class="home-nav-inner">
+    <a href="../index.html" class="hn-logo" aria-label="AI Coding Adventure หน้าหลัก">
+      <div class="hn-logo-icon" aria-hidden="true"><span class="material-symbols-rounded">smart_toy</span></div>
+      <div class="hn-logo-text">
+        <span class="hn-logo-main">AI Coding</span>
+        <span class="hn-logo-sub">Adventure</span>
+      </div>
+    </a>
+    <ul class="hn-links" id="hnMenu" role="list">
+      <li><a href="home.html" class="hn-link"><span class="material-symbols-rounded" aria-hidden="true">home</span>หน้าหลัก</a></li>
+      <li><a href="missions.html" class="hn-link hn-link--active" aria-current="page"><span class="material-symbols-rounded" aria-hidden="true">explore</span>Mission</a></li>
+      <li><a href="portfolio.html" class="hn-link"><span class="material-symbols-rounded" aria-hidden="true">collections_bookmark</span>Portfolio</a></li>
+      <li><a href="leaderboard.html" class="hn-link"><span class="material-symbols-rounded" aria-hidden="true">leaderboard</span>อันดับ</a></li>
+      <li><a href="profile.html" class="hn-link"><span class="material-symbols-rounded" aria-hidden="true">account_circle</span>โปรไฟล์</a></li>
+    </ul>
+    <div class="hn-right">
+      <button class="hn-notif-btn" aria-label="การแจ้งเตือน">
+        <span class="material-symbols-rounded" aria-hidden="true">notifications</span>
+      </button>
+      <div class="hn-user-chip" id="navUserChip">
+        <div class="hn-user-avatar" id="navAvatar" aria-hidden="true">?</div>
+        <div class="hn-user-info" aria-live="polite">
+          <span class="hn-user-name" id="navName">Loading...</span>
+          <span class="hn-user-role">นักเรียน</span>
+        </div>
+      </div>
+      <button class="hn-logout-btn" id="logoutBtn" aria-label="ออกจากระบบ">
+        <span class="material-symbols-rounded" aria-hidden="true">logout</span>
+      </button>
+      <button class="hn-hamburger" id="hnHamburger" aria-label="เปิด/ปิดเมนู" aria-expanded="false" aria-controls="hnMenu">
+        <span aria-hidden="true"></span><span aria-hidden="true"></span><span aria-hidden="true"></span>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<!-- ===== MAIN ===== -->
+<main class="home-main md-main" id="missionDetailMain" role="main">
+  <div class="home-container md-container">
+
+    <!-- BREADCRUMB -->
+    <nav class="md-breadcrumb" aria-label="เส้นทางการนำทาง">
+      <a href="home.html" class="md-bc-link">หน้าหลัก</a>
+      <span class="material-symbols-rounded" aria-hidden="true">chevron_right</span>
+      <a href="missions.html" class="md-bc-link">Mission</a>
+      <span class="material-symbols-rounded" aria-hidden="true">chevron_right</span>
+      <span class="md-bc-current" id="mdBreadcrumbTitle">Loading...</span>
+    </nav>
+
+    <!-- MISSION HEADER -->
+    <div class="md-header" id="mdHeader">
+      <div class="md-header-icon" id="mdHeaderIcon" aria-hidden="true">
+        <span class="material-symbols-rounded" id="mdIconEl">terminal</span>
+      </div>
+      <div class="md-header-info">
+        <div class="md-header-badges" id="mdHeaderBadges">
+          <span class="md-badge md-badge--diff" id="mdDiffBadge">ง่าย</span>
+          <span class="md-badge md-badge--xp"><span class="material-symbols-rounded" aria-hidden="true">star</span><span id="mdXpVal">100</span> XP</span>
+          <span class="md-badge md-badge--time"><span class="material-symbols-rounded" aria-hidden="true">schedule</span><span id="mdTimeVal">20</span> นาที</span>
+        </div>
+        <h1 class="md-header-title" id="mdTitle">Loading...</h1>
+        <p class="md-header-desc" id="mdDesc">Loading...</p>
+        <div class="md-topics" id="mdTopics"></div>
+      </div>
+      <div class="md-header-status" id="mdHeaderStatus">
+        <div class="md-status-ring" id="mdStatusRing">
+          <span class="material-symbols-rounded" id="mdStatusIcon">play_circle</span>
+        </div>
+        <span class="md-status-label" id="mdStatusLabel">เริ่มเรียน</span>
+      </div>
+    </div>
+
+    <!-- STEP PROGRESS BAR -->
+    <div class="md-step-bar" id="mdStepBar" role="navigation" aria-label="ขั้นตอน">
+      <div class="md-steps" id="mdSteps">
+        <!-- Rendered by JS -->
+      </div>
+    </div>
+
+    <!-- CONTENT AREA -->
+    <div class="md-content-wrap">
+
+      <!-- LESSON PANEL -->
+      <section class="md-lesson-panel" id="mdLessonPanel" aria-label="บทเรียน">
+        <div class="md-lesson-header" id="mdLessonHeader">
+          <span class="md-step-num" id="mdStepNum">ขั้นที่ 1</span>
+          <h2 class="md-step-title" id="mdStepTitle">Loading...</h2>
+        </div>
+        <div class="md-lesson-body" id="mdLessonBody" aria-live="polite">
+          <!-- Rendered by JS -->
+        </div>
+        <div class="md-lesson-nav">
+          <button class="md-nav-btn md-nav-btn--prev" id="mdPrevBtn" aria-label="ขั้นก่อนหน้า">
+            <span class="material-symbols-rounded" aria-hidden="true">arrow_back</span>
+            ก่อนหน้า
+          </button>
+          <div class="md-lesson-dots" id="mdLessonDots" aria-hidden="true"></div>
+          <button class="md-nav-btn md-nav-btn--next" id="mdNextBtn" aria-label="ขั้นถัดไป">
+            ถัดไป
+            <span class="material-symbols-rounded" aria-hidden="true">arrow_forward</span>
+          </button>
+        </div>
+      </section>
+
+      <!-- QUIZ PANEL (hidden until all steps done) -->
+      <section class="md-quiz-panel" id="mdQuizPanel" aria-label="แบบทดสอบ" hidden>
+        <div class="md-quiz-header">
+          <div class="md-quiz-icon" aria-hidden="true"><span class="material-symbols-rounded">quiz</span></div>
+          <div>
+            <h2 class="md-quiz-title">แบบทดสอบ</h2>
+            <p class="md-quiz-sub">ตอบคำถามให้ถูกต้องอย่างน้อย 60% เพื่อผ่าน Mission</p>
+          </div>
+        </div>
+
+        <!-- Question counter -->
+        <div class="md-quiz-progress" id="mdQuizProgress">
+          <span id="mdQNum">ข้อ 1</span><span> / </span><span id="mdQTotal">5</span>
+          <div class="md-qprog-bar" role="progressbar" aria-label="ความคืบหน้าคำถาม">
+            <div class="md-qprog-fill" id="mdQProgFill" style="width:20%"></div>
+          </div>
+        </div>
+
+        <!-- Question -->
+        <div class="md-question-card" id="mdQuestionCard" aria-live="polite">
+          <div class="md-q-type-badge" id="mdQTypeBadge">Multiple Choice</div>
+          <p class="md-q-text" id="mdQText">Loading...</p>
+
+          <!-- Multiple choice options -->
+          <div class="md-options" id="mdOptions" role="radiogroup" aria-label="ตัวเลือก"></div>
+
+          <!-- Coding answer -->
+          <div class="md-coding-area" id="mdCodingArea" hidden>
+            <div class="md-code-header">
+              <span class="material-symbols-rounded" aria-hidden="true">code</span>
+              <span>เขียนโค้ดของคุณ</span>
+              <button class="md-hint-btn" id="mdHintBtn" aria-label="ดูคำใบ้">
+                <span class="material-symbols-rounded" aria-hidden="true">lightbulb</span> คำใบ้
+              </button>
+            </div>
+            <textarea class="md-code-editor" id="mdCodeEditor" spellcheck="false" placeholder="# เขียนโค้ดที่นี่..." aria-label="พื้นที่เขียนโค้ด"></textarea>
+            <div class="md-hint-panel" id="mdHintPanel" hidden>
+              <span class="material-symbols-rounded" aria-hidden="true">tips_and_updates</span>
+              <span id="mdHintText"></span>
+            </div>
+          </div>
+
+          <!-- Feedback -->
+          <div class="md-q-feedback" id="mdQFeedback" hidden>
+            <span class="material-symbols-rounded" id="mdFeedbackIcon">check_circle</span>
+            <p id="mdFeedbackText"></p>
+          </div>
+        </div>
+
+        <!-- Quiz nav -->
+        <div class="md-quiz-nav">
+          <button class="md-nav-btn md-nav-btn--prev" id="mdQPrevBtn" aria-label="ข้อก่อนหน้า" hidden>
+            <span class="material-symbols-rounded" aria-hidden="true">arrow_back</span> ก่อนหน้า
+          </button>
+          <button class="md-quiz-submit-btn" id="mdQSubmitBtn">
+            <span class="material-symbols-rounded" aria-hidden="true">send</span>
+            ส่งคำตอบ
+          </button>
+          <button class="md-nav-btn md-nav-btn--next" id="mdQNextBtn" aria-label="ข้อถัดไป" hidden>
+            ถัดไป <span class="material-symbols-rounded" aria-hidden="true">arrow_forward</span>
+          </button>
+        </div>
+
+        <!-- Score submit -->
+        <button class="md-finish-btn" id="mdFinishBtn" hidden>
+          <span class="material-symbols-rounded" aria-hidden="true">emoji_events</span>
+          ส่งแบบทดสอบ
+        </button>
+      </section>
+
+    </div><!-- /md-content-wrap -->
+
+  </div>
+</main>
+
+<!-- ===== COMPLETION OVERLAY ===== -->
+<div class="md-completion-overlay" id="mdCompletionOverlay" hidden role="dialog" aria-modal="true" aria-labelledby="mdCompTitle">
+  <div class="md-completion-card" id="mdCompletionCard">
+    <div class="md-comp-fireworks" id="mdCompFireworks" aria-hidden="true">
+      <span>🎉</span><span>⭐</span><span>🎊</span><span>✨</span><span>🏆</span>
+    </div>
+    <div class="md-comp-icon" aria-hidden="true"><span class="material-symbols-rounded">emoji_events</span></div>
+    <h2 class="md-comp-title" id="mdCompTitle">Mission สำเร็จ!</h2>
+    <p class="md-comp-sub" id="mdCompSub">ยอดเยี่ยมมาก! คุณผ่าน Mission แล้ว</p>
+
+    <div class="md-comp-score-row">
+      <div class="md-comp-stat">
+        <span class="md-comp-stat-val" id="mdCompScore">0</span>
+        <span class="md-comp-stat-lbl">คะแนน</span>
+      </div>
+      <div class="md-comp-stat md-comp-stat--xp">
+        <span class="md-comp-stat-val" id="mdCompXP">+0</span>
+        <span class="md-comp-stat-lbl">XP</span>
+      </div>
+      <div class="md-comp-stat">
+        <span class="md-comp-stat-val" id="mdCompAccuracy">0%</span>
+        <span class="md-comp-stat-lbl">ความแม่นยำ</span>
+      </div>
+    </div>
+
+    <div class="md-comp-badge-row" id="mdCompBadgeRow" hidden>
+      <p class="md-comp-badge-label">ได้รับเหรียญใหม่!</p>
+      <div class="md-comp-badge-icon" id="mdCompBadgeIcon" aria-hidden="true">
+        <span class="material-symbols-rounded" id="mdCompBadgeSymbol">military_tech</span>
+      </div>
+      <span class="md-comp-badge-name" id="mdCompBadgeName"></span>
+    </div>
+
+    <div class="md-comp-actions">
+      <a href="missions.html" class="md-comp-btn md-comp-btn--sec">
+        <span class="material-symbols-rounded" aria-hidden="true">explore</span> ดู Mission อื่น
+      </a>
+      <a href="home.html" class="md-comp-btn md-comp-btn--pri" id="mdCompNext">
+        <span class="material-symbols-rounded" aria-hidden="true">arrow_forward</span> ต่อไป
+      </a>
+    </div>
+  </div>
+</div>
+
+<!-- RETRY OVERLAY -->
+<div class="md-retry-overlay" id="mdRetryOverlay" hidden role="dialog" aria-modal="true" aria-labelledby="mdRetryTitle">
+  <div class="md-retry-card">
+    <div class="md-retry-icon" aria-hidden="true"><span class="material-symbols-rounded">sentiment_dissatisfied</span></div>
+    <h2 class="md-retry-title" id="mdRetryTitle">ยังไม่ผ่าน...</h2>
+    <p class="md-retry-sub">คะแนน <span id="mdRetryScore">0</span>/100 (ต้องการ 60 คะแนนขึ้นไป)</p>
+    <p class="md-retry-msg">ลองกลับไปทบทวนบทเรียนแล้วลองใหม่ได้เลย!</p>
+    <div class="md-retry-actions">
+      <button class="md-comp-btn md-comp-btn--sec" id="mdRetryLessonBtn">
+        <span class="material-symbols-rounded" aria-hidden="true">menu_book</span> ทบทวนบทเรียน
+      </button>
+      <button class="md-comp-btn md-comp-btn--pri" id="mdRetryQuizBtn">
+        <span class="material-symbols-rounded" aria-hidden="true">replay</span> ลองใหม่
+      </button>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js" defer></script>
+<script src="../config/app-config.js" defer></script>
+<script src="../services/api.js" defer></script>
+<script src="../services/analytics-service.js" defer></script>
+<script src="../services/auth-service.js" defer></script>
+<script src="../services/mission-service.js" defer></script>
+<script src="../scripts/mission-detail.js" defer></script>
+</body>
+</html>
