@@ -222,6 +222,60 @@ const GoogleSheetService = (function () {
     return { ok: true, data: result.data };
   }
 
+  /**
+   * Create one real student account (teacher dashboard "เพิ่มนักเรียน").
+   * @param {{userId:string, name:string, class:string}} student
+   * @returns {Promise<{ok: boolean, data?: object, error?: string}>}
+   */
+  async function createStudent(student) {
+    if (!_isProd()) return { ok: true, data: Object.assign({ xp: 0, level: 1, badges: [], completedMissions: [] }, student) };
+
+    var result = await ApiService.post('createStudent', student || {});
+    if (!result.ok) return { ok: false, error: result.error, message: result.message };
+    return { ok: true, data: result.data };
+  }
+
+  /**
+   * Bulk-create students from an Excel/CSV import.
+   * @param {{userId:string, name:string, class:string}[]} students
+   * @returns {Promise<{ok: boolean, data?: {created:number, skipped:number}, error?: string}>}
+   */
+  async function importStudents(students) {
+    if (!_isProd()) return { ok: true, data: { created: (students || []).length, skipped: 0 } };
+
+    var result = await ApiService.post('importStudents', { students: students || [] });
+    if (!result.ok) return { ok: false, error: result.error, message: result.message };
+    return { ok: true, data: result.data };
+  }
+
+  /**
+   * Update a real student's editable fields (name, class, ...).
+   * @param {string} userId
+   * @param {object} updates
+   * @returns {Promise<{ok: boolean, data?: object, error?: string}>}
+   */
+  async function updateStudent(userId, updates) {
+    if (!_isProd()) return { ok: true, data: updates };
+
+    var result = await ApiService.put('updateStudentProfile', { userId: userId, updates: updates || {} });
+    if (!result.ok) return { ok: false, error: result.error, message: result.message };
+    return { ok: true, data: result.data };
+  }
+
+  /**
+   * Permanently delete a real student account. Demo accounts are
+   * rejected server-side and will return error 'cannot_delete_demo'.
+   * @param {string} userId
+   * @returns {Promise<{ok: boolean, data?: object, error?: string}>}
+   */
+  async function deleteStudent(userId) {
+    if (!_isProd()) return { ok: true, data: { deleted: true, userId: userId } };
+
+    var result = await ApiService.delete('deleteStudent', { userId: userId });
+    if (!result.ok) return { ok: false, error: result.error, message: result.message };
+    return { ok: true, data: result.data };
+  }
+
   /* ============================================================
      Expose public interface
      ============================================================ */
@@ -230,6 +284,10 @@ const GoogleSheetService = (function () {
     getClassData:        getClassData,
     getClassAnalytics:   getClassAnalytics,
     getBadgeDefinitions: getBadgeDefinitions,
+    createStudent:       createStudent,
+    importStudents:      importStudents,
+    updateStudent:        updateStudent,
+    deleteStudent:        deleteStudent,
   };
 
 })();
