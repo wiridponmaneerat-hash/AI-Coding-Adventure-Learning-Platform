@@ -25,6 +25,7 @@
      K  nickname
      L  email
      M  bio
+     N  isDemo        (TRUE/FALSE — demo accounts never persist writes)
 
    Sheet: Teachers
      A  userId        (e.g. TCH001)
@@ -33,6 +34,22 @@
      D  subject
      E  classes       (JSON array string — e.g. ["ป.5/1","ป.5/2"])
      F  joinDate
+     G  isDemo        (TRUE/FALSE — scopes dashboard/leaderboard to demo-only students)
+
+   DEMO ACCOUNT ISOLATION
+   ──────────────────────
+   Rows with isDemo=TRUE are "sandbox" accounts (e.g. STD001, TCH001).
+   Students/teachers with isDemo=TRUE only ever see other isDemo=TRUE
+   rows (leaderboard, class dashboard). Real accounts (isDemo=FALSE or
+   blank) only see other real accounts. This keeps demo data permanently
+   fixed for visitors trying the product, while real classroom data
+   stays live and mutable in the same sheet.
+
+   Writes that would normally mutate a student's row (submitMission,
+   uploadPortfolio, updateStudentProfile) are skipped entirely for
+   isDemo=TRUE students — the API still returns a normal-looking
+   response (so the UI plays XP/badge animations) but nothing is
+   persisted, so the demo resets to baseline for the next visitor.
 
    Sheet: Scores
      A  scoreId
@@ -310,6 +327,21 @@ function _calcLevel(xp) {
 }
 
 /* ────────────────────────────────────────────────────────────
+   DEMO ACCOUNT HELPERS
+   ──────────────────────────────────────────────────────────── */
+
+/**
+ * True if a Students/Teachers row (plain object OR raw cell value) is
+ * flagged as a demo account. Accepts boolean TRUE, or the strings
+ * 'TRUE'/'true' (Sheets sometimes stores checkboxes as strings when
+ * read via getValues on freshly-typed cells).
+ */
+function _isDemoRow(rowOrValue) {
+  var v = (rowOrValue && typeof rowOrValue === 'object') ? rowOrValue.isDemo : rowOrValue;
+  return v === true || v === 'TRUE' || v === 'true';
+}
+
+/* ────────────────────────────────────────────────────────────
    AUTH — login
    ──────────────────────────────────────────────────────────── */
 
@@ -361,6 +393,7 @@ function _login(body) {
       badges:            [],
       completedMissions: [],
       joinDate:          user.joinDate || '',
+      isDemo:            _isDemoRow(user),
     };
   } else {
     var xp    = Number(user.xp) || 0;
@@ -380,6 +413,7 @@ function _login(body) {
       email:             user.email    || null,
       bio:               user.bio      || null,
       joinDate:          user.joinDate || '',
+      isDemo:            _isDemoRow(user),
     };
   }
 
@@ -438,14 +472,22 @@ function _updateStudentProfile(body) {
   var headers = sheet.getRange(1, 1, 1, sheet.getLastColumn()).getValues()[0]
     .map(function (h) { return String(h).trim(); });
 
-  ALLOWED.forEach(function (field) {
-    if (!(field in updates)) return;
-    var colIdx = headers.indexOf(field);
-    if (colIdx === -1) return;
-    sheet.getRange(rowIdx, colIdx + 1).setValue(updates[field]);
-  });
+  /* Demo accounts never get persisted — echo the update back so the UI
+     behaves normally, but leave the sheet untouched. */
+  var isDemoCol = headers.indexOf('isDemo');
+  var isDemo    = isDemoCol !== -1 &&
+    _isDemoRow(sheet.getRange(rowIdx, isDemoCol + 1).getValue());
 
-  return _ok(updates);
+  if (!isDemo) {
+    ALLOWED.forEach(function (field) {
+      if (!(field in updates)) return;
+      var colIdx = headers.indexOf(field);
+      if (colIdx === -1) return;
+      sheet.getRange(rowIdx, colIdx + 1).setValue(updates[field]);
+    });
+  }
+
+  return _ok(Object.assign({}, updates, { isDemo: isDemo }));
 }
 
 /* ────────────────────────────────────────────────────────────
@@ -582,6 +624,7 @@ function _submitMission(body) {
   var rowObj     = {};
   headers.forEach(function (h, i) { rowObj[h] = rowData[i]; });
 
+  var isDemo             = _isDemoRow(rowObj);
   var currentXP         = Number(rowObj.xp) || 0;
   var completedMissions = _parseJson(rowObj.completedMissions, []);
   var currentBadges     = _parseJson(rowObj.badges, []);
@@ -620,41 +663,47 @@ function _submitMission(body) {
   var newLevel      = _calcLevel(newTotalXP);
   var updatedBadges = currentBadges.concat(newBadges);
 
-  /* Update Students sheet */
-  if (!alreadyDone && isPassed) {
-    var xpCol         = headers.indexOf('xp')                + 1;
-    var levelCol      = headers.indexOf('level')             + 1;
-    var badgesCol     = headers.indexOf('badges')            + 1;
-    var completedCol  = headers.indexOf('completedMissions') + 1;
+  /* Demo accounts (isDemo=TRUE) never get persisted — everything below
+     this line is skipped for them so the demo resets to baseline for
+     the next visitor, but the response still looks like a real submit
+     so the UI plays its normal XP/badge feedback. */
+  if (!isDemo) {
+    /* Update Students sheet */
+    if (!alreadyDone && isPassed) {
+      var xpCol         = headers.indexOf('xp')                + 1;
+      var levelCol      = headers.indexOf('level')             + 1;
+      var badgesCol     = headers.indexOf('badges')            + 1;
+      var completedCol  = headers.indexOf('completedMissions') + 1;
 
-    if (xpCol)        sheet.getRange(rowIdx, xpCol).setValue(newTotalXP);
-    if (levelCol)     sheet.getRange(rowIdx, levelCol).setValue(newLevel.level);
-    if (badgesCol)    sheet.getRange(rowIdx, badgesCol).setValue(JSON.stringify(updatedBadges));
-    if (completedCol) sheet.getRange(rowIdx, completedCol).setValue(JSON.stringify(newCompleted));
+      if (xpCol)        sheet.getRange(rowIdx, xpCol).setValue(newTotalXP);
+      if (levelCol)     sheet.getRange(rowIdx, levelCol).setValue(newLevel.level);
+      if (badgesCol)    sheet.getRange(rowIdx, badgesCol).setValue(JSON.stringify(updatedBadges));
+      if (completedCol) sheet.getRange(rowIdx, completedCol).setValue(JSON.stringify(newCompleted));
+    }
+
+    /* Append to Scores sheet */
+    try {
+      var scoresSheet = _getSheet(SHEET_NAMES.SCORES);
+      scoresSheet.appendRow([
+        _generateId('SCR'),
+        userId,
+        missionId,
+        score,
+        xpEarned,
+        durationSeconds,
+        codeSnapshot,
+        submittedAt,
+        isPassed,
+      ]);
+    } catch (_) { /* non-fatal */ }
+
+    /* Log analytics */
+    try {
+      _appendAnalytics(userId, isPassed ? 'mission_complete' : 'mission_fail', missionId, score, {
+        xpEarned: xpEarned, duration: durationSeconds
+      });
+    } catch (_) { /* non-fatal */ }
   }
-
-  /* Append to Scores sheet */
-  try {
-    var scoresSheet = _getSheet(SHEET_NAMES.SCORES);
-    scoresSheet.appendRow([
-      _generateId('SCR'),
-      userId,
-      missionId,
-      score,
-      xpEarned,
-      durationSeconds,
-      codeSnapshot,
-      submittedAt,
-      isPassed,
-    ]);
-  } catch (_) { /* non-fatal */ }
-
-  /* Log analytics */
-  try {
-    _appendAnalytics(userId, isPassed ? 'mission_complete' : 'mission_fail', missionId, score, {
-      xpEarned: xpEarned, duration: durationSeconds
-    });
-  } catch (_) { /* non-fatal */ }
 
   return _ok({
     success:           true,
@@ -668,6 +717,7 @@ function _submitMission(body) {
     newBadges:         newBadges,
     completedMissions: newCompleted,
     alreadyCompleted:  alreadyDone,
+    isDemo:            isDemo,
   });
 }
 
@@ -728,55 +778,63 @@ function _uploadPortfolio(body) {
   if (!missionId) return _err('missing_mission_id');
   if (!title)     return _err('missing_title');
 
-  var driveUrl = null;
-  var fileId   = null;
+  /* Look up the student's demo status — demo accounts never touch
+     Drive or the sheet, they just get a simulated success response. */
+  var studentsRows = _sheetToObjects(_getSheet(SHEET_NAMES.STUDENTS));
+  var studentRow   = studentsRows.find(function (r) { return String(r.userId || '').toUpperCase() === userId; });
+  var isDemo       = _isDemoRow(studentRow);
 
-  if (fileData) {
-    try {
-      var blob   = Utilities.newBlob(Utilities.base64Decode(fileData), mimeType, fileName);
-      var folder = DriveApp.getFolderById(folderId);
-      var file   = folder.createFile(blob);
-      file.setSharing(DriveApp.Access.ANYONE_WITH_LINK, DriveApp.Permission.VIEW);
-      fileId   = file.getId();
-      driveUrl = file.getUrl();
-    } catch (e) {
-      return _err('drive_upload_failed', e.message);
-    }
-  }
-
-  var entryId  = _generateId('PF');
+  var entryId    = _generateId('PF');
   var fileSizeKb = fileSize ? Math.round(fileSize / 1024) : 0;
+  var driveUrl   = null;
+  var fileId     = null;
+  var submittedAt = new Date().toISOString();
 
-  try {
-    _getSheet(SHEET_NAMES.PORTFOLIO).appendRow([
-      entryId,
-      userId,
-      missionId,
-      title,
-      description,
-      tags,
-      fileName,
-      mimeType,
-      fileSizeKb,
-      driveUrl,
-      fileId,
-      new Date().toISOString(),
-    ]);
-  } catch (e) {
-    return _err('sheet_write_failed', e.message);
-  }
-
-  /* portfolio_first badge */
-  try {
-    var existing = _sheetToObjects(_getSheet(SHEET_NAMES.PORTFOLIO))
-      .filter(function (r) { return String(r.userId || '').toUpperCase() === userId; });
-    if (existing.length === 1) {
-      _awardBadge(userId, 'portfolio_first');
+  if (!isDemo) {
+    if (fileData) {
+      try {
+        var blob   = Utilities.newBlob(Utilities.base64Decode(fileData), mimeType, fileName);
+        var folder = DriveApp.getFolderById(folderId);
+        var file   = folder.createFile(blob);
+        file.setSharing(DriveApp.Access.ANYONE_WITH_LINK, DriveApp.Permission.VIEW);
+        fileId   = file.getId();
+        driveUrl = file.getUrl();
+      } catch (e) {
+        return _err('drive_upload_failed', e.message);
+      }
     }
-  } catch (_) { /* non-fatal */ }
 
-  /* Analytics */
-  try { _appendAnalytics(userId, 'portfolio_upload', missionId, null, { fileName: fileName }); } catch (_) {}
+    try {
+      _getSheet(SHEET_NAMES.PORTFOLIO).appendRow([
+        entryId,
+        userId,
+        missionId,
+        title,
+        description,
+        tags,
+        fileName,
+        mimeType,
+        fileSizeKb,
+        driveUrl,
+        fileId,
+        submittedAt,
+      ]);
+    } catch (e) {
+      return _err('sheet_write_failed', e.message);
+    }
+
+    /* portfolio_first badge */
+    try {
+      var existing = _sheetToObjects(_getSheet(SHEET_NAMES.PORTFOLIO))
+        .filter(function (r) { return String(r.userId || '').toUpperCase() === userId; });
+      if (existing.length === 1) {
+        _awardBadge(userId, 'portfolio_first');
+      }
+    } catch (_) { /* non-fatal */ }
+
+    /* Analytics */
+    try { _appendAnalytics(userId, 'portfolio_upload', missionId, null, { fileName: fileName }); } catch (_) {}
+  }
 
   return _ok({
     id:          entryId,
@@ -791,7 +849,8 @@ function _uploadPortfolio(body) {
     driveUrl:    driveUrl,
     fileId:      fileId,
     thumbnailUrl: fileId ? 'https://drive.google.com/thumbnail?id=' + fileId + '&sz=w400' : null,
-    submittedAt: new Date().toISOString(),
+    submittedAt: submittedAt,
+    isDemo:      isDemo,
   });
 }
 
@@ -890,11 +949,20 @@ function _getAnalytics(params) {
 function _getLeaderboard(params) {
   var classFilter = params.classes ? params.classes.split(',') : [];
   var limit       = params.limit   ? Number(params.limit)     : 0;
+  /* isDemo filter: only passed explicitly ('true'/'false') do we filter.
+     This keeps demo accounts seeing only other demo accounts, and real
+     accounts seeing only other real accounts. */
+  var hasDemoFilter = params.isDemo !== undefined && params.isDemo !== null && params.isDemo !== '';
+  var wantDemo      = hasDemoFilter && (params.isDemo === true || params.isDemo === 'true');
 
   var rows = _sheetToObjects(_getSheet(SHEET_NAMES.STUDENTS));
 
   if (classFilter.length) {
     rows = rows.filter(function (r) { return classFilter.indexOf(r.class) !== -1; });
+  }
+
+  if (hasDemoFilter) {
+    rows = rows.filter(function (r) { return _isDemoRow(r) === wantDemo; });
   }
 
   var ranked = rows.map(function (r) {
@@ -912,6 +980,7 @@ function _getLeaderboard(params) {
       completedMissions: cm,
       badges:            bdg,
       avatarColor:       r.avatarColor || null,
+      isDemo:            _isDemoRow(r),
     };
   }).sort(function (a, b) {
     if (b.xp !== a.xp) return b.xp - a.xp;
@@ -941,8 +1010,12 @@ function _getClassData(params) {
 
   var teacherClasses = _parseJson(teacher.classes, []);
   var filter = classFilter.length ? classFilter : teacherClasses;
+  var teacherIsDemo = _isDemoRow(teacher);
 
-  var leaderboard = _getLeaderboard({ classes: filter.join(',') });
+  /* Scope the leaderboard to the teacher's own demo/real status, so a
+     demo teacher (TCH001) only ever sees demo students, and a real
+     teacher only ever sees real students. */
+  var leaderboard = _getLeaderboard({ classes: filter.join(','), isDemo: teacherIsDemo ? 'true' : 'false' });
   if (!leaderboard.ok) return leaderboard;
 
   var students = leaderboard.data;
@@ -963,6 +1036,7 @@ function _getClassData(params) {
     classes:       filter,
     teacherId:     teacherId,
     teacherName:   teacher.name,
+    isDemo:        teacherIsDemo,
     stats: {
       total:         n,
       avgXP:         n ? Math.round(totXP / n) : 0,
@@ -982,10 +1056,12 @@ function _getClassAnalytics(params) {
   var teacher      = teachers.find(function (t) { return String(t.userId || '').toUpperCase() === teacherId; });
   if (!teacher) return _err('teacher_not_found');
   var classes      = _parseJson(teacher.classes, []);
+  var teacherIsDemo = _isDemoRow(teacher);
 
-  /* Get student IDs in teacher's classes */
+  /* Get student IDs in teacher's classes, scoped to the teacher's own
+     demo/real status so analytics never mix demo and real activity. */
   var students     = _sheetToObjects(_getSheet(SHEET_NAMES.STUDENTS))
-    .filter(function (r) { return classes.indexOf(r.class) !== -1; });
+    .filter(function (r) { return classes.indexOf(r.class) !== -1 && _isDemoRow(r) === teacherIsDemo; });
   var studentIds   = students.map(function (s) { return String(s.userId).toUpperCase(); });
 
   /* Filter analytics rows */
@@ -1100,6 +1176,103 @@ function migratePasswordsToHash() {
 }
 
 /**
+ * Ensure a column named `colName` exists on `sheet` (1-based header row).
+ * Returns the column's 1-based index, appending a new column if missing.
+ */
+function _ensureColumn(sheet, colName) {
+  var lastCol = Math.max(sheet.getLastColumn(), 1);
+  var headers = sheet.getRange(1, 1, 1, lastCol).getValues()[0]
+    .map(function (h) { return String(h).trim(); });
+  var idx = headers.indexOf(colName);
+  if (idx !== -1) return idx + 1;
+  var newCol = lastCol + 1;
+  sheet.getRange(1, newCol).setValue(colName);
+  return newCol;
+}
+
+/**
+ * ONE-TIME MIGRATION — run once from the GAS Script Editor after
+ * deploying this version of the backend:
+ *   1. Adds the `isDemo` column to Students/Teachers if not already present.
+ *   2. Tags existing STD001 / TCH001 as isDemo = TRUE (they stay frozen —
+ *      writes from gameplay never persist to them anymore).
+ *   3. Tags every other existing student/teacher row as isDemo = FALSE
+ *      (treated as real accounts).
+ *   4. Creates the real teacher account TCH002 (วิริทธิ์พล แก้วดวงจันทร์,
+ *      สอนวิทยาการคำนวณ, ป.5) if it doesn't already exist.
+ *   5. Seeds 5 sample demo students (STD901–STD905) with varied XP/badges
+ *      so the demo dashboard/leaderboard looks populated for visitors.
+ * Safe to re-run — it skips rows/accounts that already exist.
+ */
+function migrateAddIsDemoAndSeedData() {
+  var studentsSheet = _getSheet(SHEET_NAMES.STUDENTS);
+  var teachersSheet = _getSheet(SHEET_NAMES.TEACHERS);
+
+  var stuDemoCol = _ensureColumn(studentsSheet, 'isDemo');
+  var tchDemoCol = _ensureColumn(teachersSheet, 'isDemo');
+
+  /* Tag existing accounts: STD001 / TCH001 stay demo, everything else
+     already in the sheet is treated as a real account. */
+  var stuData = studentsSheet.getDataRange().getValues();
+  for (var i = 1; i < stuData.length; i++) {
+    var uid = String(stuData[i][0] || '').toUpperCase();
+    if (!uid) continue;
+    studentsSheet.getRange(i + 1, stuDemoCol).setValue(uid === 'STD001');
+  }
+
+  var tchData = teachersSheet.getDataRange().getValues();
+  for (var j = 1; j < tchData.length; j++) {
+    var tuid = String(tchData[j][0] || '').toUpperCase();
+    if (!tuid) continue;
+    teachersSheet.getRange(j + 1, tchDemoCol).setValue(tuid === 'TCH001');
+  }
+
+  /* Real teacher account: TCH002 */
+  if (_findRowIndex(teachersSheet, 0, 'TCH002') < 0) {
+    teachersSheet.appendRow([
+      'TCH002',
+      'วิริทธิ์พล แก้วดวงจันทร์',
+      getPasswordHash('teacher2544'),
+      'วิทยาการคำนวณ',
+      JSON.stringify(['ป.5']),
+      Utilities.formatDate(new Date(), 'GMT+7', 'yyyy-MM-dd'),
+      false,
+    ]);
+    Logger.log('Created real teacher account: TCH002');
+  }
+
+  /* Sample demo students — visible only to demo accounts (isDemo=TRUE),
+     never mixed with real classroom data. */
+  var demoStudents = [
+    { id:'STD901', name:'ปัณณวิชญ์ ศรีสุข',   class:'ป.5/1', xp:920,  badges:['mission1_complete','mission2_complete','mission3_complete','speed_learner'], completed:[1,2,3],   color:'#3B82F6' },
+    { id:'STD902', name:'ธีรดา รุ่งเรือง',     class:'ป.5/1', xp:680,  badges:['mission1_complete','mission2_complete'],                                     completed:[1,2],     color:'#EF4444' },
+    { id:'STD903', name:'ปวริศ ทองแท้',        class:'ป.5/1', xp:450,  badges:['mission1_complete'],                                                          completed:[1],       color:'#22C55E' },
+    { id:'STD904', name:'ชนัญชิดา ใจงาม',      class:'ป.5/1', xp:1150, badges:['mission1_complete','mission2_complete','mission3_complete','mission4_complete','perfect_score'], completed:[1,2,3,4], color:'#A855F7' },
+    { id:'STD905', name:'กิตติภูมิ แสงจันทร์', class:'ป.5/1', xp:180,  badges:[],                                                                             completed:[],        color:'#F59E0B' },
+  ];
+
+  demoStudents.forEach(function (d) {
+    if (_findRowIndex(studentsSheet, 0, d.id) >= 0) return; /* already seeded */
+    studentsSheet.appendRow([
+      d.id,
+      d.name,
+      '',                              /* passwordHash — students log in passwordless */
+      d.class,
+      d.xp,
+      _calcLevel(d.xp).level,
+      JSON.stringify(d.badges),
+      JSON.stringify(d.completed),
+      Utilities.formatDate(new Date(), 'GMT+7', 'yyyy-MM-dd'),
+      d.color,
+      '', '', '',                      /* nickname, email, bio */
+      true,                            /* isDemo */
+    ]);
+  });
+
+  Logger.log('Migration complete: isDemo column added, existing accounts tagged, TCH002 created, demo students seeded.');
+}
+
+/**
  * Create all required sheets with headers if they don't exist.
  * Run once to initialise a fresh spreadsheet.
  */
@@ -1107,8 +1280,8 @@ function initializeSpreadsheet() {
   var ss = _getSpreadsheet();
 
   var config = [
-    { name: SHEET_NAMES.STUDENTS,  headers: ['userId','name','passwordHash','class','xp','level','badges','completedMissions','joinDate','avatarColor','nickname','email','bio'] },
-    { name: SHEET_NAMES.TEACHERS,  headers: ['userId','name','passwordHash','subject','classes','joinDate'] },
+    { name: SHEET_NAMES.STUDENTS,  headers: ['userId','name','passwordHash','class','xp','level','badges','completedMissions','joinDate','avatarColor','nickname','email','bio','isDemo'] },
+    { name: SHEET_NAMES.TEACHERS,  headers: ['userId','name','passwordHash','subject','classes','joinDate','isDemo'] },
     { name: SHEET_NAMES.SCORES,    headers: ['scoreId','userId','missionId','score','xpEarned','durationSeconds','codeSnapshot','submittedAt','isPassed'] },
     { name: SHEET_NAMES.PORTFOLIO, headers: ['entryId','userId','missionId','title','description','tags','fileName','mimeType','fileSizeKb','driveUrl','fileId','submittedAt'] },
     { name: SHEET_NAMES.ANALYTICS, headers: ['eventId','userId','eventType','missionId','value','meta','timestamp'] },
