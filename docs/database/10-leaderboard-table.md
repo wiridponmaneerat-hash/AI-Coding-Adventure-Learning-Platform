@@ -124,9 +124,8 @@ The UI reads the two most recent snapshots for each student and computes:
 
 | rank_id | snapshot_date | scope | scope_id | student_id | student_name | rank_position | rank_previous | rank_change | xp_total | missions_completed | avg_score |
 |---|---|---|---|---|---|---|---|---|---|---|---|
-| RNK000001 | 2026-06-30 | class | ป.5/1 | STD003 | มาริสา นาคทอง | 1 | 1 | 0 | 1200 | 3 | 91.33 |
-| RNK000002 | 2026-06-30 | class | ป.5/1 | STD001 | นภัสสร สุขใจ | 2 | 3 | +1 | 850 | 2 | 83.50 |
-| RNK000003 | 2026-06-30 | class | ป.5/1 | STD002 | ปภัสรา คงดี | 3 | 2 | -1 | 650 | 1 | 72.00 |
+| RNK000001 | 2026-06-30 | class | ป.5/1 | STD001 | นภัสสร สุขใจ | 1 | 2 | +1 | 850 | 2 | 83.50 |
+| RNK000002 | 2026-06-30 | class | ป.5/1 | STD002 | ปภัสรา คงดี | 2 | 1 | -1 | 650 | 1 | 72.00 |
 
 ---
 
