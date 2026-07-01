@@ -21,10 +21,12 @@
     { id:5, name:'AI Project',  icon:'🤖', color:'#EF4444', colorBg:'rgba(239,68,68,0.1)'   }
   ];
 
-  /* Mock teacher data */
+  /* Mock teacher data (Teacher Management admin panel — separate from the
+     real Teachers sheet). TCH002 is now a real account (วิริทธิ์พล
+     แก้วดวงจันทร์), so this mock entry uses TCH003 to avoid an ID clash. */
   var MOCK_TEACHERS = [
     { userId:'TCH001', name:'ครูวิริยา สมใจ',  subject:'วิทยาการคำนวณ', classes:['ป.5'] },
-    { userId:'TCH002', name:'ครูสมชาย ใจดี',   subject:'คณิตศาสตร์',    classes:['ป.5'] }
+    { userId:'TCH003', name:'ครูสมชาย ใจดี',   subject:'คณิตศาสตร์',    classes:['ป.5'] }
   ];
 
   var _classFilter      = 'all'; /* current class filter for student mgmt */
@@ -58,6 +60,7 @@
     if (!session) return;
     _setupNav();
     _renderHero();
+    _renderDemoBanner();
 
     /* In production, load real class data from GAS */
     if (window.GoogleSheetService &&
@@ -217,6 +220,29 @@
     if (nameEl) nameEl.textContent = session.name || 'ครู';
     if (subjectEl) subjectEl.textContent = session.subject || 'วิทยาการคำนวณ';
     if (logoutBtn) logoutBtn.addEventListener('click', function () { AuthService.logout(); });
+  }
+
+  /* ═══════════════════════════════════
+     DEMO MODE BANNER
+  ═══════════════════════════════════ */
+  function _renderDemoBanner() {
+    if (!session || !session.isDemo) return;
+    if (document.getElementById('demoModeBanner')) return;
+
+    var main = document.querySelector('.db-main');
+    var banner = document.createElement('div');
+    banner.id = 'demoModeBanner';
+    banner.setAttribute('role', 'status');
+    banner.style.cssText = 'margin:12px auto;max-width:1100px;padding:10px 16px;' +
+      'background:#FEF3C7;border:1px solid #F59E0B;border-radius:10px;' +
+      'color:#92400E;font-size:14px;font-weight:600;text-align:center;';
+    banner.textContent = '🧪 โหมดทดลอง (Demo) — ข้อมูลนักเรียนที่แสดงเป็นข้อมูลตัวอย่างเท่านั้น ไม่ใช่ห้องเรียนจริง';
+
+    if (main) {
+      main.insertBefore(banner, main.firstChild);
+    } else {
+      document.body.insertBefore(banner, document.body.firstChild);
+    }
   }
 
   /* ═══════════════════════════════════
