@@ -33,6 +33,9 @@
   var _editingStudentId = null;  /* userId being edited, or null for add */
   var _editingTeacherId = null;
 
+  var _prodStudents = null;   /* real students fetched from Google Sheet (production mode) */
+  var _isProdMode    = false; /* true once init() successfully loaded real class data */
+
   var MGMT_STU_KEY = 'aca_mgmt_students';
   var MGMT_TCH_KEY = 'aca_mgmt_teachers';
 
@@ -69,6 +72,8 @@
       var result  = await GoogleSheetService.getClassData(session.userId, classes);
       if (result.ok && result.data) {
         var d = result.data;
+        _prodStudents = (d.students || []).slice();
+        _isProdMode   = true;
         _renderStatsFromData(d.stats);
         _renderStudentTableFromData(d.students);
         _renderMissionListFromData(d.stats);
@@ -749,7 +754,12 @@
      STUDENT MANAGEMENT DATA
   ═══════════════════════════════════ */
   function _getStudents() {
-    /* Merge MOCK_STUDENTS with custom students from localStorage */
+    /* Production: return the real students fetched from the Google Sheet
+       via GoogleSheetService.getClassData() in init(). Never touch the
+       local mock/localStorage data once we have real data. */
+    if (_isProdMode) return (_prodStudents || []).slice();
+
+    /* Dev/mock mode: merge MOCK_STUDENTS with custom students from localStorage */
     var custom = [];
     try { custom = JSON.parse(localStorage.getItem(MGMT_STU_KEY) || '[]'); } catch (e) {}
     /* Build map from mock data */
@@ -887,10 +897,24 @@
     var errorEl  = document.getElementById('dbStuError');
     var overlay  = document.getElementById('dbStudentModal');
 
+    /* Populate the class dropdown from this teacher's REAL assigned
+       classes (session.classes) instead of the old hardcoded "ป.5"
+       option — otherwise a newly added/edited student gets a class
+       string that doesn't match the teacher's real class filter and
+       silently disappears from the list right after saving. */
+    var classOptions = (session && Array.isArray(session.classes) && session.classes.length)
+      ? session.classes
+      : ALL_CLASSES;
+    if (classEl) {
+      classEl.innerHTML = classOptions.map(function (c) {
+        return '<option value="' + _esc(c) + '">' + _esc(c) + '</option>';
+      }).join('');
+    }
+
     if (titleEl) titleEl.textContent = student ? 'แก้ไขข้อมูลนักเรียน' : 'เพิ่มนักเรียน';
     if (idInput)   { idInput.value = student ? student.userId : ''; idInput.disabled = !!student; }
     if (nameInput) nameInput.value = student ? student.name : '';
-    if (classEl)   classEl.value  = student ? (student.class || 'ป.5') : 'ป.5';
+    if (classEl)   classEl.value  = student ? (student.class || classOptions[0]) : classOptions[0];
     if (errorEl)   errorEl.hidden = true;
     if (overlay)   { overlay.hidden = false; (nameInput || idInput).focus(); }
   }
@@ -901,18 +925,49 @@
     _editingStudentId = null;
   }
 
-  function _handleStudentSubmit(e) {
+  async function _handleStudentSubmit(e) {
     e.preventDefault();
     var idVal   = (document.getElementById('dbStuId') || {}).value.trim().toUpperCase();
     var nameVal = (document.getElementById('dbStuName') || {}).value.trim();
     var classVal= (document.getElementById('dbStuClass') || {}).value;
     var errorEl = document.getElementById('dbStuError');
+    var submitBtn = document.getElementById('dbStuSubmitBtn');
 
     function _showStuErr(msg) { if (errorEl) { errorEl.textContent = msg; errorEl.hidden = false; } }
 
     if (!idVal)   { _showStuErr('กรุณากรอกรหัสนักเรียน'); return; }
     if (!nameVal) { _showStuErr('กรุณากรอกชื่อ-สกุล');    return; }
 
+    if (_isProdMode) {
+      /* Production: write through to the real Google Sheet via the GAS API. */
+      if (submitBtn) submitBtn.disabled = true;
+      try {
+        if (!_editingStudentId) {
+          if ((_prodStudents || []).find(function (s) { return s.userId === idVal; })) {
+            _showStuErr('รหัสนักเรียน ' + idVal + ' มีอยู่แล้ว');
+            return;
+          }
+          var createResult = await GoogleSheetService.createStudent({ userId: idVal, name: nameVal, class: classVal });
+          if (!createResult.ok) { _showStuErr(createResult.message || 'เพิ่มนักเรียนไม่สำเร็จ'); return; }
+          _prodStudents.push(Object.assign(
+            { userId: idVal, name: nameVal, class: classVal, xp: 0, completedMissions: [], badges: [] },
+            createResult.data
+          ));
+        } else {
+          var updateResult = await GoogleSheetService.updateStudent(_editingStudentId, { name: nameVal, class: classVal });
+          if (!updateResult.ok) { _showStuErr(updateResult.message || 'บันทึกไม่สำเร็จ'); return; }
+          var pIdx = (_prodStudents || []).findIndex(function (s) { return s.userId === _editingStudentId; });
+          if (pIdx !== -1) { _prodStudents[pIdx].name = nameVal; _prodStudents[pIdx].class = classVal; }
+        }
+        _closeStudentModal();
+        _renderStudentMgmt();
+      } finally {
+        if (submitBtn) submitBtn.disabled = false;
+      }
+      return;
+    }
+
+    /* Dev/mock mode */
     var students = _getStudents();
     if (!_editingStudentId) {
       if (students.find(function (s) { return s.userId === idVal; })) {
@@ -929,7 +984,21 @@
     _renderStudentMgmt();
   }
 
-  function _deleteStudent(userId) {
+  async function _deleteStudent(userId) {
+    if (_isProdMode) {
+      /* Production: delete the real Sheet row via the GAS API.
+         Demo accounts are rejected server-side (cannot_delete_demo). */
+      var result = await GoogleSheetService.deleteStudent(userId);
+      if (!result.ok) {
+        alert(result.message || 'ลบนักเรียนไม่สำเร็จ');
+        return;
+      }
+      _prodStudents = (_prodStudents || []).filter(function (s) { return s.userId !== userId; });
+      _renderStudentMgmt();
+      return;
+    }
+
+    /* Dev/mock mode */
     var students = _getStudents().filter(function (s) { return s.userId !== userId; });
     /* For mock students, save a "deleted" marker */
     var isMock = MOCK_STUDENTS.some(function (s) { return s.userId === userId; });
@@ -1260,11 +1329,31 @@
     _importRows = [];
   }
 
-  function _confirmImport() {
+  async function _confirmImport() {
+    var newRows = _importRows.filter(function (row) { return row.status === 'new'; });
+
+    if (_isProdMode) {
+      /* Production: bulk-create the real rows in one API call. */
+      var payload = newRows.map(function (row) { return { userId: row.userId, name: row.name, class: row.cls || '' }; });
+      var result  = await GoogleSheetService.importStudents(payload);
+      _closeImportModal();
+      if (!result.ok) {
+        alert(result.message || 'นำเข้าไม่สำเร็จ');
+        return;
+      }
+      payload.forEach(function (row) {
+        _prodStudents.push(Object.assign({ xp: 0, completedMissions: [], badges: [] }, row));
+      });
+      _renderStudentMgmt();
+      var skippedMsg = result.data.skipped ? (' (ข้าม ' + result.data.skipped + ' คนที่มีอยู่แล้ว)') : '';
+      alert('นำเข้าสำเร็จ เพิ่มนักเรียนใหม่ ' + (result.data.created || 0) + ' คน' + skippedMsg);
+      return;
+    }
+
+    /* Dev/mock mode */
     var students = _getStudents(); /* merged list (mock + custom) */
     var added = 0;
-    _importRows.forEach(function (row) {
-      if (row.status !== 'new') return;
+    newRows.forEach(function (row) {
       if (students.find(function (s) { return (s.userId || '').toUpperCase() === row.userId; })) return;
       students.push({ userId: row.userId, name: row.name, class: row.cls || '', xp: 0, completedMissions: [], badges: ['first_login'] });
       added++;
