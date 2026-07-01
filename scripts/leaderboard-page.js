@@ -15,7 +15,6 @@
 
   /* Mock class data — replaced by real API in production */
   var MOCK_STUDENTS = [
-    { userId:'STD003', name:'มาริสา นาคทอง',    xp:1200, completedMissions:[1,2,3], badges:['first_login','mission1_complete','mission2_complete','mission3_complete'] },
     { userId:'STD004', name:'พีรพัฒน์ สุขศรี',  xp:950,  completedMissions:[1,2],   badges:['first_login','mission1_complete','mission2_complete'] },
     { userId:'STD005', name:'กรกช วงศ์ดี',       xp:720,  completedMissions:[1,2],   badges:['first_login','mission1_complete','mission2_complete'] },
     { userId:'STD006', name:'ณัฐกานต์ แสงทอง',  xp:650,  completedMissions:[1],     badges:['first_login','mission1_complete'] },
