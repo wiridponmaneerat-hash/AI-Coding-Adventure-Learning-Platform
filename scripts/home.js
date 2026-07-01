@@ -807,11 +807,14 @@
 
     if (isProd) {
       /* Production: pull the real leaderboard from Google Sheets, scoped
-         to this user's own isDemo status so demo accounts only ever see
+         to this user's own isDemo status (so demo accounts only ever see
          other demo accounts, and real students only ever see real
-         classmates. */
+         classmates) AND to this user's own classroom (ห้องเรียน), since
+         this widget is specifically the classroom ranking — not the
+         school-wide leaderboard. */
       try {
-        var result = await GoogleSheetService.getLeaderboard({ isDemo: !!_user.isDemo, limit: 3 });
+        var classFilter = _user.class ? [_user.class] : [];
+        var result = await GoogleSheetService.getLeaderboard({ classes: classFilter, isDemo: !!_user.isDemo, limit: 3 });
         if (result.ok && Array.isArray(result.data)) {
           top3 = result.data.slice(0, 3).map(function (s) {
             return {
