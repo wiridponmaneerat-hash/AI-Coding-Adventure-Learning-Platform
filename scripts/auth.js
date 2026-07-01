@@ -196,8 +196,8 @@
      VALIDATION
      ======================== */
   var _patterns = {
-    student: /^STD\d{3}$/i,
-    teacher: /^TCH\d{3}$/i
+    student: /^STD\d{3,6}$/i,   
+         teacher: /^TCH\d{3,6}$/i
   };
 
   var _examples = { student: 'STD001', teacher: 'TCH001' };
