@@ -795,28 +795,57 @@
   /* ============================================================
      MINI LEADERBOARD
      ============================================================ */
-  function _renderMiniLeaderboard() {
+  async function _renderMiniLeaderboard() {
     var list = document.getElementById('miniLbList');
     if (!list) return;
 
     var MEDAL = ['🥇','🥈','🥉'];
     var COLORS = ['#FBBF24','#94A3B8','#D97706'];
 
-    /* Merge user into leaderboard and sort */
-    var lb = CLASS_LEADERBOARD.slice();
-    var userEntry = {
-      name: _user.name,
-      xp: _user.xp || 0,
-      level: _getLevelInfo(_user.xp || 0).level,
-      missions: (_user.completedMissions || []).length,
-      avatar: (_user.name || '?').charAt(0).toUpperCase(),
-      isMe: true,
-    };
-    lb.push(userEntry);
-    lb.sort(function (a, b) { return b.xp - a.xp; });
+    var isProd = !!(window.AppConfig && window.AppConfig.ENVIRONMENT === 'production' && window.GoogleSheetService);
+    var top3 = [];
+
+    if (isProd) {
+      /* Production: pull the real leaderboard from Google Sheets, scoped
+         to this user's own isDemo status so demo accounts only ever see
+         other demo accounts, and real students only ever see real
+         classmates. */
+      try {
+        var result = await GoogleSheetService.getLeaderboard({ isDemo: !!_user.isDemo, limit: 3 });
+        if (result.ok && Array.isArray(result.data)) {
+          top3 = result.data.slice(0, 3).map(function (s) {
+            return {
+              name:     s.name,
+              xp:       s.xp || 0,
+              level:    s.level || _getLevelInfo(s.xp || 0).level,
+              missions: (s.completedMissions || []).length,
+              avatar:   (s.name || '?').charAt(0).toUpperCase(),
+              isMe:     s.userId === _user.userId,
+            };
+          });
+        }
+      } catch (_) { /* fall through to mock below */ }
+    }
+
+    if (!top3.length) {
+      /* Dev mode (or production fetch failure): merge user into the
+         local mock class list so the widget still has something to show. */
+      var lb = CLASS_LEADERBOARD.slice();
+      var userEntry = {
+        name: _user.name,
+        xp: _user.xp || 0,
+        level: _getLevelInfo(_user.xp || 0).level,
+        missions: (_user.completedMissions || []).length,
+        avatar: (_user.name || '?').charAt(0).toUpperCase(),
+        isMe: true,
+      };
+      lb.push(userEntry);
+      lb.sort(function (a, b) { return b.xp - a.xp; });
+      top3 = lb.slice(0, 3);
+    }
 
     list.innerHTML = '';
-    lb.slice(0, 3).forEach(function (entry, idx) {
+    top3.forEach(function (entry, idx) {
       var li = document.createElement('li');
       li.className = 'mini-lb-item' + (entry.isMe ? ' mini-lb-item--me' : '');
       li.innerHTML =
@@ -829,6 +858,31 @@
         '<span class="mini-lb-xp">' + (entry.xp).toLocaleString() + ' XP</span>';
       list.appendChild(li);
     });
+
+    _renderDemoBanner();
+  }
+
+  /* ============================================================
+     DEMO MODE BANNER
+     ============================================================ */
+  function _renderDemoBanner() {
+    if (!_user || !_user.isDemo) return;
+    if (document.getElementById('demoModeBanner')) return;
+
+    var nav = document.getElementById('homeNav');
+    var banner = document.createElement('div');
+    banner.id = 'demoModeBanner';
+    banner.setAttribute('role', 'status');
+    banner.style.cssText = 'margin:12px auto;max-width:900px;padding:10px 16px;' +
+      'background:#FEF3C7;border:1px solid #F59E0B;border-radius:10px;' +
+      'color:#92400E;font-size:14px;font-weight:600;text-align:center;';
+    banner.textContent = '🧪 โหมดทดลอง (Demo) — ข้อมูลนี้เป็นข้อมูลตัวอย่าง ไม่ใช่ข้อมูลนักเรียนจริง';
+
+    if (nav && nav.parentNode) {
+      nav.parentNode.insertBefore(banner, nav.nextSibling);
+    } else {
+      document.body.insertBefore(banner, document.body.firstChild);
+    }
   }
 
   /* ============================================================
