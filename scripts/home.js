@@ -170,7 +170,6 @@
      CONSTANTS — Leaderboard (mock classmates)
      ============================================================ */
   var CLASS_LEADERBOARD = [
-    { name:'มาริสา นาคทอง',   xp:1200, level:4, missions:3, avatar:'ม' },
     { name:'พีรพัฒน์ สุขศรี', xp:950,  level:3, missions:2, avatar:'พ' },
     { name:'นภัสสร สุขใจ',   xp:850,  level:3, missions:2, avatar:'น' },
     { name:'กรกช วงศ์ดี',     xp:720,  level:3, missions:2, avatar:'ก' },
