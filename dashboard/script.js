@@ -40,7 +40,6 @@
   /* Mock student data — replace with API call in production */
   var MOCK_STUDENTS = [
     { userId:'STD001', name:'นภัสสร สุขใจ',    class:'ป.5', xp:850,  completedMissions:[1,2],     badges:['first_login','mission1_complete','mission2_complete'] },
-    { userId:'STD003', name:'มาริสา นาคทอง',   class:'ป.5', xp:1200, completedMissions:[1,2,3],   badges:['first_login','mission1_complete','mission2_complete','mission3_complete'] },
     { userId:'STD004', name:'พีรพัฒน์ สุขศรี', class:'ป.5', xp:950,  completedMissions:[1,2],     badges:['first_login','mission1_complete','mission2_complete'] },
     { userId:'STD005', name:'กรกช วงศ์ดี',      class:'ป.5', xp:720,  completedMissions:[1,2],     badges:['first_login','mission1_complete','mission2_complete'] },
     { userId:'STD006', name:'ณัฐกานต์ แสงทอง', class:'ป.5', xp:650,  completedMissions:[1],       badges:['first_login','mission1_complete'] },
