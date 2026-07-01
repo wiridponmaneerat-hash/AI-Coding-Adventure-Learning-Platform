@@ -19,7 +19,7 @@ const AppConfig = Object.freeze({
      'development' — uses local fallback data, no real API calls
      'production'  — uses Google Apps Script API
      ---------------------------------------------------------- */
-  ENVIRONMENT: 'development',
+  ENVIRONMENT: 'production',
 
   /* ----------------------------------------------------------
      Google Apps Script backend
@@ -32,7 +32,7 @@ const AppConfig = Object.freeze({
        4. Execute as: Me | Access: Anyone
        5. Copy the Web App URL here
      ---------------------------------------------------------- */
-  API_BASE_URL: 'https://script.google.com/macros/s/YOUR_DEPLOYMENT_ID/exec',
+  API_BASE_URL: 'https://script.google.com/macros/s/AKfycbxD-0auIMRb2m7HPdPGVayA-MMDTuJ3cZvbsnAZKwnLERhCMVZ4TfxfDpNneEIBAHxclg/exec',
 
   /* ----------------------------------------------------------
      Google Spreadsheet ID
@@ -40,7 +40,7 @@ const AppConfig = Object.freeze({
      The GAS backend reads this from ScriptProperties so this
      value is for reference / documentation only.
      ---------------------------------------------------------- */
-  SPREADSHEET_ID: 'YOUR_SPREADSHEET_ID',
+  SPREADSHEET_ID: '1vnJ8l3pn8AUe8BqVrdaT6Z064EZwuX5UkTDpfUu_HvM',
 
   /* ----------------------------------------------------------
      Request settings
@@ -83,7 +83,7 @@ const AppConfig = Object.freeze({
   DRIVE: Object.freeze({
     MAX_FILE_SIZE_MB: 10,
     ALLOWED_TYPES:    ['image/png', 'image/jpeg', 'image/gif', 'application/pdf'],
-    FOLDER_ID:        'YOUR_GOOGLE_DRIVE_FOLDER_ID',
+    FOLDER_ID:        '16EHsrgEhw1klkdXk5__sLt6OR6Yn5ZRK',
     THUMBNAIL_SIZE:   400,
   }),
 
