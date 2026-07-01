@@ -318,7 +318,11 @@ function _login(body) {
   var password = String(body.password || '');
   var role     = String(body.role     || 'student');
 
-  if (!userId || !password) return _err('missing_credentials');
+  /* Students log in with just their ID (matches frontend UX — no password
+     field is shown for the student role). Teachers/admins still require a
+     password. */
+  if (!userId) return _err('missing_credentials');
+  if (role !== 'student' && !password) return _err('missing_credentials');
 
   /* Look up in the appropriate sheet */
   var sheetName = (role === 'teacher' || role === 'admin')
@@ -337,7 +341,7 @@ function _login(body) {
 
   if (!user) return _err('invalid_credentials', 'รหัสผู้ใช้หรือรหัสผ่านไม่ถูกต้อง');
 
-  if (!_verifyPassword(password, String(user.passwordHash || ''))) {
+  if (role !== 'student' && !_verifyPassword(password, String(user.passwordHash || ''))) {
     return _err('invalid_credentials', 'รหัสผู้ใช้หรือรหัสผ่านไม่ถูกต้อง');
   }
 
