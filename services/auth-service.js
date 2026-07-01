@@ -30,12 +30,6 @@ const AuthService = (function () {
       completedMissions: [1], theme: 'default', joinDate: '2026-01-15',
     },
     {
-      id: 'STD003', name: 'มาริสา นาคทอง', password: 'adventure1',
-      role: 'student', class: 'ป.5/1', avatar: 'ม', xp: 1200, level: 5,
-      badges: ['first_login', 'mission1_complete', 'mission2_complete', 'mission3_complete'],
-      completedMissions: [1, 2, 3], theme: 'default', joinDate: '2026-01-15',
-    },
-    {
       id: 'TCH001', name: 'ครูวิริยา สมใจ', password: 'teacher123',
       role: 'teacher', subject: 'วิทยาการคำนวณ', classes: ['ป.5'],
       avatar: 'ว', xp: 0, level: 1, badges: [], completedMissions: [],
