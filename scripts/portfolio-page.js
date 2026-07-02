@@ -8,7 +8,6 @@
   var selectedFile  = null;
 
   var AVATAR_COLORS = ['#2563EB','#7C3AED','#DB2777','#D97706','#059669','#DC2626','#0891B2'];
-  var STORAGE_KEY   = 'aca_portfolio';
 
   var MISSION_NAMES = {
     '1': 'Hello, World!',
@@ -64,27 +63,18 @@
   /* ═══════════════════════════════════
      LOAD
   ═══════════════════════════════════ */
-  function _loadPortfolio() {
+  async function _loadPortfolio() {
+    var grid = document.getElementById('pfGrid');
+    if (grid) grid.innerHTML = '<p style="opacity:.6">กำลังโหลดผลงาน...</p>';
+
     try {
-      var raw = localStorage.getItem(STORAGE_KEY);
-      var all = raw ? JSON.parse(raw) : [];
-      /* Filter to current user */
-      allEntries = all.filter(function (e) { return e.userId === session.userId; });
+      var result = await PortfolioService.getPortfolio(session.userId);
+      allEntries = (result.ok && Array.isArray(result.data)) ? result.data : [];
     } catch (e) {
       allEntries = [];
     }
     _renderStats();
     _renderGrid();
-  }
-
-  function _savePortfolio() {
-    /* Merge with other users' entries */
-    var raw = '';
-    try { raw = localStorage.getItem(STORAGE_KEY); } catch (e) {}
-    var all = [];
-    try { all = raw ? JSON.parse(raw) : []; } catch (e) {}
-    var others = all.filter(function (e) { return e.userId !== session.userId; });
-    try { localStorage.setItem(STORAGE_KEY, JSON.stringify(others.concat(allEntries))); } catch (e) {}
   }
 
   /* ═══════════════════════════════════
@@ -121,7 +111,7 @@
       : allEntries.filter(function (e) { return String(e.missionId) === String(activeFilter); });
 
     /* Sort newest first */
-    filtered = filtered.slice().sort(function (a, b) { return (b.createdAt || 0) - (a.createdAt || 0); });
+    filtered = filtered.slice().sort(function (a, b) { return new Date(b.submittedAt || 0) - new Date(a.submittedAt || 0); });
 
     grid.innerHTML = '';
 
@@ -144,15 +134,19 @@
     card.setAttribute('tabindex', '0');
     card.dataset.id = entry.id;
 
+    var isImage = (entry.mimeType || '').indexOf('image/') === 0;
+    var thumbSrc = entry.thumbnailUrl || entry.driveUrl || '';
+
     var thumbHtml;
-    if (entry.type === 'image' && entry.dataUrl) {
-      thumbHtml = '<img src="' + entry.dataUrl + '" alt="' + _esc(entry.title) + '" class="pf-card-thumb-img" loading="lazy" />';
+    if (isImage && thumbSrc) {
+      thumbHtml = '<img src="' + thumbSrc + '" alt="' + _esc(entry.title) + '" class="pf-card-thumb-img" loading="lazy" />';
     } else {
       thumbHtml = '<span class="pf-card-thumb-icon"><span class="material-symbols-rounded" aria-hidden="true">picture_as_pdf</span></span>';
     }
 
     var missionLabel = entry.missionId ? 'Mission ' + entry.missionId : '';
-    var dateStr      = entry.createdAt ? new Date(entry.createdAt).toLocaleDateString('th-TH', { day:'numeric', month:'short', year:'numeric' }) : '';
+    var dateStr      = entry.submittedAt ? new Date(entry.submittedAt).toLocaleDateString('th-TH', { day:'numeric', month:'short', year:'numeric' }) : '';
+    var typeLabel    = isImage ? 'IMAGE' : 'PDF';
 
     card.innerHTML =
       '<div class="pf-card-thumb">' +
@@ -164,7 +158,7 @@
         '<p class="pf-card-desc">' + _esc(entry.description || '') + '</p>' +
         '<div class="pf-card-footer">' +
           '<span class="pf-card-date">' + dateStr + '</span>' +
-          '<span class="pf-card-type"><span class="material-symbols-rounded" aria-hidden="true">' + (entry.type === 'pdf' ? 'picture_as_pdf' : 'image') + '</span>' + (entry.type || 'image').toUpperCase() + '</span>' +
+          '<span class="pf-card-type"><span class="material-symbols-rounded" aria-hidden="true">' + (isImage ? 'image' : 'picture_as_pdf') + '</span>' + typeLabel + '</span>' +
         '</div>' +
       '</div>';
 
@@ -282,7 +276,7 @@
       if (errorEl) { errorEl.textContent = msg; errorEl.hidden = false; }
     }
 
-    if (form) form.addEventListener('submit', function (e) {
+    if (form) form.addEventListener('submit', async function (e) {
       e.preventDefault();
       if (!selectedFile) { _showError('กรุณาเลือกไฟล์'); return; }
       var title   = (document.getElementById('pfTitle') || {}).value || '';
@@ -293,45 +287,37 @@
 
       if (submitBtn) { submitBtn.disabled = true; submitBtn.textContent = 'กำลังบันทึก...'; }
 
-      var isImage = selectedFile.type.startsWith('image/');
-      var reader  = new FileReader();
-      reader.onload = function (ev) {
-        var entry = {
-          id:          Date.now() + '_' + Math.random().toString(36).substr(2,6),
-          userId:      session.userId,
-          title:       title.trim(),
-          description: desc.trim(),
-          missionId:   parseInt(mId, 10),
-          type:        isImage ? 'image' : 'pdf',
-          fileName:    selectedFile.name,
-          dataUrl:     isImage ? ev.target.result : null,
-          pdfData:     isImage ? null : ev.target.result,
-          createdAt:   Date.now()
-        };
-        allEntries.push(entry);
-        _savePortfolio();
+      var result = await PortfolioService.uploadPortfolio(
+        session.userId,
+        { missionId: mId, title: title.trim(), description: desc.trim() },
+        selectedFile
+      );
 
-        /* Award portfolio badge if first upload */
-        var badges = session.badges || [];
-        if (badges.indexOf('portfolio_first') === -1) {
-          badges = badges.concat(['portfolio_first']);
-          AuthService.updateSession({ badges: badges });
-          session = AuthService.getCurrentUser();
-        }
-
-        if (typeof AnalyticsService !== 'undefined') {
-          AnalyticsService.logEvent('portfolio_upload', {
-            missionId: entry.missionId,
-            type:      entry.type,
-            fileSize:  selectedFile.size,
-          });
-        }
-        _renderStats();
-        _renderGrid();
-        closeModal();
+      if (!result.ok) {
+        _showError('บันทึกผลงานไม่สำเร็จ กรุณาลองใหม่อีกครั้ง');
         if (submitBtn) { submitBtn.disabled = false; submitBtn.innerHTML = '<span class="material-symbols-rounded" aria-hidden="true">save</span> บันทึกผลงาน'; }
-      };
-      reader.readAsDataURL(selectedFile);
+        return;
+      }
+
+      /* Award portfolio badge if first upload */
+      var badges = session.badges || [];
+      if (badges.indexOf('portfolio_first') === -1) {
+        badges = badges.concat(['portfolio_first']);
+        AuthService.updateSession({ badges: badges });
+        session = AuthService.getCurrentUser();
+      }
+
+      if (typeof AnalyticsService !== 'undefined') {
+        AnalyticsService.logEvent('portfolio_upload', {
+          missionId: parseInt(mId, 10),
+          type:      selectedFile.type.indexOf('image/') === 0 ? 'image' : 'pdf',
+          fileSize:  selectedFile.size,
+        });
+      }
+
+      await _loadPortfolio();
+      closeModal();
+      if (submitBtn) { submitBtn.disabled = false; submitBtn.innerHTML = '<span class="material-symbols-rounded" aria-hidden="true">save</span> บันทึกผลงาน'; }
     });
   }
 
@@ -347,14 +333,15 @@
     overlay && overlay.addEventListener('click', function (e) { if (e.target === overlay) overlay.hidden = true; });
     overlay && overlay.addEventListener('keydown', function (e) { if (e.key === 'Escape') overlay.hidden = true; });
 
-    if (deleteBtn) deleteBtn.addEventListener('click', function () {
+    if (deleteBtn) deleteBtn.addEventListener('click', async function () {
       if (!viewingId) return;
       if (!confirm('ต้องการลบผลงานนี้?')) return;
-      allEntries = allEntries.filter(function (e) { return e.id !== viewingId; });
-      _savePortfolio();
-      _renderStats();
-      _renderGrid();
+      deleteBtn.disabled = true;
+      var result = await PortfolioService.deletePortfolioEntry(session.userId, viewingId);
+      deleteBtn.disabled = false;
+      if (!result.ok) { alert('ลบผลงานไม่สำเร็จ กรุณาลองใหม่อีกครั้ง'); return; }
       if (overlay) overlay.hidden = true;
+      await _loadPortfolio();
     });
   }
 
@@ -376,8 +363,10 @@
     if (itemTitle) itemTitle.textContent = entry.title;
     if (itemDesc) itemDesc.textContent = entry.description || 'ไม่มีคำอธิบาย';
 
-    if (entry.type === 'image' && entry.dataUrl) {
-      if (imgEl) { imgEl.src = entry.dataUrl; imgEl.alt = entry.title; imgEl.hidden = false; }
+    var isImage  = (entry.mimeType || '').indexOf('image/') === 0;
+    var imgSrc   = entry.thumbnailUrl || entry.driveUrl || '';
+    if (isImage && imgSrc) {
+      if (imgEl) { imgEl.src = imgSrc; imgEl.alt = entry.title; imgEl.hidden = false; }
       if (pdfEl) pdfEl.hidden = true;
     } else {
       if (imgEl) imgEl.hidden = true;
