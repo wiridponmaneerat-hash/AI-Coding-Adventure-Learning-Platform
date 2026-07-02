@@ -774,7 +774,7 @@
     html = html.split(/\n\n+/).map(function (para) {
       para = para.trim();
       if (!para) return '';
-      if (/^<(h[1-6]|pre|ul|ol|table|li)/.test(para)) return para;
+      if (/^<(h[1-6]|pre|ul|ol|table|li|div)/.test(para)) return para;
       return '<p>' + para.replace(/\n/g, '<br>') + '</p>';
     }).join('\n');
 
