@@ -306,6 +306,87 @@
   color: var(--text);
 }
 
+/* ── INTERACTIVE CODE PLAYGROUND (lesson-step "ลองเขียนดู!" widgets) ── */
+.md-playground {
+  margin: 1rem 0 1.25rem;
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-sm);
+}
+.md-playground-header {
+  display: flex;
+  align-items: center;
+  gap: .5rem;
+  font-family: var(--font-ui);
+  font-size: .82rem;
+  font-weight: 700;
+  background: #1E293B;
+  color: #94A3B8;
+  padding: .6rem 1rem;
+}
+.md-playground-header .material-symbols-rounded { font-size: 1rem; color: #22C55E; }
+.md-playground-editor {
+  display: block;
+  background: #0F172A;
+  color: #E2E8F0;
+  border: none;
+  padding: 1rem;
+  font-family: 'JetBrains Mono', 'Courier New', monospace;
+  font-size: .88rem;
+  line-height: 1.7;
+  resize: vertical;
+  min-height: 110px;
+  width: 100%;
+  box-sizing: border-box;
+  outline: none;
+  tab-size: 4;
+}
+.md-playground-actions {
+  display: flex;
+  align-items: center;
+  gap: .75rem;
+  flex-wrap: wrap;
+  background: #0F172A;
+  padding: 0 1rem .9rem;
+}
+.md-playground-run {
+  display: flex;
+  align-items: center;
+  gap: .35rem;
+  background: var(--primary);
+  color: #fff;
+  border: none;
+  border-radius: var(--radius-pill);
+  padding: .5rem 1.15rem;
+  font-family: var(--font-ui);
+  font-size: .82rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  flex-shrink: 0;
+}
+.md-playground-run:hover { background: #1D4ED8; transform: translateY(-1px); }
+.md-playground-run .material-symbols-rounded { font-size: 1rem; }
+.md-playground-hint {
+  font-family: var(--font-ui);
+  font-size: .75rem;
+  color: #64748B;
+}
+.md-playground-output {
+  margin: 0;
+  background: #020617;
+  color: #4ADE80;
+  font-family: 'JetBrains Mono', 'Courier New', monospace;
+  font-size: .85rem;
+  line-height: 1.7;
+  padding: .9rem 1rem;
+  white-space: pre-wrap;
+  word-break: break-word;
+  border-top: 1px dashed #1E293B;
+}
+.md-playground-output--error { color: #F87171; }
+
 /* ── LESSON NAV ── */
 .md-lesson-nav {
   display: flex;
