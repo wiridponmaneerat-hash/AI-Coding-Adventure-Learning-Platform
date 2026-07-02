@@ -275,10 +275,12 @@
       if (typeof gsap !== 'undefined') {
         gsap.to(bodyEl, { opacity: 0, duration: .15, onComplete: function () {
           bodyEl.innerHTML = html;
+          _wirePlaygrounds(bodyEl);
           gsap.to(bodyEl, { opacity: 1, duration: .3 });
         }});
       } else {
         bodyEl.innerHTML = html;
+        _wirePlaygrounds(bodyEl);
       }
     }
 
@@ -732,8 +734,9 @@
   function _parseMarkdown(md) {
     if (!md) return '';
 
-    /* code blocks */
-    var html = md.replace(/```[\w]*\n?([\s\S]*?)```/g, function (_, code) {
+    /* code blocks (```playground blocks become interactive run-your-own-code widgets) */
+    var html = md.replace(/```(\w*)\n?([\s\S]*?)```/g, function (_, lang, code) {
+      if (lang === 'playground') return _renderPlayground(code.trim());
       return '<pre><code>' + _esc(code.trim()) + '</code></pre>';
     });
 
@@ -776,6 +779,74 @@
     }).join('\n');
 
     return html;
+  }
+
+  /* ═══════════════════════════════════
+     INTERACTIVE CODE PLAYGROUNDS
+     (```playground fenced blocks in mission content)
+  ═══════════════════════════════════ */
+  var _pgSeq = 0;
+
+  function _renderPlayground(code) {
+    _pgSeq++;
+    var id = 'pg' + _pgSeq;
+    return '' +
+      '<div class="md-playground">' +
+        '<div class="md-playground-header">' +
+          '<span class="material-symbols-rounded" aria-hidden="true">terminal</span>' +
+          '<span>เขียนโค้ดของคุณเอง</span>' +
+        '</div>' +
+        '<textarea class="md-playground-editor" spellcheck="false" data-pg-editor="' + id + '" aria-label="พื้นที่เขียนโค้ดฝึกหัด">' + _esc(code) + '</textarea>' +
+        '<div class="md-playground-actions">' +
+          '<button type="button" class="md-playground-run" data-pg-run="' + id + '">' +
+            '<span class="material-symbols-rounded" aria-hidden="true">play_arrow</span> รันโค้ด' +
+          '</button>' +
+          '<span class="md-playground-hint">กด "รันโค้ด" เพื่อดูผลลัพธ์จากโค้ดของคุณเอง</span>' +
+        '</div>' +
+        '<pre class="md-playground-output" data-pg-output="' + id + '" hidden></pre>' +
+      '</div>';
+  }
+
+  function _runPlayground(container, id) {
+    var editor = container.querySelector('[data-pg-editor="' + id + '"]');
+    var output = container.querySelector('[data-pg-output="' + id + '"]');
+    if (!editor || !output) return;
+
+    if (typeof PyMini === 'undefined') {
+      output.hidden = false;
+      output.className = 'md-playground-output md-playground-output--error';
+      output.textContent = 'ไม่สามารถโหลดตัวรันโค้ดได้ ลองรีเฟรชหน้าใหม่อีกครั้ง';
+      return;
+    }
+
+    var result = PyMini.run(editor.value, {
+      input: function (promptText) { return window.prompt(promptText || ''); }
+    });
+
+    output.hidden = false;
+    var text = (result.output || []).join('\n');
+    if (result.error) {
+      output.className = 'md-playground-output md-playground-output--error';
+      text = (text ? text + '\n' : '') + '❌ ' + result.error;
+    } else {
+      output.className = 'md-playground-output';
+      if (!text) text = '(ยังไม่มีผลลัพธ์ — ลองใช้ print() เพื่อแสดงข้อความออกมาดูสิ!)';
+    }
+    output.textContent = text;
+  }
+
+  function _wirePlaygrounds(container) {
+    if (!container) return;
+    var btns = container.querySelectorAll('[data-pg-run]');
+    for (var i = 0; i < btns.length; i++) {
+      (function (btn) {
+        if (btn.dataset.wired) return;
+        btn.dataset.wired = '1';
+        btn.addEventListener('click', function () {
+          _runPlayground(container, btn.getAttribute('data-pg-run'));
+        });
+      })(btns[i]);
+    }
   }
 
   /* ═══════════════════════════════════
