@@ -734,10 +734,20 @@
   function _parseMarkdown(md) {
     if (!md) return '';
 
-    /* code blocks (```playground blocks become interactive run-your-own-code widgets) */
+    /* code blocks (```playground blocks become interactive run-your-own-code widgets).
+       Pull them out to placeholder tokens FIRST so later rules (bold, lists, and
+       especially the paragraph/<br> pass) never touch their raw contents —
+       otherwise a single newline before a fence (no blank line separating it from
+       the preceding text) would let the paragraph pass swallow the whole block and
+       corrupt embedded newlines (e.g. inside a playground <textarea>) into <br>. */
+    var _blocks = [];
     var html = md.replace(/```(\w*)\n?([\s\S]*?)```/g, function (_, lang, code) {
-      if (lang === 'playground') return _renderPlayground(code.trim());
-      return '<pre><code>' + _esc(code.trim()) + '</code></pre>';
+      var rendered = (lang === 'playground')
+        ? _renderPlayground(code.trim())
+        : '<pre><code>' + _esc(code.trim()) + '</code></pre>';
+      var token = '@@BLOCK' + _blocks.length + '@@';
+      _blocks.push(rendered);
+      return token;
     });
 
     /* inline code */
@@ -774,9 +784,13 @@
     html = html.split(/\n\n+/).map(function (para) {
       para = para.trim();
       if (!para) return '';
-      if (/^<(h[1-6]|pre|ul|ol|table|li|div)/.test(para)) return para;
+      if (/^<(h[1-6]|ul|ol|table|li)/.test(para)) return para;
       return '<p>' + para.replace(/\n/g, '<br>') + '</p>';
     }).join('\n');
+
+    /* restore code/playground blocks from their placeholder tokens (their raw
+       content — including newlines — is untouched by everything above) */
+    html = html.replace(/@@BLOCK(\d+)@@/g, function (_, i) { return _blocks[i]; });
 
     return html;
   }
