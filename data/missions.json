@@ -22,22 +22,22 @@
       {
         "id": 2,
         "title": "💻 คำสั่ง print()",
-        "content": "**print()** คือคำสั่งที่ใช้แสดงข้อความบนหน้าจอ\n\n```python\nprint(\"Hello, World!\")\n```\n\n**ผลลัพธ์:**\n```\nHello, World!\n```\n\n**กฎสำคัญ:**\n- ใส่ข้อความในเครื่องหมาย `\"` หรือ `'`\n- ตัวอักษรพิมพ์เล็กทั้งหมด\n- ต้องมีวงเล็บ `()`\n\nลองเขียนดู!\n```python\nprint(\"ฉันชื่อ...\")\nprint(\"ฉันเรียน ป.5\")\n```"
+        "content": "**print()** คือคำสั่งที่ใช้แสดงข้อความบนหน้าจอ\n\n```python\nprint(\"Hello, World!\")\n```\n\n**ผลลัพธ์:**\n```\nHello, World!\n```\n\n**กฎสำคัญ:**\n- ใส่ข้อความในเครื่องหมาย `\"` หรือ `'`\n- ตัวอักษรพิมพ์เล็กทั้งหมด\n- ต้องมีวงเล็บ `()`\n\n**🧪 ลองเขียนโค้ดของคุณเอง!** พิมพ์ชื่อและชั้นเรียนของคุณเอง แล้วกด \"รันโค้ด\" เพื่อดูผลลัพธ์\n```playground\nprint(\"ฉันชื่อ...\")\nprint(\"ฉันเรียน ป.5\")\n```"
       },
       {
         "id": 3,
         "title": "📦 ตัวแปร (Variables)",
-        "content": "**ตัวแปร** คือกล่องเก็บข้อมูล เราตั้งชื่อเพื่อเก็บค่าที่ต้องการใช้ภายหลัง\n\n```python\nname = \"นภัสสร\"\nage = 11\nschool = \"โรงเรียนวัดนวลนรดิศ\"\n\nprint(name)\nprint(age)\nprint(school)\n```\n\n**ผลลัพธ์:**\n```\nนภัสสร\n11\nโรงเรียนวัดนวลนรดิศ\n```\n\n**ประเภทข้อมูล:**\n- `str` ข้อความ → `\"Hello\"`\n- `int` จำนวนเต็ม → `11`\n- `float` ทศนิยม → `3.14`"
+        "content": "**ตัวแปร** คือกล่องเก็บข้อมูล เราตั้งชื่อเพื่อเก็บค่าที่ต้องการใช้ภายหลัง\n\n```python\nname = \"นภัสสร\"\nage = 11\nschool = \"โรงเรียนวัดนวลนรดิศ\"\n\nprint(name)\nprint(age)\nprint(school)\n```\n\n**ผลลัพธ์:**\n```\nนภัสสร\n11\nโรงเรียนวัดนวลนรดิศ\n```\n\n**ประเภทข้อมูล:**\n- `str` ข้อความ → `\"Hello\"`\n- `int` จำนวนเต็ม → `11`\n- `float` ทศนิยม → `3.14`\n\n**🧪 ลองเขียนโค้ดของคุณเอง!** สร้างตัวแปร name, age, school เป็นของตัวเอง แล้ว print() ออกมาทั้ง 3 ตัว\n```playground\nname = \"...\"\nage = 12\nschool = \"...\"\n\nprint(name)\nprint(age)\nprint(school)\n```"
       },
       {
         "id": 4,
         "title": "🔢 คำนวณด้วย Python",
-        "content": "Python คำนวณเลขได้เหมือนเครื่องคิดเลข!\n\n```python\na = 10\nb = 3\n\nprint(a + b)   # 13\nprint(a - b)   # 7\nprint(a * b)   # 30\nprint(a / b)   # 3.333...\nprint(a // b)  # 3  (หารจำนวนเต็ม)\nprint(a % b)   # 1  (เศษ)\n```\n\n**เคล็ดลับ:** ใช้ f-string เพื่อรวมตัวแปรกับข้อความ\n```python\nname = \"นภัสสร\"\nage = 11\nprint(f\"ฉันชื่อ {name} อายุ {age} ปี\")\n```\n\n**ผลลัพธ์:**\n```\nฉันชื่อ นภัสสร อายุ 11 ปี\n```"
+        "content": "Python คำนวณเลขได้เหมือนเครื่องคิดเลข!\n\n```python\na = 10\nb = 3\n\nprint(a + b)   # 13\nprint(a - b)   # 7\nprint(a * b)   # 30\nprint(a / b)   # 3.333...\nprint(a // b)  # 3  (หารจำนวนเต็ม)\nprint(a % b)   # 1  (เศษ)\n```\n\n**เคล็ดลับ:** ใช้ f-string เพื่อรวมตัวแปรกับข้อความ\n```python\nname = \"นภัสสร\"\nage = 11\nprint(f\"ฉันชื่อ {name} อายุ {age} ปี\")\n```\n\n**ผลลัพธ์:**\n```\nฉันชื่อ นภัสสร อายุ 11 ปี\n```\n\n**🧪 ลองเขียนโค้ดของคุณเอง!** ตั้งค่า a และ b เป็นตัวเลขที่คุณชอบ แล้วคำนวณและแสดงผลด้วย f-string\n```playground\na = 7\nb = 2\n\nprint(a + b)\nprint(a * b)\n\nname = \"AI Hero\"\nprint(f\"ฉันชื่อ {name} คำนวณได้ {a + b}\")\n```"
       },
       {
         "id": 5,
         "title": "✅ สรุปและทดสอบ",
-        "content": "**สิ่งที่เรียนรู้วันนี้:**\n\n✅ `print()` — แสดงข้อความ\n✅ ตัวแปร — เก็บข้อมูล\n✅ ชนิดข้อมูล — str, int, float\n✅ การคำนวณ — +, -, *, /\n✅ f-string — รวมตัวแปรกับข้อความ\n\n**ตัวอย่างโปรแกรมสมบูรณ์:**\n```python\nname = \"AI Hero\"\nxp = 100\nprint(f\"ยินดีต้อนรับ {name}!\")\nprint(f\"คุณได้รับ {xp} XP\")\nprint(\"ขอแสดงความยินดี! 🎉\")\n```\n\nพร้อมสำหรับการทดสอบแล้ว! กดปุ่ม **เริ่มทำแบบทดสอบ** ได้เลย 🚀"
+        "content": "**สิ่งที่เรียนรู้วันนี้:**\n\n✅ `print()` — แสดงข้อความ\n✅ ตัวแปร — เก็บข้อมูล\n✅ ชนิดข้อมูล — str, int, float\n✅ การคำนวณ — +, -, *, /\n✅ f-string — รวมตัวแปรกับข้อความ\n\n**ตัวอย่างโปรแกรมสมบูรณ์:**\n```python\nname = \"AI Hero\"\nxp = 100\nprint(f\"ยินดีต้อนรับ {name}!\")\nprint(f\"คุณได้รับ {xp} XP\")\nprint(\"ขอแสดงความยินดี! 🎉\")\n```\n\n**🧪 ลองเขียนโค้ดของคุณเอง!** รวมทุกอย่างที่เรียนมาวันนี้ เขียนโปรแกรมแนะนำตัวของคุณเอง\n```playground\nname = \"...\"\nxp = 100\nprint(f\"ยินดีต้อนรับ {name}!\")\nprint(f\"คุณได้รับ {xp} XP\")\n```\n\nพร้อมสำหรับการทดสอบแล้ว! กดปุ่ม **เริ่มทำแบบทดสอบ** ได้เลย 🚀"
       }
     ],
     "quiz": [
@@ -108,22 +108,22 @@
       {
         "id": 2,
         "title": "✅ คำสั่ง if/else",
-        "content": "```python\ntemperature = 35\n\nif temperature > 30:\n    print(\"ร้อนมาก! ดื่มน้ำเยอะๆ\")\nelse:\n    print(\"อากาศดี!\")\n```\n\n**ผลลัพธ์:**\n```\nร้อนมาก! ดื่มน้ำเยอะๆ\n```\n\n**กฎสำคัญ:**\n- ต้องมี `:` หลัง if และ else\n- โค้ดข้างใน indent (เว้น 4 ช่อง)\n- Python ใช้ indent แทนวงเล็บ {}!"
+        "content": "```python\ntemperature = 35\n\nif temperature > 30:\n    print(\"ร้อนมาก! ดื่มน้ำเยอะๆ\")\nelse:\n    print(\"อากาศดี!\")\n```\n\n**ผลลัพธ์:**\n```\nร้อนมาก! ดื่มน้ำเยอะๆ\n```\n\n**กฎสำคัญ:**\n- ต้องมี `:` หลัง if และ else\n- โค้ดข้างใน indent (เว้น 4 ช่อง)\n- Python ใช้ indent แทนวงเล็บ {}!\n\n**🧪 ลองเขียนโค้ดของคุณเอง!** ตั้งค่าตัวแปร score แล้วเขียน if/else ตรวจสอบว่ามากกว่า 50 หรือไม่\n```playground\nscore = 60\n\nif score > 50:\n    print(\"ผ่าน!\")\nelse:\n    print(\"ยังไม่ผ่าน\")\n```"
       },
       {
         "id": 3,
         "title": "🔀 คำสั่ง elif",
-        "content": "ใช้ `elif` เมื่อมีหลายเงื่อนไข:\n\n```python\nscore = 75\n\nif score >= 90:\n    print(\"ยอดเยี่ยม! เกรด A\")\nelif score >= 80:\n    print(\"ดีมาก! เกรด B\")\nelif score >= 70:\n    print(\"ดี! เกรด C\")\nelif score >= 60:\n    print(\"ผ่าน! เกรด D\")\nelse:\n    print(\"ยังไม่ผ่าน ลองใหม่!\")\n```\n\n**ผลลัพธ์:**\n```\nดี! เกรด C\n```"
+        "content": "ใช้ `elif` เมื่อมีหลายเงื่อนไข:\n\n```python\nscore = 75\n\nif score >= 90:\n    print(\"ยอดเยี่ยม! เกรด A\")\nelif score >= 80:\n    print(\"ดีมาก! เกรด B\")\nelif score >= 70:\n    print(\"ดี! เกรด C\")\nelif score >= 60:\n    print(\"ผ่าน! เกรด D\")\nelse:\n    print(\"ยังไม่ผ่าน ลองใหม่!\")\n```\n\n**ผลลัพธ์:**\n```\nดี! เกรด C\n```\n\n**🧪 ลองเขียนโค้ดของคุณเอง!** ลองเปลี่ยนค่า score แล้วดูว่า elif จะให้ผลลัพธ์อะไร\n```playground\nscore = 88\n\nif score >= 90:\n    print(\"เกรด A\")\nelif score >= 80:\n    print(\"เกรด B\")\nelif score >= 70:\n    print(\"เกรด C\")\nelse:\n    print(\"เกรด D\")\n```"
       },
       {
         "id": 4,
         "title": "⚖️ Boolean และการเปรียบเทียบ",
-        "content": "**ตัวดำเนินการเปรียบเทียบ:**\n\n| สัญลักษณ์ | ความหมาย |\n|---|---|\n| `==` | เท่ากับ |\n| `!=` | ไม่เท่ากับ |\n| `>` | มากกว่า |\n| `<` | น้อยกว่า |\n| `>=` | มากกว่าหรือเท่ากับ |\n| `<=` | น้อยกว่าหรือเท่ากับ |\n\n**Boolean:**\n```python\nx = 10\nprint(x > 5)   # True\nprint(x == 5)  # False\n\n# และ/หรือ\nage = 11\nprint(age >= 10 and age <= 12)  # True\nprint(age < 10 or age > 12)    # False\n```"
+        "content": "**ตัวดำเนินการเปรียบเทียบ:**\n\n| สัญลักษณ์ | ความหมาย |\n|---|---|\n| `==` | เท่ากับ |\n| `!=` | ไม่เท่ากับ |\n| `>` | มากกว่า |\n| `<` | น้อยกว่า |\n| `>=` | มากกว่าหรือเท่ากับ |\n| `<=` | น้อยกว่าหรือเท่ากับ |\n\n**Boolean:**\n```python\nx = 10\nprint(x > 5)   # True\nprint(x == 5)  # False\n\n# และ/หรือ\nage = 11\nprint(age >= 10 and age <= 12)  # True\nprint(age < 10 or age > 12)    # False\n```\n\n**🧪 ลองเขียนโค้ดของคุณเอง!** ลองเปลี่ยนค่า age แล้วดูผลลัพธ์ของการเปรียบเทียบที่เปลี่ยนไป\n```playground\nage = 13\n\nprint(age > 10)\nprint(age == 13)\nprint(age >= 10 and age <= 15)\n```"
       },
       {
         "id": 5,
         "title": "✅ สรุปและทดสอบ",
-        "content": "**สิ่งที่เรียนรู้วันนี้:**\n\n✅ `if` — ตรวจสอบเงื่อนไข\n✅ `else` — กรณีที่เงื่อนไขไม่เป็นจริง\n✅ `elif` — เงื่อนไขเพิ่มเติม\n✅ Boolean — True / False\n✅ ตัวดำเนินการเปรียบเทียบ\n\n**ตัวอย่างโปรแกรม AI ตัดสินใจ:**\n```python\nxp = 850\n\nif xp >= 1500:\n    level = \"AI Master\"\nelif xp >= 1000:\n    level = \"นักพัฒนา\"\nelif xp >= 600:\n    level = \"นักสำรวจ\"\nelse:\n    level = \"มือใหม่\"\n\nprint(f\"ระดับของคุณ: {level}\")\n```\n\nพร้อมทำแบบทดสอบแล้ว! 🎯"
+        "content": "**สิ่งที่เรียนรู้วันนี้:**\n\n✅ `if` — ตรวจสอบเงื่อนไข\n✅ `else` — กรณีที่เงื่อนไขไม่เป็นจริง\n✅ `elif` — เงื่อนไขเพิ่มเติม\n✅ Boolean — True / False\n✅ ตัวดำเนินการเปรียบเทียบ\n\n**ตัวอย่างโปรแกรม AI ตัดสินใจ:**\n```python\nxp = 850\n\nif xp >= 1500:\n    level = \"AI Master\"\nelif xp >= 1000:\n    level = \"นักพัฒนา\"\nelif xp >= 600:\n    level = \"นักสำรวจ\"\nelse:\n    level = \"มือใหม่\"\n\nprint(f\"ระดับของคุณ: {level}\")\n```\n\n**🧪 ลองเขียนโค้ดของคุณเอง!** ลองเปลี่ยนค่า xp แล้วดูว่าระดับของคุณจะเปลี่ยนไปอย่างไร\n```playground\nxp = 700\n\nif xp >= 1500:\n    level = \"AI Master\"\nelif xp >= 1000:\n    level = \"นักพัฒนา\"\nelif xp >= 600:\n    level = \"นักสำรวจ\"\nelse:\n    level = \"มือใหม่\"\n\nprint(f\"ระดับของคุณ: {level}\")\n```\n\nพร้อมทำแบบทดสอบแล้ว! 🎯"
       }
     ],
     "quiz": [
@@ -189,27 +189,27 @@
       {
         "id": 1,
         "title": "🔄 ทำซ้ำในชีวิตจริง",
-        "content": "**ลองนับ 1 ถึง 10:**\n\nถ้าไม่มี Loop:\n```python\nprint(1)\nprint(2)\nprint(3)\n# ...ต้องเขียน 10 บรรทัด!\n```\n\nด้วย Loop แค่ 2 บรรทัด:\n```python\nfor i in range(1, 11):\n    print(i)\n```\n\n**Loop ทำให้:**\n- โค้ดสั้นลง\n- ทำงานเร็วขึ้น\n- ลดการพิมพ์ซ้ำ\n\nนี่คือพลังของการโปรแกรม! 💪"
+        "content": "**ลองนับ 1 ถึง 10:**\n\nถ้าไม่มี Loop:\n```python\nprint(1)\nprint(2)\nprint(3)\n# ...ต้องเขียน 10 บรรทัด!\n```\n\nด้วย Loop แค่ 2 บรรทัด:\n```python\nfor i in range(1, 11):\n    print(i)\n```\n\n**Loop ทำให้:**\n- โค้ดสั้นลง\n- ทำงานเร็วขึ้น\n- ลดการพิมพ์ซ้ำ\n\nนี่คือพลังของการโปรแกรม! 💪\n\n**🧪 ลองเขียนโค้ดของคุณเอง!** ลองเขียน for loop พิมพ์ตัวเลข 1 ถึง 5\n```playground\nfor i in range(1, 6):\n    print(i)\n```"
       },
       {
         "id": 2,
         "title": "🔵 for loop",
-        "content": "**for loop** วนซ้ำตามจำนวนที่กำหนด:\n\n```python\n# range(5) = 0, 1, 2, 3, 4\nfor i in range(5):\n    print(f\"รอบที่ {i+1}\")\n```\n\n**ผลลัพธ์:**\n```\nรอบที่ 1\nรอบที่ 2\nรอบที่ 3\nรอบที่ 4\nรอบที่ 5\n```\n\n**range() มี 3 รูปแบบ:**\n```python\nrange(5)       # 0 ถึง 4\nrange(1, 6)    # 1 ถึง 5\nrange(0, 10, 2) # 0, 2, 4, 6, 8\n```"
+        "content": "**for loop** วนซ้ำตามจำนวนที่กำหนด:\n\n```python\n# range(5) = 0, 1, 2, 3, 4\nfor i in range(5):\n    print(f\"รอบที่ {i+1}\")\n```\n\n**ผลลัพธ์:**\n```\nรอบที่ 1\nรอบที่ 2\nรอบที่ 3\nรอบที่ 4\nรอบที่ 5\n```\n\n**range() มี 3 รูปแบบ:**\n```python\nrange(5)       # 0 ถึง 4\nrange(1, 6)    # 1 ถึง 5\nrange(0, 10, 2) # 0, 2, 4, 6, 8\n```\n\n**🧪 ลองเขียนโค้ดของคุณเอง!** ลองเปลี่ยนตัวเลขใน range() แล้วสังเกตผลลัพธ์ที่เปลี่ยนไป\n```playground\nfor i in range(3):\n    print(f\"รอบที่ {i + 1}\")\n```"
       },
       {
         "id": 3,
         "title": "📋 วนซ้ำผ่าน List",
-        "content": "เราวน loop ผ่านรายการข้อมูลได้:\n\n```python\nfruits = [\"แอปเปิ้ล\", \"กล้วย\", \"ส้ม\", \"มะม่วง\"]\n\nfor fruit in fruits:\n    print(f\"ผลไม้: {fruit} 🍎\")\n```\n\n**ผลลัพธ์:**\n```\nผลไม้: แอปเปิ้ล 🍎\nผลไม้: กล้วย 🍎\nผลไม้: ส้ม 🍎\nผลไม้: มะม่วง 🍎\n```\n\n**ใช้ enumerate เพื่อดูลำดับ:**\n```python\nfor i, fruit in enumerate(fruits, 1):\n    print(f\"{i}. {fruit}\")\n```"
+        "content": "เราวน loop ผ่านรายการข้อมูลได้:\n\n```python\nfruits = [\"แอปเปิ้ล\", \"กล้วย\", \"ส้ม\", \"มะม่วง\"]\n\nfor fruit in fruits:\n    print(f\"ผลไม้: {fruit} 🍎\")\n```\n\n**ผลลัพธ์:**\n```\nผลไม้: แอปเปิ้ล 🍎\nผลไม้: กล้วย 🍎\nผลไม้: ส้ม 🍎\nผลไม้: มะม่วง 🍎\n```\n\n**ใช้ enumerate เพื่อดูลำดับ:**\n```python\nfor i, fruit in enumerate(fruits, 1):\n    print(f\"{i}. {fruit}\")\n```\n\n**🧪 ลองเขียนโค้ดของคุณเอง!** สร้าง list ของสิ่งที่คุณชอบ แล้ววนลูปพิมพ์ออกมา\n```playground\nthings = [\"...\", \"...\", \"...\"]\n\nfor item in things:\n    print(f\"ฉันชอบ: {item}\")\n```"
       },
       {
         "id": 4,
         "title": "🔴 while loop",
-        "content": "**while loop** วนซ้ำตราบเท่าที่เงื่อนไขยังเป็น True:\n\n```python\ncount = 0\nwhile count < 5:\n    print(f\"นับ: {count}\")\n    count = count + 1  # หรือ count += 1\n\nprint(\"เสร็จแล้ว!\")\n```\n\n**ผลลัพธ์:**\n```\nนับ: 0\nนับ: 1\nนับ: 2\nนับ: 3\nนับ: 4\nเสร็จแล้ว!\n```\n\n⚠️ **ระวัง!** ต้องแน่ใจว่าเงื่อนไขจะเป็น False ในที่สุด มิฉะนั้น loop จะวนไม่สิ้นสุด (Infinite Loop)!"
+        "content": "**while loop** วนซ้ำตราบเท่าที่เงื่อนไขยังเป็น True:\n\n```python\ncount = 0\nwhile count < 5:\n    print(f\"นับ: {count}\")\n    count = count + 1  # หรือ count += 1\n\nprint(\"เสร็จแล้ว!\")\n```\n\n**ผลลัพธ์:**\n```\nนับ: 0\nนับ: 1\nนับ: 2\nนับ: 3\nนับ: 4\nเสร็จแล้ว!\n```\n\n⚠️ **ระวัง!** ต้องแน่ใจว่าเงื่อนไขจะเป็น False ในที่สุด มิฉะนั้น loop จะวนไม่สิ้นสุด (Infinite Loop)!\n\n**🧪 ลองเขียนโค้ดของคุณเอง!** ลองเขียน while loop นับจาก 0 ถึงค่าที่คุณกำหนด\n```playground\ncount = 0\nwhile count < 3:\n    print(f\"นับ: {count}\")\n    count = count + 1\n```"
       },
       {
         "id": 5,
         "title": "✅ สรุปและทดสอบ",
-        "content": "**สิ่งที่เรียนรู้วันนี้:**\n\n✅ `for i in range()` — วนซ้ำตามจำนวน\n✅ `for item in list` — วนผ่านรายการ\n✅ `while condition` — วนจนกว่าเงื่อนไขไม่ตรง\n✅ `enumerate()` — วนพร้อมลำดับ\n\n**ตัวอย่าง: นับ XP 5 วัน**\n```python\ndaily_xp = [50, 100, 75, 120, 90]\ntotal = 0\n\nfor day, xp in enumerate(daily_xp, 1):\n    total += xp\n    print(f\"วันที่ {day}: +{xp} XP (รวม {total} XP)\")\n\nprint(f\"\\nXP ทั้งหมด: {total}\")\n```\n\nพร้อมทำแบบทดสอบ! 🚀"
+        "content": "**สิ่งที่เรียนรู้วันนี้:**\n\n✅ `for i in range()` — วนซ้ำตามจำนวน\n✅ `for item in list` — วนผ่านรายการ\n✅ `while condition` — วนจนกว่าเงื่อนไขไม่ตรง\n✅ `enumerate()` — วนพร้อมลำดับ\n\n**ตัวอย่าง: นับ XP 5 วัน**\n```python\ndaily_xp = [50, 100, 75, 120, 90]\ntotal = 0\n\nfor day, xp in enumerate(daily_xp, 1):\n    total += xp\n    print(f\"วันที่ {day}: +{xp} XP (รวม {total} XP)\")\n\nprint(f\"\\nXP ทั้งหมด: {total}\")\n```\n\n**🧪 ลองเขียนโค้ดของคุณเอง!** ลองเปลี่ยนค่าใน daily_xp แล้วดูผลรวม XP ที่เปลี่ยนไป\n```playground\ndaily_xp = [50, 100, 75]\ntotal = 0\n\nfor xp in daily_xp:\n    total += xp\n    print(f\"+{xp} XP (รวม {total})\")\n\nprint(f\"XP ทั้งหมด: {total}\")\n```\n\nพร้อมทำแบบทดสอบ! 🚀"
       }
     ],
     "quiz": [
@@ -280,22 +280,22 @@
       {
         "id": 2,
         "title": "📝 def — สร้างฟังก์ชั่น",
-        "content": "```python\n# สร้างฟังก์ชั่น\ndef greet():\n    print(\"สวัสดี! ยินดีต้อนรับ\")\n    print(\"พร้อมผจญภัยแล้วหรือยัง?\")\n\n# เรียกใช้ฟังก์ชั่น\ngreet()\ngreet()\ngreet()\n```\n\n**ผลลัพธ์:**\n```\nสวัสดี! ยินดีต้อนรับ\nพร้อมผจญภัยแล้วหรือยัง?\nสวัสดี! ยินดีต้อนรับ\nพร้อมผจญภัยแล้วหรือยัง?\nสวัสดี! ยินดีต้อนรับ\nพร้อมผจญภัยแล้วหรือยัง?\n```\n\nเขียนแค่ 3 บรรทัดแต่ทำงาน 6 บรรทัด!"
+        "content": "```python\n# สร้างฟังก์ชั่น\ndef greet():\n    print(\"สวัสดี! ยินดีต้อนรับ\")\n    print(\"พร้อมผจญภัยแล้วหรือยัง?\")\n\n# เรียกใช้ฟังก์ชั่น\ngreet()\ngreet()\ngreet()\n```\n\n**ผลลัพธ์:**\n```\nสวัสดี! ยินดีต้อนรับ\nพร้อมผจญภัยแล้วหรือยัง?\nสวัสดี! ยินดีต้อนรับ\nพร้อมผจญภัยแล้วหรือยัง?\nสวัสดี! ยินดีต้อนรับ\nพร้อมผจญภัยแล้วหรือยัง?\n```\n\nเขียนแค่ 3 บรรทัดแต่ทำงาน 6 บรรทัด!\n\n**🧪 ลองเขียนโค้ดของคุณเอง!** สร้างฟังก์ชันของคุณเองที่พิมพ์ข้อความทักทาย แล้วเรียกใช้ 2 ครั้ง\n```playground\ndef my_greet():\n    print(\"สวัสดี!\")\n\nmy_greet()\nmy_greet()\n```"
       },
       {
         "id": 3,
         "title": "📨 Parameters — รับข้อมูล",
-        "content": "ฟังก์ชั่นรับข้อมูลได้ผ่าน **parameters**:\n\n```python\ndef greet(name, level):\n    print(f\"สวัสดี {name}!\")\n    print(f\"คุณอยู่ระดับ: {level}\")\n\n# เรียกใช้พร้อมส่งข้อมูล\ngreet(\"นภัสสร\", \"นักพัฒนา\")\ngreet(\"มาริสา\", \"AI Master\")\n```\n\n**ผลลัพธ์:**\n```\nสวัสดี นภัสสร!\nคุณอยู่ระดับ: นักพัฒนา\nสวัสดี มาริสา!\nคุณอยู่ระดับ: AI Master\n```"
+        "content": "ฟังก์ชั่นรับข้อมูลได้ผ่าน **parameters**:\n\n```python\ndef greet(name, level):\n    print(f\"สวัสดี {name}!\")\n    print(f\"คุณอยู่ระดับ: {level}\")\n\n# เรียกใช้พร้อมส่งข้อมูล\ngreet(\"นภัสสร\", \"นักพัฒนา\")\ngreet(\"มาริสา\", \"AI Master\")\n```\n\n**ผลลัพธ์:**\n```\nสวัสดี นภัสสร!\nคุณอยู่ระดับ: นักพัฒนา\nสวัสดี มาริสา!\nคุณอยู่ระดับ: AI Master\n```\n\n**🧪 ลองเขียนโค้ดของคุณเอง!** สร้างฟังก์ชันที่รับชื่อและวิชาที่ชอบ แล้วเรียกใช้\n```playground\ndef greet(name, subject):\n    print(f\"สวัสดี {name}!\")\n    print(f\"วิชาที่ชอบ: {subject}\")\n\ngreet(\"เอิร์ธ\", \"คณิตศาสตร์\")\n```"
       },
       {
         "id": 4,
         "title": "↩️ return — ส่งค่ากลับ",
-        "content": "ฟังก์ชั่นส่งผลลัพธ์กลับด้วย `return`:\n\n```python\ndef calculate_xp(score, bonus):\n    total = score + bonus\n    return total\n\ndef get_level(xp):\n    if xp >= 1500:\n        return \"AI Master\"\n    elif xp >= 1000:\n        return \"นักพัฒนา\"\n    elif xp >= 600:\n        return \"นักสำรวจ\"\n    else:\n        return \"มือใหม่\"\n\n# ใช้งาน\nmy_xp = calculate_xp(850, 100)\nmy_level = get_level(my_xp)\nprint(f\"XP: {my_xp}, ระดับ: {my_level}\")\n```\n\n**ผลลัพธ์:**\n```\nXP: 950, ระดับ: นักสำรวจ\n```"
+        "content": "ฟังก์ชั่นส่งผลลัพธ์กลับด้วย `return`:\n\n```python\ndef calculate_xp(score, bonus):\n    total = score + bonus\n    return total\n\ndef get_level(xp):\n    if xp >= 1500:\n        return \"AI Master\"\n    elif xp >= 1000:\n        return \"นักพัฒนา\"\n    elif xp >= 600:\n        return \"นักสำรวจ\"\n    else:\n        return \"มือใหม่\"\n\n# ใช้งาน\nmy_xp = calculate_xp(850, 100)\nmy_level = get_level(my_xp)\nprint(f\"XP: {my_xp}, ระดับ: {my_level}\")\n```\n\n**ผลลัพธ์:**\n```\nXP: 950, ระดับ: นักสำรวจ\n```\n\n**🧪 ลองเขียนโค้ดของคุณเอง!** เขียนฟังก์ชัน add_bonus ที่รับคะแนนกับโบนัส แล้ว return ผลรวม\n```playground\ndef add_bonus(score, bonus):\n    return score + bonus\n\nresult = add_bonus(80, 15)\nprint(f\"คะแนนรวม: {result}\")\n```"
       },
       {
         "id": 5,
         "title": "✅ สรุปและทดสอบ",
-        "content": "**สิ่งที่เรียนรู้วันนี้:**\n\n✅ `def name():` — สร้างฟังก์ชั่น\n✅ `parameters` — รับข้อมูลเข้าฟังก์ชั่น\n✅ `return` — ส่งค่ากลับ\n✅ เรียกใช้ฟังก์ชั่นซ้ำๆ ได้\n\n**ตัวอย่างระบบ XP แบบมืออาชีพ:**\n```python\ndef award_xp(player, mission_xp, bonus=0):\n    total = mission_xp + bonus\n    player['xp'] += total\n    print(f\"🎉 {player['name']} ได้รับ {total} XP!\")\n    return total\n\nplayer = {'name': 'นภัสสร', 'xp': 850}\naward_xp(player, 200, bonus=50)\nprint(f\"XP รวม: {player['xp']}\")\n```\n\nพร้อมทำแบบทดสอบ! 🏆"
+        "content": "**สิ่งที่เรียนรู้วันนี้:**\n\n✅ `def name():` — สร้างฟังก์ชั่น\n✅ `parameters` — รับข้อมูลเข้าฟังก์ชั่น\n✅ `return` — ส่งค่ากลับ\n✅ เรียกใช้ฟังก์ชั่นซ้ำๆ ได้\n\n**ตัวอย่างระบบ XP แบบมืออาชีพ:**\n```python\ndef award_xp(player, mission_xp, bonus=0):\n    total = mission_xp + bonus\n    player['xp'] += total\n    print(f\"🎉 {player['name']} ได้รับ {total} XP!\")\n    return total\n\nplayer = {'name': 'นภัสสร', 'xp': 850}\naward_xp(player, 200, bonus=50)\nprint(f\"XP รวม: {player['xp']}\")\n```\n\n**🧪 ลองเขียนโค้ดของคุณเอง!** ลองเขียนฟังก์ชันของคุณเองที่ใช้ if/elif/else ข้างในแล้วเรียกใช้ดู\n```playground\ndef get_level(xp):\n    if xp >= 1000:\n        return \"นักพัฒนา\"\n    elif xp >= 600:\n        return \"นักสำรวจ\"\n    else:\n        return \"มือใหม่\"\n\nprint(get_level(700))\n```\n\nพร้อมทำแบบทดสอบ! 🏆"
       }
     ],
     "quiz": [
@@ -366,17 +366,17 @@
       {
         "id": 2,
         "title": "💬 รับข้อมูลจากผู้ใช้",
-        "content": "ใช้ `input()` รับข้อมูลจากผู้ใช้:\n\n```python\nname = input(\"ชื่อของคุณคืออะไร? \")\nprint(f\"สวัสดี {name}! ยินดีต้อนรับ 👋\")\n\nage = int(input(\"อายุเท่าไหร่? \"))\nif age < 12:\n    print(\"น้องยังเด็กเลย 😊\")\nelse:\n    print(\"โตแล้ว! 💪\")\n```\n\n**หมายเหตุ:**\n- `input()` รับค่าเป็น string เสมอ\n- ใช้ `int()` แปลงเป็นเลขจำนวนเต็ม\n- ใช้ `float()` แปลงเป็นทศนิยม"
+        "content": "ใช้ `input()` รับข้อมูลจากผู้ใช้:\n\n```python\nname = input(\"ชื่อของคุณคืออะไร? \")\nprint(f\"สวัสดี {name}! ยินดีต้อนรับ 👋\")\n\nage = int(input(\"อายุเท่าไหร่? \"))\nif age < 12:\n    print(\"น้องยังเด็กเลย 😊\")\nelse:\n    print(\"โตแล้ว! 💪\")\n```\n\n**หมายเหตุ:**\n- `input()` รับค่าเป็น string เสมอ\n- ใช้ `int()` แปลงเป็นเลขจำนวนเต็ม\n- ใช้ `float()` แปลงเป็นทศนิยม\n\n**🧪 ลองเขียนโค้ดของคุณเอง!** ลองรับชื่อจากผู้ใช้ แล้วแสดงข้อความทักทาย (กด \"รันโค้ด\" แล้วจะมีกล่องให้พิมพ์คำตอบ)\n```playground\nname = input(\"ชื่อของคุณคืออะไร? \")\nprint(f\"สวัสดี {name}! 👋\")\n```"
       },
       {
         "id": 3,
         "title": "🧠 สร้าง Chatbot AI",
-        "content": "ใส่ทุกอย่างรวมกัน สร้าง Chatbot:\n\n```python\ndef ai_response(question):\n    question = question.lower()  # แปลงเป็นตัวพิมพ์เล็ก\n    \n    if \"สวัสดี\" in question or \"hello\" in question:\n        return \"สวัสดี! ฉันคือ AI ผู้ช่วยของคุณ 🤖\"\n    elif \"ชื่อ\" in question:\n        return \"ฉันชื่อ ACA-Bot!\"\n    elif \"ขอบคุณ\" in question:\n        return \"ยินดีค่ะ! 😊\"\n    else:\n        return \"ขอโทษ ฉันไม่เข้าใจคำถามนั้น 🤔\"\n\n# ทดสอบ Chatbot\nprint(ai_response(\"สวัสดี\"))\nprint(ai_response(\"ชื่ออะไร\"))\nprint(ai_response(\"ขอบคุณ\"))\n```"
+        "content": "ใส่ทุกอย่างรวมกัน สร้าง Chatbot:\n\n```python\ndef ai_response(question):\n    question = question.lower()  # แปลงเป็นตัวพิมพ์เล็ก\n    \n    if \"สวัสดี\" in question or \"hello\" in question:\n        return \"สวัสดี! ฉันคือ AI ผู้ช่วยของคุณ 🤖\"\n    elif \"ชื่อ\" in question:\n        return \"ฉันชื่อ ACA-Bot!\"\n    elif \"ขอบคุณ\" in question:\n        return \"ยินดีค่ะ! 😊\"\n    else:\n        return \"ขอโทษ ฉันไม่เข้าใจคำถามนั้น 🤔\"\n\n# ทดสอบ Chatbot\nprint(ai_response(\"สวัสดี\"))\nprint(ai_response(\"ชื่ออะไร\"))\nprint(ai_response(\"ขอบคุณ\"))\n```\n\n**🧪 ลองเขียนโค้ดของคุณเอง!** ลองเพิ่มเงื่อนไขคำถามของคุณเองใน chatbot แล้วทดสอบดู\n```playground\ndef ai_response(question):\n    q = question.lower()\n    if \"สวัสดี\" in q:\n        return \"สวัสดี! ฉันคือ AI 🤖\"\n    elif \"ชื่อ\" in q:\n        return \"ฉันชื่อ ACA-Bot!\"\n    else:\n        return \"ขอโทษ ไม่เข้าใจคำถามนั้น 🤔\"\n\nprint(ai_response(\"สวัสดี\"))\n```"
       },
       {
         "id": 4,
         "title": "🔁 Chatbot ที่ตอบสนองต่อเนื่อง",
-        "content": "เพิ่ม while loop ให้ Chatbot คุยได้ต่อเนื่อง:\n\n```python\ndef ai_chat(question):\n    q = question.lower()\n    if \"สวัสดี\" in q:\n        return \"สวัสดี! 🤖 มีอะไรให้ช่วยไหม?\"\n    elif \"ชื่อ\" in q:\n        return \"ฉันชื่อ ACA-Bot!\"\n    elif \"กี่โมง\" in q:\n        return \"ฉันไม่รู้เวลา แต่ตอนนี้เป็นเวลาแห่งการเรียนรู้! 📚\"\n    elif \"ลาก่อน\" in q or \"bye\" in q:\n        return \"ลาก่อน! แล้วพบกันใหม่ 👋\"\n    else:\n        return f'ขอโทษ ฉันไม่รู้เรื่อง \"{question}\" 🤔'\n\n# Main loop\nprint(\"=== ACA-Bot เริ่มทำงาน ===\")\nwhile True:\n    user_input = input(\"คุณ: \")\n    if user_input == \"ลาก่อน\":\n        print(\"Bot: ลาก่อน! แล้วพบกันใหม่ 👋\")\n        break\n    response = ai_chat(user_input)\n    print(f\"Bot: {response}\")\n```"
+        "content": "เพิ่ม while loop ให้ Chatbot คุยได้ต่อเนื่อง:\n\n```python\ndef ai_chat(question):\n    q = question.lower()\n    if \"สวัสดี\" in q:\n        return \"สวัสดี! 🤖 มีอะไรให้ช่วยไหม?\"\n    elif \"ชื่อ\" in q:\n        return \"ฉันชื่อ ACA-Bot!\"\n    elif \"กี่โมง\" in q:\n        return \"ฉันไม่รู้เวลา แต่ตอนนี้เป็นเวลาแห่งการเรียนรู้! 📚\"\n    elif \"ลาก่อน\" in q or \"bye\" in q:\n        return \"ลาก่อน! แล้วพบกันใหม่ 👋\"\n    else:\n        return f'ขอโทษ ฉันไม่รู้เรื่อง \"{question}\" 🤔'\n\n# Main loop\nprint(\"=== ACA-Bot เริ่มทำงาน ===\")\nwhile True:\n    user_input = input(\"คุณ: \")\n    if user_input == \"ลาก่อน\":\n        print(\"Bot: ลาก่อน! แล้วพบกันใหม่ 👋\")\n        break\n    response = ai_chat(user_input)\n    print(f\"Bot: {response}\")\n```\n\n**🧪 ลองเขียนโค้ดของคุณเอง!** ลองรันแชทบอทของคุณเอง พิมพ์คำถามในกล่อง แล้วพิมพ์ \"ลาก่อน\" เพื่อจบการสนทนา\n```playground\ndef ai_chat(question):\n    q = question.lower()\n    if \"สวัสดี\" in q:\n        return \"สวัสดี! 🤖 มีอะไรให้ช่วยไหม?\"\n    elif \"ลาก่อน\" in q:\n        return \"ลาก่อน! แล้วพบกันใหม่ 👋\"\n    else:\n        return \"ขอโทษ ฉันไม่เข้าใจ 🤔\"\n\nwhile True:\n    user_input = input(\"คุณ: \")\n    if user_input == \"ลาก่อน\":\n        print(\"Bot: ลาก่อน! แล้วพบกันใหม่ 👋\")\n        break\n    print(f\"Bot: {ai_chat(user_input)}\")\n```"
       },
       {
         "id": 5,
