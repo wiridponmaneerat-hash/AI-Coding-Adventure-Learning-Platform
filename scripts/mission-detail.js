@@ -554,13 +554,37 @@
   /* ═══════════════════════════════════
      FINISH & SCORE
   ═══════════════════════════════════ */
-  function _finishQuiz() {
+  async function _finishQuiz() {
     var total   = mission.quiz.length;
     var correct = answers.filter(function (a) { return a.correct; }).length;
     var pct     = Math.round(correct / total * 100);
+    var elapsed = Math.round((Date.now() - startTime) / 1000);
+
+    /* Persist this attempt to the backend (Scores sheet) regardless of
+       pass/fail, so teacher-side progress tracking is never silently
+       empty. Falls back to local-only scoring below if this fails
+       (offline, backend down, etc.) so the student is never blocked. */
+    var serverResult = null;
+    if (typeof MissionService !== 'undefined' && session && session.userId) {
+      try {
+        var codeSnapshot = answers
+          .filter(function (a) { return a.codeAnswer; })
+          .map(function (a) { return a.codeAnswer; })
+          .join('\n\n');
+        var res = await MissionService.submitMission(session.userId, mission.id, {
+          score:            pct,
+          codeSnapshot:     codeSnapshot,
+          durationSeconds:  elapsed,
+        });
+        if (res && res.ok) serverResult = res.data;
+        else console.warn('[mission-detail] submitMission failed:', res && (res.error || res.message));
+      } catch (e) {
+        console.warn('[mission-detail] submitMission threw:', e);
+      }
+    }
 
     if (pct >= 60) {
-      _showCompletion(pct, correct, total);
+      _showCompletion(pct, correct, total, elapsed, serverResult);
     } else {
       if (typeof AnalyticsService !== 'undefined') {
         AnalyticsService.logEvent('mission_fail', { missionId: mission.id, score: pct });
@@ -569,47 +593,21 @@
     }
   }
 
-  function _showCompletion(pct, correct, total) {
-    var elapsed     = Math.round((Date.now() - startTime) / 1000);
+  function _showCompletion(pct, correct, total, elapsed, serverResult) {
+    elapsed = (typeof elapsed === 'number') ? elapsed : Math.round((Date.now() - startTime) / 1000);
     var completed   = session.completedMissions || [];
     var isFirstTime = completed.indexOf(mission.id) === -1;
-    var xpEarned    = isFirstTime ? Math.round(mission.xpReward * (pct / 100)) : 0;
-    /* Full XP on first pass, proportional otherwise */
-    if (isFirstTime && pct >= 100) xpEarned = mission.xpReward;
 
-    /* Update session */
-    if (isFirstTime) {
-      var newCompleted = completed.concat([mission.id]);
-      var newXP        = (session.xp || 0) + xpEarned;
-      var newBadges    = (session.badges || []).slice();
-      var badgeCode    = mission.badgeOnComplete;
-      var earnedBadge  = false;
-      if (badgeCode && newBadges.indexOf(badgeCode) === -1) {
-        newBadges.push(badgeCode);
-        earnedBadge = true;
-      }
-      /* perfect score badge */
-      if (pct === 100 && newBadges.indexOf('perfect_score') === -1) {
-        newBadges.push('perfect_score');
-      }
-      /* all missions badge */
-      if (newCompleted.length >= 5 && newBadges.indexOf('all_missions') === -1) {
-        newBadges.push('all_missions');
-      }
-      /* speed badge */
-      if (elapsed < 900 && newBadges.indexOf('speed_learner') === -1) {
-        newBadges.push('speed_learner');
-      }
-
-      var newLevel     = _calcLevel(newXP);
-      AuthService.updateSession({
-        xp: newXP,
-        level: newLevel.level,
-        levelName: newLevel.name,
-        completedMissions: newCompleted,
-        badges: newBadges
-      });
+    if (serverResult) {
+      /* Backend is authoritative and already recorded the attempt in the
+         Scores sheet. MissionService.submitMission() already synced
+         AuthService's session with the server-confirmed XP/level/badges —
+         just re-read it and render the overlay from server data. */
       session = AuthService.getCurrentUser();
+      var xpEarned    = serverResult.xpEarned || 0;
+      var newBadges   = serverResult.newBadges || [];
+      var earnedBadge = newBadges.length > 0;
+      var badgeCode   = earnedBadge ? newBadges[0] : null;
 
       if (typeof AnalyticsService !== 'undefined') {
         AnalyticsService.logEvent('mission_complete', {
@@ -621,8 +619,57 @@
         });
       }
 
-      /* Show overlay */
       _populateCompletionOverlay(pct, xpEarned, earnedBadge, badgeCode);
+    } else if (isFirstTime) {
+      /* Fallback: backend submit unavailable — compute locally so the
+         student still sees correct feedback (this path no longer writes
+         to the Scores sheet, which is why the primary path above exists). */
+      var xpEarnedLocal = Math.round(mission.xpReward * (pct / 100));
+      if (pct >= 100) xpEarnedLocal = mission.xpReward;
+
+      var newCompleted = completed.concat([mission.id]);
+      var newXP        = (session.xp || 0) + xpEarnedLocal;
+      var newBadgesLocal = (session.badges || []).slice();
+      var badgeCodeLocal = mission.badgeOnComplete;
+      var earnedBadgeLocal = false;
+      if (badgeCodeLocal && newBadgesLocal.indexOf(badgeCodeLocal) === -1) {
+        newBadgesLocal.push(badgeCodeLocal);
+        earnedBadgeLocal = true;
+      }
+      /* perfect score badge */
+      if (pct === 100 && newBadgesLocal.indexOf('perfect_score') === -1) {
+        newBadgesLocal.push('perfect_score');
+      }
+      /* all missions badge */
+      if (newCompleted.length >= 5 && newBadgesLocal.indexOf('all_missions') === -1) {
+        newBadgesLocal.push('all_missions');
+      }
+      /* speed badge */
+      if (elapsed < 900 && newBadgesLocal.indexOf('speed_learner') === -1) {
+        newBadgesLocal.push('speed_learner');
+      }
+
+      var newLevel = _calcLevel(newXP);
+      AuthService.updateSession({
+        xp: newXP,
+        level: newLevel.level,
+        levelName: newLevel.name,
+        completedMissions: newCompleted,
+        badges: newBadgesLocal
+      });
+      session = AuthService.getCurrentUser();
+
+      if (typeof AnalyticsService !== 'undefined') {
+        AnalyticsService.logEvent('mission_complete', {
+          missionId: mission.id,
+          score:     pct,
+          xpEarned:  xpEarnedLocal,
+          duration:  elapsed,
+          firstTime: isFirstTime,
+        });
+      }
+
+      _populateCompletionOverlay(pct, xpEarnedLocal, earnedBadgeLocal, badgeCodeLocal);
     } else {
       _populateCompletionOverlay(pct, 0, false, null);
     }
