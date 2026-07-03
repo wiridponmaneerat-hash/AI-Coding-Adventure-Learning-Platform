@@ -1,23 +1,23 @@
 /* AI Coding Adventure — Service Worker v1.0.0 */
 'use strict';
 
-const CACHE_NAME   = 'aca-v1.0.0';
-const STATIC_CACHE = 'aca-static-v1.0.0';
+const CACHE_NAME   = 'aca-v1.0.1';
+const STATIC_CACHE = 'aca-static-v1.0.1';
 
 /* Assets to pre-cache on install */
 const PRECACHE_ASSETS = [
-  '/AI-Coding-Adventure/',
-  '/AI-Coding-Adventure/index.html',
-  '/AI-Coding-Adventure/pages/login.html',
-  '/AI-Coding-Adventure/styles/globals.css',
-  '/AI-Coding-Adventure/styles/auth.css',
-  '/AI-Coding-Adventure/styles/home.css',
-  '/AI-Coding-Adventure/config/app-config.js',
-  '/AI-Coding-Adventure/services/api.js',
-  '/AI-Coding-Adventure/services/auth-service.js',
-  '/AI-Coding-Adventure/scripts/auth.js',
-  '/AI-Coding-Adventure/assets/favicon.svg',
-  '/AI-Coding-Adventure/manifest.json',
+  '/AI-Coding-Adventure-Learning-Platform/',
+  '/AI-Coding-Adventure-Learning-Platform/index.html',
+  '/AI-Coding-Adventure-Learning-Platform/pages/login.html',
+  '/AI-Coding-Adventure-Learning-Platform/styles/globals.css',
+  '/AI-Coding-Adventure-Learning-Platform/styles/auth.css',
+  '/AI-Coding-Adventure-Learning-Platform/styles/home.css',
+  '/AI-Coding-Adventure-Learning-Platform/config/app-config.js',
+  '/AI-Coding-Adventure-Learning-Platform/services/api.js',
+  '/AI-Coding-Adventure-Learning-Platform/services/auth-service.js',
+  '/AI-Coding-Adventure-Learning-Platform/scripts/auth.js',
+  '/AI-Coding-Adventure-Learning-Platform/assets/favicon.svg',
+  '/AI-Coding-Adventure-Learning-Platform/manifest.json',
 ];
 
 /* ─── Install ─── */
@@ -99,7 +99,7 @@ self.addEventListener('fetch', function (e) {
           }).catch(function () {
             /* Offline fallback for HTML pages */
             if (e.request.destination === 'document') {
-              return cache.match('/AI-Coding-Adventure/index.html');
+              return cache.match('/AI-Coding-Adventure-Learning-Platform/index.html');
             }
           });
         });

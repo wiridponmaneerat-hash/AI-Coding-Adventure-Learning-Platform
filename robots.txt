@@ -1,21 +1,21 @@
 User-agent: *
-Allow: /AI-Coding-Adventure/
-Allow: /AI-Coding-Adventure/index.html
+Allow: /AI-Coding-Adventure-Learning-Platform/
+Allow: /AI-Coding-Adventure-Learning-Platform/index.html
 
 # Private pages — require authentication, no indexing value
-Disallow: /AI-Coding-Adventure/pages/home.html
-Disallow: /AI-Coding-Adventure/pages/missions.html
-Disallow: /AI-Coding-Adventure/pages/mission-detail.html
-Disallow: /AI-Coding-Adventure/pages/portfolio.html
-Disallow: /AI-Coding-Adventure/pages/leaderboard.html
-Disallow: /AI-Coding-Adventure/pages/profile.html
-Disallow: /AI-Coding-Adventure/dashboard/
-Disallow: /AI-Coding-Adventure/data/
-Disallow: /AI-Coding-Adventure/ai-context/
-Disallow: /AI-Coding-Adventure/prompts/
-Disallow: /AI-Coding-Adventure/.vscode/
+Disallow: /AI-Coding-Adventure-Learning-Platform/pages/home.html
+Disallow: /AI-Coding-Adventure-Learning-Platform/pages/missions.html
+Disallow: /AI-Coding-Adventure-Learning-Platform/pages/mission-detail.html
+Disallow: /AI-Coding-Adventure-Learning-Platform/pages/portfolio.html
+Disallow: /AI-Coding-Adventure-Learning-Platform/pages/leaderboard.html
+Disallow: /AI-Coding-Adventure-Learning-Platform/pages/profile.html
+Disallow: /AI-Coding-Adventure-Learning-Platform/dashboard/
+Disallow: /AI-Coding-Adventure-Learning-Platform/data/
+Disallow: /AI-Coding-Adventure-Learning-Platform/ai-context/
+Disallow: /AI-Coding-Adventure-Learning-Platform/prompts/
+Disallow: /AI-Coding-Adventure-Learning-Platform/.vscode/
 
 # Public pages
-Allow: /AI-Coding-Adventure/pages/login.html
+Allow: /AI-Coding-Adventure-Learning-Platform/pages/login.html
 
-Sitemap: https://YOUR_GITHUB_USERNAME.github.io/AI-Coding-Adventure/sitemap.xml
+Sitemap: https://wiridponmaneerat-hash.github.io/AI-Coding-Adventure-Learning-Platform/sitemap.xml

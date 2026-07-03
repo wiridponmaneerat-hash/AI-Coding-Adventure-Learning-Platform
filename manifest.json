@@ -2,8 +2,8 @@
   "name": "AI Coding Adventure",
   "short_name": "ACA",
   "description": "แพลตฟอร์มเรียนวิทยาการคำนวณผ่านการผจญภัย สำหรับนักเรียนชั้น ป.5 ด้วย AI และ Gamification",
-  "start_url": "/AI-Coding-Adventure/pages/login.html",
-  "scope": "/AI-Coding-Adventure/",
+  "start_url": "/AI-Coding-Adventure-Learning-Platform/pages/login.html",
+  "scope": "/AI-Coding-Adventure-Learning-Platform/",
   "display": "standalone",
   "orientation": "portrait-primary",
   "background_color": "#0F172A",
@@ -34,12 +34,12 @@
   "shortcuts": [
     {
       "name": "เข้าสู่ระบบ",
-      "url": "/AI-Coding-Adventure/pages/login.html",
+      "url": "/AI-Coding-Adventure-Learning-Platform/pages/login.html",
       "icons": [{ "src": "assets/favicon.svg", "sizes": "any", "type": "image/svg+xml" }]
     },
     {
       "name": "Mission",
-      "url": "/AI-Coding-Adventure/pages/missions.html",
+      "url": "/AI-Coding-Adventure-Learning-Platform/pages/missions.html",
       "icons": [{ "src": "assets/favicon.svg", "sizes": "any", "type": "image/svg+xml" }]
     }
   ],

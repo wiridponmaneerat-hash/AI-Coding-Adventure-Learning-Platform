@@ -4,17 +4,17 @@
 
   <!-- Landing page (public) -->
   <url>
-    <loc>https://YOUR_GITHUB_USERNAME.github.io/AI-Coding-Adventure/</loc>
+    <loc>https://wiridponmaneerat-hash.github.io/AI-Coding-Adventure-Learning-Platform/</loc>
     <lastmod>2026-06-30</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
     <xhtml:link rel="alternate" hreflang="th"
-                href="https://YOUR_GITHUB_USERNAME.github.io/AI-Coding-Adventure/"/>
+                href="https://wiridponmaneerat-hash.github.io/AI-Coding-Adventure-Learning-Platform/"/>
   </url>
 
   <!-- Login page (public) -->
   <url>
-    <loc>https://YOUR_GITHUB_USERNAME.github.io/AI-Coding-Adventure/pages/login.html</loc>
+    <loc>https://wiridponmaneerat-hash.github.io/AI-Coding-Adventure-Learning-Platform/pages/login.html</loc>
     <lastmod>2026-06-30</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
