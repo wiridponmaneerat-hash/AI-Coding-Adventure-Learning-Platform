@@ -379,6 +379,29 @@
       tagsEl.innerHTML = mName ? '<span class="pf-view-tag">' + _esc(mName) + '</span>' : '';
     }
 
+    /* "Open in Drive" link so students can view the real file */
+    var openEl = document.getElementById('pfViewOpen');
+    if (!openEl && tagsEl && tagsEl.parentNode) {
+      openEl = document.createElement('a');
+      openEl.id = 'pfViewOpen';
+      openEl.className = 'pf-view-tag';
+      openEl.target = '_blank';
+      openEl.rel = 'noopener';
+      openEl.style.textDecoration = 'none';
+      openEl.style.display = 'inline-block';
+      openEl.style.marginTop = '8px';
+      tagsEl.parentNode.insertBefore(openEl, tagsEl.nextSibling);
+    }
+    if (openEl) {
+      if (entry.driveUrl) {
+        openEl.href = entry.driveUrl;
+        openEl.textContent = 'เปิดไฟล์ใน Google Drive ↗';
+        openEl.hidden = false;
+      } else {
+        openEl.hidden = true;
+      }
+    }
+
     if (overlay) { overlay.hidden = false; }
   }
 
