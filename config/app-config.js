@@ -45,7 +45,10 @@ const AppConfig = Object.freeze({
   /* ----------------------------------------------------------
      Request settings
      ---------------------------------------------------------- */
-  TIMEOUT:     15000,   /* milliseconds before a request is aborted */
+  TIMEOUT:     15000,   /* milliseconds before a normal request is aborted */
+  UPLOAD_TIMEOUT: 120000, /* uploads carry a file payload and need far longer than a
+                             normal call — 15s used to abort mid-upload, so the student
+                             saw "failed" even though Drive + Sheet had already saved */
   RETRY_LIMIT: 2,       /* max automatic retries on transient failures */
   RETRY_DELAY: 1000,    /* ms between retries (doubles each attempt) */
 
@@ -83,8 +86,12 @@ const AppConfig = Object.freeze({
   DRIVE: Object.freeze({
     MAX_FILE_SIZE_MB: 10,
     ALLOWED_TYPES:    ['image/png', 'image/jpeg', 'image/gif', 'application/pdf'],
-    FOLDER_ID:        '16EHsrgEhw1klkdXk5__sLt6OR6Yn5ZRK',
+    FOLDER_ID:        '1hrr9e9Y_l4IN80iKEoflc8_QnLqAUdL6',
     THUMBNAIL_SIZE:   400,
+    /* Images are downscaled in the browser before upload: smaller payload =
+       faster, more reliable saves on school internet. */
+    IMAGE_MAX_DIMENSION: 1600,
+    IMAGE_QUALITY:       0.82,
   }),
 
   /* ----------------------------------------------------------
