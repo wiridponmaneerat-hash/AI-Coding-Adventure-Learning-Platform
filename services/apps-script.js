@@ -122,7 +122,7 @@ var XP_LEVELS = [
   { level: 5, name: 'AI Master',  min: 1500 },
 ];
 
-var DRIVE_FOLDER_ID = ''; /* Override via Script Properties: DRIVE_FOLDER_ID */
+var DRIVE_FOLDER_ID = '1hrr9e9Y_l4IN80iKEoflc8_QnLqAUdL6'; /* 03_Portfolio — override via Script Properties: DRIVE_FOLDER_ID */
 
 /* ────────────────────────────────────────────────────────────
    ENTRY POINTS — doGet / doPost
@@ -771,7 +771,9 @@ function _uploadPortfolio(body) {
   var title       = String(body.title     || '').trim();
   var description = String(body.description || '').trim();
   var tags        = String(body.tags      || '');
-  var folderId    = body.folderId || _getDriveFolderId();
+  /* The server is the single source of truth for the destination folder.
+     A stale cached frontend must never be able to redirect uploads elsewhere. */
+  var folderId    = _getDriveFolderId();
   var fileData    = body.fileData  || null;
   var fileName    = body.fileName  || 'upload';
   var mimeType    = body.mimeType  || 'application/octet-stream';
@@ -799,7 +801,23 @@ function _uploadPortfolio(body) {
         var blob   = Utilities.newBlob(Utilities.base64Decode(fileData), mimeType, fileName);
         var folder = DriveApp.getFolderById(folderId);
         var file   = folder.createFile(blob);
-        file.setSharing(DriveApp.Access.ANYONE_WITH_LINK, DriveApp.Permission.VIEW);
+        /* Belt-and-braces: make sure the file is parented to the portfolio folder only. */
+        try {
+          var parents = file.getParents();
+          while (parents.hasNext()) {
+            var p = parents.next();
+            if (p.getId() !== folder.getId()) { p.removeFile(file); }
+          }
+          var stillThere = false;
+          var chk = file.getParents();
+          while (chk.hasNext()) { if (chk.next().getId() === folder.getId()) stillThere = true; }
+          if (!stillThere) folder.addFile(file);
+        } catch (parentErr) { /* non-fatal */ }
+        /* Per-file sharing may be blocked by account policy — non-fatal.
+           Files inherit access from the (link-shared) portfolio folder. */
+        try {
+          file.setSharing(DriveApp.Access.ANYONE_WITH_LINK, DriveApp.Permission.VIEW);
+        } catch (shareErr) { /* inherit folder permissions */ }
         fileId   = file.getId();
         driveUrl = file.getUrl();
       } catch (e) {
@@ -1461,4 +1479,114 @@ function initializeSpreadsheet() {
   });
 
   Logger.log('Spreadsheet initialization complete.');
+}
+
+
+/**
+ * MAINTENANCE — run once from the GAS editor.
+ * Creates a real Drive file for every Portfolio row that has none, then writes
+ * driveUrl + fileId back and turns the fileName cell into a clickable link.
+ */
+function fixPortfolioFiles() {
+  var folder = DriveApp.getFolderById(_getDriveFolderId());
+  try { folder.setSharing(DriveApp.Access.ANYONE_WITH_LINK, DriveApp.Permission.VIEW); } catch (e) {}
+
+  var sheet = _getSheet(SHEET_NAMES.PORTFOLIO);
+  var data  = sheet.getDataRange().getValues();
+  var col   = {};
+  data[0].forEach(function (h, i) { col[String(h).trim()] = i; });
+
+  var existing = {};
+  var it = folder.getFiles();
+  while (it.hasNext()) { var f = it.next(); existing[f.getName()] = f; }
+
+  var fixed = 0;
+  for (var r = 1; r < data.length; r++) {
+    var fileName = String(data[r][col.fileName] || '').trim();
+    var fileId   = String(data[r][col.fileId]   || '').trim();
+    if (!fileName || fileId) continue;
+
+    var file = existing[fileName];
+    if (!file) {
+      var code = _samplePortfolioCode(fileName,
+        String(data[r][col.title] || ''),
+        String(data[r][col.description] || ''),
+        String(data[r][col.userId] || ''));
+      file = folder.createFile(fileName, code, 'text/plain');
+      existing[fileName] = file;
+    }
+    var url = file.getUrl();
+    sheet.getRange(r + 1, col.driveUrl + 1).setValue(url);
+    sheet.getRange(r + 1, col.fileId   + 1).setValue(file.getId());
+    sheet.getRange(r + 1, col.fileName + 1).setFormula(
+      '=HYPERLINK("' + url + '","' + fileName.replace(/"/g, '""') + '")');
+    fixed++;
+  }
+  Logger.log('fixPortfolioFiles: updated ' + fixed + ' rows');
+  return fixed;
+}
+
+/** Generate a simple, age-appropriate Python file for a seeded portfolio row. */
+function _samplePortfolioCode(fileName, title, desc, userId) {
+  var header = '# ' + title + '\n# ' + desc + '\n# ผลงานของ ' + userId + ' — AI Coding Adventure\n\n';
+  var body;
+  if (fileName.indexOf('mission1') === 0) {
+    body = 'name = "นักเรียน"\nprint(f"สวัสดี {name}!")\nprint("ยินดีต้อนรับสู่ AI Coding Adventure")\n';
+  } else if (fileName.indexOf('mission2') === 0) {
+    body = 'age = 11\nif age >= 18:\n    print("เป็นผู้ใหญ่แล้ว")\nelse:\n    print("ยังเป็นเด็กอยู่")\n';
+  } else if (fileName.indexOf('mission3') === 0) {
+    if (fileName.indexOf('countdown') >= 0) {
+      body = 'n = 5\nwhile n > 0:\n    print(n)\n    n = n - 1\nprint("หมดเวลา!")\n';
+    } else if (fileName.indexOf('multiply') >= 0) {
+      body = 'for i in range(1, 13):\n    print(f"2 x {i} = {2 * i}")\n';
+    } else {
+      body = 'for i in range(1, 6):\n    print(i)\n';
+    }
+  } else if (fileName.indexOf('mission4') === 0) {
+    body = 'def greet(name):\n    return f"สวัสดี {name}!"\n\nprint(greet("คุณครู"))\nprint(greet("เพื่อน ๆ"))\n';
+  } else {
+    body = 'print("แชทบอทน้อย: สวัสดี! ถามฉันได้เลย")\nq = "สบายดีไหม"\nif q == "สบายดีไหม":\n    print("แชทบอทน้อย: สบายดีมาก ขอบคุณที่ถาม")\nelse:\n    print("แชทบอทน้อย: ฉันยังไม่เข้าใจคำถามนี้")\n';
+  }
+  return header + body;
+}
+
+/**
+ * MAINTENANCE — run from the GAS editor after changing the portfolio folder.
+ * Pulls every file referenced by the Portfolio sheet into the portfolio folder
+ * (removing any other parent) and refreshes the clickable fileName link.
+ */
+function repairPortfolioFolder() {
+  var folder = DriveApp.getFolderById(_getDriveFolderId());
+  var sheet  = _getSheet(SHEET_NAMES.PORTFOLIO);
+  var data   = sheet.getDataRange().getValues();
+  var col    = {};
+  data[0].forEach(function (h, i) { col[String(h).trim()] = i; });
+
+  var moved = 0, relinked = 0;
+  for (var r = 1; r < data.length; r++) {
+    var fileId   = String(data[r][col.fileId] || '').trim();
+    var fileName = String(data[r][col.fileName] || '').trim();
+    if (!fileId) continue;
+
+    var file;
+    try { file = DriveApp.getFileById(fileId); } catch (e) { continue; }
+
+    var inFolder = false;
+    var parents  = file.getParents();
+    var others   = [];
+    while (parents.hasNext()) {
+      var p = parents.next();
+      if (p.getId() === folder.getId()) { inFolder = true; } else { others.push(p); }
+    }
+    if (!inFolder) { folder.addFile(file); moved++; }
+    others.forEach(function (p) { try { p.removeFile(file); } catch (e) {} });
+
+    var url = file.getUrl();
+    sheet.getRange(r + 1, col.driveUrl + 1).setValue(url);
+    sheet.getRange(r + 1, col.fileName + 1).setFormula(
+      '=HYPERLINK("' + url + '","' + (fileName || file.getName()).replace(/"/g, '""') + '")');
+    relinked++;
+  }
+  Logger.log('repairPortfolioFolder: moved ' + moved + ', relinked ' + relinked);
+  return moved + '/' + relinked;
 }
