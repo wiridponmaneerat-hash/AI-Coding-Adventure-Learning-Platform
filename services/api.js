@@ -55,9 +55,9 @@ const ApiService = (function () {
     return { ok: false, status: status || 0, error: 'network_error', message };
   }
 
-  async function _fetchOnce(url, options) {
+  async function _fetchOnce(url, options, timeoutOverride) {
     const cfg     = _cfg();
-    const timeout = cfg.TIMEOUT || 15000;
+    const timeout = timeoutOverride || cfg.TIMEOUT || 15000;
 
     const controller = new AbortController();
     const timer      = setTimeout(() => controller.abort(), timeout);
@@ -100,7 +100,7 @@ const ApiService = (function () {
     }
   }
 
-  async function _fetchWithRetry(url, options) {
+  async function _fetchWithRetry(url, options, timeoutOverride) {
     const cfg    = _cfg();
     const limit  = cfg.RETRY_LIMIT !== undefined ? cfg.RETRY_LIMIT : 2;
     const delay  = cfg.RETRY_DELAY || 1000;
@@ -109,7 +109,7 @@ const ApiService = (function () {
     for (let attempt = 0; attempt <= limit; attempt++) {
       if (attempt > 0) await _sleep(delay * attempt);
 
-      last = await _fetchOnce(url, options);
+      last = await _fetchOnce(url, options, timeoutOverride);
 
       /* Don't retry client errors or success */
       if (last.ok || (last.status >= 400 && last.status < 500)) break;
@@ -142,7 +142,7 @@ const ApiService = (function () {
    * the CORS preflight that 'application/json' triggers on GAS.
    * GAS: handled by doPost(e) — e.postData.contents is the raw body.
    */
-  async function post(action, body) {
+  async function post(action, body, timeoutOverride) {
     const url     = _cfg().API_BASE_URL || '';
     const payload = Object.assign({ action }, body || {});
 
@@ -153,7 +153,7 @@ const ApiService = (function () {
         'Accept':       'application/json',
       },
       body: JSON.stringify(payload),
-    });
+    }, timeoutOverride);
   }
 
   /** PUT emulated via POST + _method:'PUT' */
@@ -202,19 +202,67 @@ const ApiService = (function () {
       };
     }
 
+    /* Shrink large photos in the browser first. A 6 MB phone photo becomes a
+       ~300 KB upload, which is the difference between a save that completes and
+       one that times out on school wi-fi. */
+    let payloadFile = file;
+    if ((file.type || '').indexOf('image/') === 0 && file.type !== 'image/gif') {
+      try { payloadFile = await _downscaleImage(file, drive); } catch (_) { payloadFile = file; }
+    }
+
     const base64 = await new Promise((resolve, reject) => {
       const reader  = new FileReader();
       reader.onload = () => resolve(reader.result.split(',')[1]);
       reader.onerror = reject;
-      reader.readAsDataURL(file);
+      reader.readAsDataURL(payloadFile);
     });
+
+    /* Uploads get their own, much longer timeout. */
+    const uploadTimeout = cfg.UPLOAD_TIMEOUT || 120000;
 
     return post(action, Object.assign({
       fileName: file.name,
-      mimeType: file.type,
-      fileSize: file.size,
+      mimeType: payloadFile.type || file.type,
+      fileSize: payloadFile.size || file.size,
       fileData: base64,
-    }, metadata || {}));
+    }, metadata || {}), uploadTimeout);
+  }
+
+  /**
+   * Downscale/re-encode an image via canvas so uploads stay small and fast.
+   * Falls back to the original file if anything goes wrong.
+   */
+  function _downscaleImage(file, drive) {
+    const maxDim  = (drive && drive.IMAGE_MAX_DIMENSION) || 1600;
+    const quality = (drive && drive.IMAGE_QUALITY)       || 0.82;
+
+    return new Promise((resolve, reject) => {
+      const url = URL.createObjectURL(file);
+      const img = new Image();
+      img.onload = function () {
+        try {
+          let { width, height } = img;
+          if (width <= maxDim && height <= maxDim && file.size <= 1024 * 1024) {
+            URL.revokeObjectURL(url); resolve(file); return;
+          }
+          const scale = Math.min(1, maxDim / Math.max(width, height));
+          const w = Math.round(width * scale);
+          const h = Math.round(height * scale);
+
+          const canvas = document.createElement('canvas');
+          canvas.width = w; canvas.height = h;
+          canvas.getContext('2d').drawImage(img, 0, 0, w, h);
+
+          canvas.toBlob(function (blob) {
+            URL.revokeObjectURL(url);
+            if (!blob || blob.size >= file.size) { resolve(file); return; }
+            resolve(new File([blob], file.name, { type: 'image/jpeg' }));
+          }, 'image/jpeg', quality);
+        } catch (e) { URL.revokeObjectURL(url); reject(e); }
+      };
+      img.onerror = function (e) { URL.revokeObjectURL(url); reject(e); };
+      img.src = url;
+    });
   }
 
   /**
